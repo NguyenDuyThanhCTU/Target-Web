@@ -241,54 +241,26 @@ export const SocialMediaCustom = [
   },
 ];
 
-export const mainHeaderItems = [
+export const HeaderItems = [
+  {
+    name: "Trang chủ",
+    link: "trang-chu",
+  },
   {
     name: "Giới thiệu",
     link: "gioi-thieu",
   },
   {
+    name: "Dịch vụ",
+    link: "dich-vu",
+  },
+  {
     name: "Tin tức",
     link: "tin-tuc",
-  },
-
-  {
-    name: "Cẩm nang du lịch",
-    link: "cam-nang-du-lich",
-  },
-  {
-    name: "Thư viện hình ảnh",
-    link: "thu-vien-hinh-anh",
   },
   {
     name: "Liên hệ",
     link: "lien-he",
-  },
-  {
-    name: "Tuyển dụng",
-    link: "tuyen-dung",
-  },
-];
-
-export const subHeaderItems = [
-  {
-    name: "Dịch vụ",
-    link: "dich-vu-khac",
-  },
-  {
-    name: "Giá vé",
-    link: "gia-ve",
-  },
-  {
-    name: "Mua vé trực tuyến",
-    link: "dat-ve",
-  },
-  {
-    name: "Lịch tàu chạy",
-    link: "lich-tau-chay",
-  },
-  {
-    name: "Khuyến mãi",
-    link: "tin-tuc/khuyen-mai",
   },
 ];
 

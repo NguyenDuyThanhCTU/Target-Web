@@ -20,15 +20,16 @@ const layout: React.FC<ClientLayoutProps> = ({ children }) => {
     <>
       <Header />
       <div className="">{children}</div>
-
+      <Hotline />
+      {/* 
       <div className="relative z-50">
         <BookingButton />
       </div>
       <div className="relative z-50">
         <OnTop />
-        <Hotline />
+     
       </div>
-      <Copyright />
+      <Copyright /> */}
     </>
   );
 };

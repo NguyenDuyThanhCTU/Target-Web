@@ -20,6 +20,8 @@ export type StateContextType = {
   setOpenCart: (openCart: boolean) => void;
   Refetch: any;
   setRefetch: (refetch: any) => void;
+  theme: string;
+  setTheme: (theme: string) => void;
 };
 
 export const StateContext = createContext<StateContextType>({
@@ -37,6 +39,8 @@ export const StateContext = createContext<StateContextType>({
   setOpenCart: () => {},
   Refetch: "",
   setRefetch: () => {},
+  theme: "",
+  setTheme: () => {},
 });
 
 export const StateProvider = ({ children }: Props) => {
@@ -50,9 +54,12 @@ export const StateProvider = ({ children }: Props) => {
   const [Search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [OpenCart, setOpenCart] = useState(false);
+  const [theme, setTheme] = useState("light");
   return (
     <StateContext.Provider
       value={{
+        theme,
+        setTheme,
         Refetch,
         setRefetch,
         OpenCart,
