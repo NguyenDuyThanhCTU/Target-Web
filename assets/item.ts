@@ -481,37 +481,4 @@ export const PolicyItems = [
   },
 ];
 
-export const PartnerItems = [
-  {
-    image:
-      "https://superdong.com.vn/wp-content/uploads/2021/03/Thien_Viet_Travel.jpg",
-  },
-  {
-    image:
-      "https://superdong.com.vn/wp-content/uploads/2021/03/Vietnam_Tourist.jpg",
-  },
-  {
-    image:
-      "https://superdong.com.vn/wp-content/uploads/2021/03/Golden_Beach.jpg",
-  },
-  {
-    image: "https://superdong.com.vn/wp-content/uploads/2021/03/Puolo_Trip.jpg",
-  },
-  {
-    image: "https://superdong.com.vn/wp-content/uploads/2019/05/Untitled-6.jpg",
-  },
-  {
-    image:
-      "https://superdong.com.vn/wp-content/uploads/2019/10/logo-500x320-01.jpg",
-  },
-  {
-    image:
-      "https://superdong.com.vn/wp-content/uploads/2021/03/Dao_Ngoc_Travel.jpg",
-  },
-  {
-    image:
-      "https://superdong.com.vn/wp-content/uploads/2021/03/Con_Son_Land.jpg",
-  },
-];
-
 export {};
