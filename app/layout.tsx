@@ -1,3 +1,5 @@
+import Fetch from "@components/items/Fetch";
+import Loading from "@components/items/Loading";
 import { AuthProviders } from "@context/AuthProviders";
 import { DataProviders } from "@context/DataProviders";
 import { StateProvider } from "@context/StateProvider";
@@ -14,6 +16,8 @@ export default function RootLayout({
         <StateProvider>
           <DataProviders>
             <AuthProviders>
+              <Fetch />
+              <Loading />
               <>{children}</>
             </AuthProviders>
           </DataProviders>

@@ -2,36 +2,20 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, initializeFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyASm9bIKcP7tkR8W4qKnFF7pQ7iAb_LCNo",
-
-//   authDomain: "lnktshopstore.firebaseapp.com",
-
-//   projectId: "lnktshopstore",
-
-//   storageBucket: "lnktshopstore.appspot.com",
-
-//   messagingSenderId: "992053436218",
-
-//   appId: "1:992053436218:web:5e9f8012379b3e13277a03",
-
-//   measurementId: "G-5QZ7CY67DK",
-// };
-
 const firebaseConfig = {
-  apiKey: "AIzaSyA0zFVIz_68Lv3DX9pga_MGzcQty05ZcDw",
+  apiKey: "AIzaSyD0weQUvpsk8EDp-WDJdpgNR8p9oe2YhsY",
 
-  authDomain: "superdong-51e09.firebaseapp.com",
+  authDomain: "target-31b09.firebaseapp.com",
 
-  projectId: "superdong-51e09",
+  projectId: "target-31b09",
 
-  storageBucket: "superdong-51e09.appspot.com",
+  storageBucket: "target-31b09.appspot.com",
 
-  messagingSenderId: "276536016778",
+  messagingSenderId: "666736140247",
 
-  appId: "1:276536016778:web:cb20080b7a1000191e9273",
+  appId: "1:666736140247:web:bac6a96936a4cd3995f592",
 
-  measurementId: "G-RXJF1T08KM",
+  measurementId: "G-BHQ202JDS2",
 };
 
 const app = initializeApp(firebaseConfig);
