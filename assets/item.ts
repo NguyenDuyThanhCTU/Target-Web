@@ -244,19 +244,29 @@ export const SocialMediaCustom = [
 export const HeaderItems = [
   {
     name: "Trang chủ",
-    link: "trang-chu",
+    link: "",
   },
+  {
+    name: "Danh mục sản phẩm",
+    Link: "danh-muc-san-pham",
+  },
+  {
+    name: "Sản phẩm",
+    link: "san-pham",
+  },
+
   {
     name: "Giới thiệu",
     link: "gioi-thieu",
   },
   {
-    name: "Dịch vụ",
-    link: "dich-vu",
-  },
-  {
     name: "Tin tức",
     link: "tin-tuc",
+  },
+
+  {
+    name: "Hỗ trợ",
+    link: "ho-tro",
   },
   {
     name: "Liên hệ",

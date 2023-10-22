@@ -1,5 +1,13 @@
+import GetApp from "@components/client/Home/GetApp";
+import Hero from "@components/client/Home/Hero";
+
 const HomePage = () => {
-  return <div className="h-screen">hello world</div>;
+  return (
+    <>
+      <Hero />
+      <GetApp />
+    </>
+  );
 };
 
 export default HomePage;
