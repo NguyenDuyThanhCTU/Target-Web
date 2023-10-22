@@ -22,18 +22,12 @@ type ChangeEventType = React.ChangeEvent<HTMLInputElement>;
 const AddType: React.FC = () => {
   const [Name, setName] = useState<string>("");
   const [Params, setIsParams] = useState<string>("");
-  const [Parent, setParent] = useState<string>("Men");
-  const [ParentParams, setParentParams] = useState<string>("men");
+  const [Parent, setParent] = useState<string>("");
+  const [ParentParams, setParentParams] = useState<string>("");
 
   const [isSelected, setSelected] = useState<number | undefined>();
   const { setIsRefetch, setDropDown } = useStateProvider();
   const { productTypes, setUpdateId } = useData();
-
-  const handleDiscard = () => {
-    setName("");
-    setIsParams("");
-    setParent("Men");
-  };
 
   const HandleSubmit = () => {
     if (!Name) {
@@ -58,7 +52,6 @@ const AddType: React.FC = () => {
         Thông tin đã được CẬP NHẬT !`,
         });
         setIsRefetch("CRUD productTypes");
-        handleDiscard();
       });
     }
   };
@@ -219,6 +212,7 @@ const AddType: React.FC = () => {
                       handleTitleChange(e)
                     }
                   >
+                    <option>-- Chọn mục --</option>
                     {TypeProductItems.map((item, idx) => (
                       <option
                         key={idx}
@@ -233,7 +227,6 @@ const AddType: React.FC = () => {
 
                 <div className="flex gap-6 mt-10">
                   <button
-                    onClick={() => handleDiscard()}
                     type="button"
                     className="border-gray-300 border-2 text-md font-medium p-2 rounded w-28 lg:w-44 outline-none"
                   >

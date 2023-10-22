@@ -1,26 +1,19 @@
 "use client";
-import { useData } from "@context/DataProviders";
 import { useStateProvider } from "@context/StateProvider";
+import { usePathname } from "next/navigation";
 
 import { useState } from "react";
 import { BiSolidMagicWand } from "react-icons/bi";
 import { MdDarkMode } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 
-function Hotline() {
+function FloatButton() {
   const [isOpen, setIsOpen] = useState(false);
-  const { SocialMedia, ContactData } = useData();
   const { setTheme, theme } = useStateProvider();
+  const pathname = usePathname();
+
   return (
     <div className="fixed bottom-7 right-10  box-border flex flex-col gap-5">
-      {/* <div className="p:flex items-center d:hidden">
-        <a
-          href={`https://${SocialMedia[1]}`}
-          className="h-14 w-14 p-2 bg-blue-500 border-white border flex items-center rounded-full justify-center"
-        >
-          <FaFacebookF className="text-white text-[40px]" />
-        </a>
-      </div>*/}
       {theme === "light" ? (
         <div className="flex items-center ">
           <div
@@ -61,13 +54,8 @@ function Hotline() {
           )}
         </div>
       </div>
-      {/* <div className="flex items-center">
-        <div className="h-14 w-14   call-animation">
-          <BiPhoneCall className="text-white text-[40px]" />
-        </div>
-      </div> */}
     </div>
   );
 }
 
-export default Hotline;
+export default FloatButton;

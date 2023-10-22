@@ -1,21 +1,18 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import { FcViewDetails } from "react-icons/fc";
 import { Popconfirm, message, notification } from "antd";
 import { MdDeleteForever } from "react-icons/md";
-import { useData } from "@context/DataProviders";
 import { useStateProvider } from "@context/StateProvider";
+import { useData } from "@context/DataProviders";
 import { delDocument } from "@config/Services/Firebase/FireStoreDB";
-import { BsArrowLeftRight } from "react-icons/bs";
-import EditDepartureSchedule from "./EditDepartureSchedule";
 
-const ListDepartureSchedule = () => {
+const ListVideo: React.FC = () => {
   const [Option, setOption] = useState<number | undefined>();
-  const { DepartureSchedule } = useData();
+  const { Videos } = useData();
   const { setIsRefetch } = useStateProvider();
-  const [open, setOpen] = useState(false);
-  const { setUpdateId } = useData();
+
   const HandleOpenOption = (idx: number) => {
     if (Option === idx) {
       setOption(0);
@@ -25,27 +22,21 @@ const ListDepartureSchedule = () => {
   };
 
   const HandleDelete = (id: string) => {
-    delDocument("departureschedule", id).then(() => {
+    delDocument("videos", id).then(() => {
       notification["success"]({
         message: "Thành công!",
         description: `Yêu cầu của bạn đã được thực hiện thành công !`,
       });
     });
-    setIsRefetch("CRUD departureschedule");
-  };
-
-  const HandleUpdate = (id: string) => {
-    setUpdateId(id);
-    setOpen(true);
-    setOption(0);
+    setIsRefetch("CRUD videos");
   };
 
   return (
     <div className="h-[400px] border  rounded-2xl overflow-y-scroll flex-[70%] ">
-      {DepartureSchedule?.map((data: any, idx: number) => (
+      {Videos?.map((data: any, idx: number) => (
         <div
           key={idx}
-          className="grid  grid-cols-5 items-center my-2  ml-1 justify-start px-5  py-3"
+          className="grid  grid-cols-3 items-center my-2  ml-1 justify-start px-5  py-3"
         >
           <div className="group relative ">
             <FiEdit
@@ -58,10 +49,7 @@ const ListDepartureSchedule = () => {
                 <div className="w-[120px] bg-white opacity-90 absolute -top-2 h-8 left-5 rounded-lg   ">
                   <div className="mx-3 flex  justify-between text-[24px] h-full items-center ">
                     <FcViewDetails className="hover:scale-125 duration-300" />
-                    <FiEdit
-                      className="text-green-600 hover:scale-125 duration-300"
-                      onClick={() => HandleUpdate(data.id)}
-                    />
+                    <FiEdit className="text-green-600 hover:scale-125 duration-300" />
                     <Popconfirm
                       title="Xóa sản phẩm"
                       description="Bạn muốn xóa sản phẩm này?"
@@ -84,9 +72,12 @@ const ListDepartureSchedule = () => {
             )}
           </div>
 
-          <div>{data.start}</div>
-          <BsArrowLeftRight />
-          <div>{data.end}</div>
+          <iframe
+            src={data.embedurl}
+            className="d:w-40 d:h-40 p:w-20 p:h-20"
+            title="YouTube Video"
+            allowFullScreen
+          ></iframe>
 
           <div>
             {data.daysSinceCreation > 0 ? (
@@ -107,10 +98,8 @@ const ListDepartureSchedule = () => {
           </div>
         </div>
       ))}
-
-      <EditDepartureSchedule open={open} setOpen={setOpen} />
     </div>
   );
 };
 
-export default ListDepartureSchedule;
+export default ListVideo;

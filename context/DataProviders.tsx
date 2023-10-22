@@ -16,7 +16,8 @@ export type DataContextType = {
   setSocialMedia: (social: any) => void;
   Videos: any;
   setVideos: (video: any) => void;
-
+  Posts: any;
+  setPosts: (post: any) => void;
   Accounts: any;
   setAccounts: (account: any) => void;
   UpdateId: any;
@@ -40,16 +41,6 @@ export type DataContextType = {
   setNotification: (notification: any) => void;
   CartItems: any;
   setCartItems: (cartItem: any) => void;
-  News: any;
-  setNews: (news: any) => void;
-  TravelHandbook: any;
-  setTravelHandbook: (travelhandbook: any) => void;
-  Gallery: any;
-  setGallery: (gallery: any) => void;
-  Fare: any;
-  setFare: (fare: any) => void;
-  DepartureSchedule: any;
-  setDepartureSchedule: (departureSchedule: any) => void;
 };
 
 export const DataContext = createContext<DataContextType>({
@@ -63,7 +54,8 @@ export const DataContext = createContext<DataContextType>({
   setSocialMedia: () => {},
   Videos: [],
   setVideos: () => {},
-
+  Posts: [],
+  setPosts: () => {},
   Accounts: "",
   setAccounts: () => {},
   UpdateId: "",
@@ -78,7 +70,7 @@ export const DataContext = createContext<DataContextType>({
   setOrders: () => {},
   HeaderAdmin: "",
   setHeaderAdmin: () => {},
-  Introduction: [],
+  Introduction: "",
   setIntroduction: () => {},
 
   Sale: {},
@@ -87,16 +79,6 @@ export const DataContext = createContext<DataContextType>({
   setNotification: () => {},
   CartItems: [],
   setCartItems: () => {},
-  News: [],
-  setNews: () => {},
-  TravelHandbook: [],
-  setTravelHandbook: () => {},
-  Gallery: [],
-  setGallery: () => {},
-  Fare: [],
-  setFare: () => {},
-  DepartureSchedule: [],
-  setDepartureSchedule: () => {},
 });
 
 export const DataProviders: React.FC<Props> = ({ children }) => {
@@ -107,6 +89,7 @@ export const DataProviders: React.FC<Props> = ({ children }) => {
   const [Slides, setSlides] = useState([]);
   const [SocialMedia, setSocialMedia] = useState("");
   const [Videos, setVideos] = useState([]);
+  const [Posts, setPosts] = useState([]);
   const [Accounts, setAccounts] = useState("");
 
   //Cart
@@ -117,29 +100,15 @@ export const DataProviders: React.FC<Props> = ({ children }) => {
   const [productTypes, setProductType] = useState([]);
   const [Branches, setBranches] = useState([]);
   const [Orders, setOrders] = useState([]);
-  const [Introduction, setIntroduction] = useState([]);
+  const [Introduction, setIntroduction] = useState({});
   const [Sale, setSale] = useState({});
   const [Notification, setNotification] = useState([]);
   const [CartItems, setCartItems] = useState([]);
   //custom
-  const [News, setNews] = useState([]);
-  const [TravelHandbook, setTravelHandbook] = useState([]);
-  const [Gallery, setGallery] = useState([]);
-  const [Fare, setFare] = useState([]);
-  const [DepartureSchedule, setDepartureSchedule] = useState([]);
+
   return (
     <DataContext.Provider
       value={{
-        DepartureSchedule,
-        setDepartureSchedule,
-        Fare,
-        setFare,
-        News,
-        setNews,
-        TravelHandbook,
-        setTravelHandbook,
-        Gallery,
-        setGallery,
         CartItems,
         setCartItems,
         Notification,
@@ -163,7 +132,8 @@ export const DataProviders: React.FC<Props> = ({ children }) => {
         setProductType,
         Accounts,
         setAccounts,
-
+        Posts,
+        setPosts,
         Videos,
         setVideos,
         SocialMedia,

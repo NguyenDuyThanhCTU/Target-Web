@@ -2,9 +2,9 @@
 import React from "react";
 import { BiPhone, BiMapPin } from "react-icons/bi";
 
-import { Popconfirm, message, notification } from "antd";
-import { useData } from "@context/DataProviders";
+import { notification } from "antd";
 import { useStateProvider } from "@context/StateProvider";
+import { useData } from "@context/DataProviders";
 import { delDocument } from "@config/Services/Firebase/FireStoreDB";
 
 const Branch: React.FC = () => {
@@ -27,7 +27,7 @@ const Branch: React.FC = () => {
         <h3 className="text-[42px] font-light ">Danh sách chi nhánh</h3>
 
         <div className="font-NunitoSans grid-cols-1 border overflow-y-scroll h-[660px] w-full">
-          <div className="grid grid-cols-4 gap-5  p-2">
+          <div className="grid d-grid-cols-4 gap-5 grid-rows-2 p-2">
             {Branches?.map((items: any, idx: number) => (
               <div className="rounded-sm shadow-2xl border" key={idx}>
                 <div className="p-4 flex flex-col justify-between h-full gap-3">
@@ -63,23 +63,12 @@ const Branch: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                  <Popconfirm
-                    title="Xóa sản phẩm"
-                    description="Bạn muốn xóa sản phẩm này?"
-                    onConfirm={() => {
-                      HandleDelete(items.id);
-                    }}
-                    onCancel={() => {
-                      message.error("Sản phẩm chưa được xóa!");
-                    }}
-                    okText="Yes"
-                    okType="danger"
-                    cancelText="No"
+                  <div
+                    className="text-blue-600 border border-blue-600 text-center py-3 cursor-pointer hover:text-white hover:border-white hover:bg-red-500 uppercase"
+                    onClick={() => HandleDelete(items.id)}
                   >
-                    <div className="text-blue-600 border border-blue-600 text-center py-3 cursor-pointer hover:text-white hover:border-white hover:bg-red-500 uppercase">
-                      Loại bỏ
-                    </div>{" "}
-                  </Popconfirm>
+                    Loại bỏ
+                  </div>
                 </div>
               </div>
             ))}

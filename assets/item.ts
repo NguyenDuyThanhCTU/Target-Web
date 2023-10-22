@@ -257,7 +257,7 @@ export const HeaderItems = [
 
   {
     name: "Giới thiệu",
-    link: "gioi-thieu",
+    link: "bai-viet/gioi-thieu",
   },
   {
     name: "Tin tức",
@@ -302,6 +302,95 @@ export const ToolsTipsSocialMediaItems = [
 ];
 
 /*<-------------------------------------------------------------------------------------------------------------------- CUSTOM --------------------------------------------------------------------------------------------------------------------> */
+
+export const ProductFunctionType = [
+  {
+    label: "Bộ Khóa Pro (UPS/ Vân tay/ Thẻ/ Số/ Remote/Chìa Cơ)",
+  },
+  {
+    label: "Bộ Khóa Pro , Vân tay , Có sẵn bộ tích điện",
+  },
+  {
+    label: "Bộ Khóa Plus ( Vân tay/ Thẻ/ Số/ Remote/Chìa Cơ)",
+  },
+  {
+    label: "Bộ Khóa Basic, Thẻ từ, Mã Số, Remote, Chìa Cơ",
+  },
+  {
+    label: "Bộ Khóa Basic ( Thẻ/ Số/ Remote/Chìa Cơ)",
+  },
+  {
+    label: "Korea",
+  },
+  {
+    label: "Full",
+  },
+  {
+    label: "Bộ Khóa Plus , Vân tay, Thẻ Từ, Mã Số, Remote, Chìa Cơ",
+  },
+  {
+    label: "Bộ Khóa Plus, Vân tay, Nguồn thường",
+  },
+  {
+    label: "HomeProSec",
+  },
+];
+
+export const ProductPriceItems = [
+  {
+    label: "Dưới 950.000đ",
+  },
+  {
+    label: "1,000,000₫ - 1,950,000₫",
+  },
+  {
+    label: "2,000,000₫ - 4,950,000₫",
+  },
+  {
+    label: "5,000,000₫ - 9,900,000₫",
+  },
+  {
+    label: "Trên 10,000,000₫",
+  },
+];
+
+export const TypePostItems = [
+  {
+    label: "Tin tức",
+    value: "tin-tuc",
+  },
+  {
+    label: "Giới thiệu",
+    value: "gioi-thieu",
+  },
+  {
+    label: "Hướng dẫn sử dụng",
+    value: "huong-dan-su-dung",
+  },
+  {
+    label: "Catalogue Sản phẩm",
+    value: "catalogue-san-pham",
+  },
+
+  {
+    label: "Điều khoản sử dụng",
+    value: "dieu-khoan-su-dung",
+  },
+  {
+    label: "Chính sách và quy định chung",
+    value: "chinh-sach-va-quy-dinh-chung",
+  },
+
+  {
+    label: "Chính sách bảo mật",
+    value: "chinh-sach-bao-mat",
+  },
+
+  {
+    label: "Phương thức thanh toán",
+    value: "phuong-thuc-thanh-toan",
+  },
+];
 
 export const ServiceTypeItems = [
   {

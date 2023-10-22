@@ -20,7 +20,6 @@ import CountUp from "react-countup";
 import { BsPersonPlus } from "react-icons/bs";
 import { SlOptionsVertical } from "react-icons/sl";
 import AddAccount from "../Item/AddAccount";
-
 import InfoAccount from "../Item/AccountInfo";
 
 import { FaUserEdit, FaUserShield } from "react-icons/fa";

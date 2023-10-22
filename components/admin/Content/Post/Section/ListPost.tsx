@@ -16,19 +16,19 @@ interface PostData {
   daysSinceCreation: number;
 }
 
-const ListPost = ({ Data, type }: any) => {
+const ListPost: React.FC = () => {
   const { setIsRefetch, setDropDown } = useStateProvider();
   const [isOption, setIsOption] = useState<number>(0);
-  const { setUpdateId } = useData();
+  const { Posts, setUpdateId } = useData();
 
   const HandleDelete = (id: string): void => {
-    delDocument(type, id).then(() => {
+    delDocument("posts", id).then(() => {
       notification.success({
         message: "Thành công",
         description: `Bài viết đã được xóa !`,
       });
     });
-    setIsRefetch(`CRUD ${type}}`);
+    setIsRefetch("CRUD posts");
     setIsOption(0);
   };
 
@@ -42,7 +42,7 @@ const ListPost = ({ Data, type }: any) => {
 
   const HandleEdit = (id: string): void => {
     setUpdateId(id);
-    setDropDown(`add-${type}`);
+    setDropDown("add-post");
     setIsOption(0);
   };
 
@@ -55,20 +55,20 @@ const ListPost = ({ Data, type }: any) => {
           <p>hình ảnh</p>
         </div>
 
-        {Data.map((data: PostData, idx: number) => {
+        {Posts?.filter(
+          (item: any) =>
+            item.url === "cong-trinh-thuc-te" || item.url === "dich-vu"
+        ).map((data: PostData, idx: number) => {
           return (
             <div key={data.id} className="grid cols-4 py-4   items-center">
               <p>{idx + 1}</p>
 
               <p className="truncate ">{data.title}</p>
 
-              <>
-                {" "}
-                <Image
-                  className="  w-14 h-14 rounded-lg object-cover"
-                  src={data.image}
-                />
-              </>
+              <Image
+                className="  w-14 h-14 rounded-lg object-cover"
+                src={data.image}
+              />
 
               <div className="flex gap-5 items-center">
                 <div>

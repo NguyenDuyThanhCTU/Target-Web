@@ -11,8 +11,8 @@ import { FcViewDetails } from "react-icons/fc";
 import { MdDeleteForever } from "react-icons/md";
 import { Popconfirm, message, notification } from "antd";
 import { useData } from "@context/DataProviders";
-import { useStateProvider } from "@context/StateProvider";
 import { delDocument } from "@config/Services/Firebase/FireStoreDB";
+import { useStateProvider } from "@context/StateProvider";
 
 const ListSlide: React.FC = () => {
   const [ListProducts, setListProducts] = useState<any[]>([]);

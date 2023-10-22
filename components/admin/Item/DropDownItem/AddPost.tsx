@@ -7,30 +7,13 @@ import { useData } from "@context/DataProviders";
 import { updateDocument } from "@config/Services/Firebase/FireStoreDB";
 import TextEditor from "@components/admin/Item/CKEditor/TextEditor";
 
-const AddPost = ({ type }: any) => {
+const AddPost = () => {
   const [editorData, setEditorData] = useState<string>("");
   const [PostSort, setPost] = useState<any>();
   const { setIsRefetch, setDropDown } = useStateProvider();
-  const { UpdateId, News, Gallery, TravelHandbook } = useData();
+  const { UpdateId } = useData();
 
   const initialEditor = "<p>Bắt đầu nhập ... </p>";
-
-  let Posts: any;
-
-  if (type === "news") {
-    Posts = News;
-  } else if (type === "gallery") {
-    Posts = Gallery;
-  } else if (type === "travelHandbook") {
-    Posts = TravelHandbook;
-  }
-
-  useEffect(() => {
-    const sort = Posts?.filter((item: any) => item.id === UpdateId);
-    if (sort?.length > 0) {
-      setPost(sort[0]);
-    }
-  }, [Posts, UpdateId]);
 
   const HandleDiscard = () => {
     setEditorData("");
@@ -46,13 +29,13 @@ const AddPost = ({ type }: any) => {
       const data = {
         ...(editorData && { content: editorData }),
       };
-      updateDocument(type, UpdateId, data).then(() => {
+      updateDocument("posts", UpdateId, data).then(() => {
         notification.success({
           message: "Thành công !",
           description: "Tải lên thành công !",
         });
         HandleDiscard();
-        setIsRefetch(`CRUD ${type}`);
+        setIsRefetch(`CRUD posts`);
         setDropDown("");
       });
     }

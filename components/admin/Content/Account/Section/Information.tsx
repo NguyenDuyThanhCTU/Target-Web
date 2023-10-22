@@ -11,11 +11,14 @@ import {
 } from "antd";
 import { AiOutlinePlus, AiOutlineUser } from "react-icons/ai";
 import moment from "moment";
+
 import { MdOutlineUpdate } from "react-icons/md";
+
 import InfoAccount from "../Item/AccountInfo";
 import { useData } from "@context/DataProviders";
 import { updateDocument } from "@config/Services/Firebase/FireStoreDB";
 import { uploadImage } from "@components/items/server-items/Handle";
+
 const { TextArea } = Input;
 
 const Information = ({ showModal }: any) => {

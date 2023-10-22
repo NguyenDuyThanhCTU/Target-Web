@@ -1,10 +1,12 @@
-"use client";
 import React from "react";
-
 import AddPost from "./DropDownItem/AddPost";
+import AddType from "./DropDownItem/AddType";
+import AddProduct from "./DropDownItem/AddProduct";
+import ProductDetail from "./DropDownItem/ProductDetail";
 
 import AddBranch from "./DropDownItem/AddBranch";
 
+import AddChildrenType from "./DropDownItem/AddChildrenType";
 import { useStateProvider } from "@context/StateProvider";
 
 const AdminDropDown = () => {
@@ -15,14 +17,18 @@ const AdminDropDown = () => {
         isDropDown === "" ? "h-0" : "h-[100vh]"
       }`}
     >
-      {isDropDown === "add-news" ? (
-        <AddPost type="news" />
-      ) : isDropDown === "add-gallery" ? (
-        <AddPost type="gallery" />
-      ) : isDropDown === "add-TravelHandbook" ? (
-        <AddPost type="TravelHandbook" />
+      {isDropDown === "add-types" ? (
+        <AddType />
+      ) : isDropDown === "add-children-type" ? (
+        <AddChildrenType />
+      ) : isDropDown === "add-post" ? (
+        <AddPost />
+      ) : isDropDown === "add-product" ? (
+        <AddProduct />
       ) : isDropDown === "add-branch" ? (
         <AddBranch />
+      ) : isDropDown === "product-detail" ? (
+        <ProductDetail />
       ) : null}
     </div>
   );
