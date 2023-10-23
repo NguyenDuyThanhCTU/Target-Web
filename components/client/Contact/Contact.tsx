@@ -137,17 +137,15 @@ const Contact = () => {
           </h3>
 
           <div className=" py-3 flex flex-col gap-3">
-            <p className="font-[18px] font-light">
+            <p className="font-[18px]  ">
               Hãy để lại thông tin đầy đủ theo mẫu bên cạnh, Tôi sẽ liên hệ hỗ
               trợ bạn trong thời gian sớm nhất.
             </p>
-            <p className="text-redPrimmary font-">
-              * là các thông tin bắt buộc
-            </p>
+            <p className="text-redPrimmary ">* là các thông tin bắt buộc</p>
           </div>
           <div>
             <img
-              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgILC2hs044LQuv9zQW8Yus3ykAYdGkrL-VCoYURF3kLi0CqZq2upFI3LPqRgyaCCpunHWmPPiKoewmoJJ4n_xbCGOT0-CW-ou5OL_xF0lXSS1oM42as_i4wAZ-hl_iJ-0YjtJqqkPd22etKVgMDG7DS5dXvxRSdcUhbWxWqZLQNj1j626URnaT8SAY/s16000/Tau-cao-toc-Trung-Trac-khoi-hanh.JPG"
+              src="https://firebasestorage.googleapis.com/v0/b/target-31b09.appspot.com/o/UI%2Fphoto_2023-10-23_13-50-40.jpg?alt=media&token=da0deacf-dd29-4c7d-975f-63426eaa89b1&_gl=1*1kisnn9*_ga*MTAyMjQwNTAxNS4xNjk4MDI4NjI0*_ga_CW55HF8NVT*MTY5ODA0MzU5My40LjEuMTY5ODA0Mzk5Ny41OC4wLjA."
               alt="demo"
               className="shadow-sm shadow-gray-300"
             />

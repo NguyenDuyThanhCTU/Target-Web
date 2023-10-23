@@ -256,11 +256,11 @@ export const HeaderItems = [
   },
   {
     name: "Danh mục sản phẩm",
-    Link: "danh-muc-san-pham",
+    Link: "san-pham/giam-gia",
   },
   {
     name: "Sản phẩm",
-    link: "san-pham",
+    link: "san-pham/tat-ca",
   },
 
   {
@@ -311,54 +311,122 @@ export const ToolsTipsSocialMediaItems = [
 
 /*<-------------------------------------------------------------------------------------------------------------------- CUSTOM --------------------------------------------------------------------------------------------------------------------> */
 
-export const ProductFunctionType = [
+export const ProductLimitSpeedItems = [
   {
-    label: "Bộ Khóa Pro (UPS/ Vân tay/ Thẻ/ Số/ Remote/Chìa Cơ)",
+    label: "4 Km/h",
+    value: "4",
   },
   {
-    label: "Bộ Khóa Pro , Vân tay , Có sẵn bộ tích điện",
+    label: "6 Km/h",
+    value: "6",
   },
+
   {
-    label: "Bộ Khóa Plus ( Vân tay/ Thẻ/ Số/ Remote/Chìa Cơ)",
+    label: "8 Km/h",
+    value: "8",
   },
+
   {
-    label: "Bộ Khóa Basic, Thẻ từ, Mã Số, Remote, Chìa Cơ",
+    label: "10 Km/h",
+    value: "10",
   },
+
   {
-    label: "Bộ Khóa Basic ( Thẻ/ Số/ Remote/Chìa Cơ)",
+    label: "14 Km/h",
+    value: "14",
   },
+
   {
-    label: "Korea",
+    label: "16 Km/h",
+    value: "16",
   },
+
   {
-    label: "Full",
+    label: "18 Km/h",
+    value: "18",
   },
+
   {
-    label: "Bộ Khóa Plus , Vân tay, Thẻ Từ, Mã Số, Remote, Chìa Cơ",
-  },
-  {
-    label: "Bộ Khóa Plus, Vân tay, Nguồn thường",
-  },
-  {
-    label: "HomeProSec",
+    label: "20 Km/h",
+    value: "20",
   },
 ];
 
-export const ProductPriceItems = [
+export const ProductLimitRoadItems = [
   {
-    label: "Dưới 950.000đ",
+    label: "3Km",
+    value: "3",
   },
   {
-    label: "1,000,000₫ - 1,950,000₫",
+    label: "6Km",
+    value: "6",
   },
   {
-    label: "2,000,000₫ - 4,950,000₫",
+    label: "8Km",
+    value: "8",
   },
   {
-    label: "5,000,000₫ - 9,900,000₫",
+    label: "10Km",
+    value: "10",
   },
   {
-    label: "Trên 10,000,000₫",
+    label: "13Km",
+    value: "13",
+  },
+  {
+    label: "16Km",
+    value: "16",
+  },
+  {
+    label: "18Km",
+    value: "18",
+  },
+  {
+    label: "20Km",
+    value: "20",
+  },
+];
+
+export const ProductLimitCoinItems = [
+  {
+    label: "1.8x",
+    value: "1.8",
+  },
+  {
+    label: "2x",
+    value: "2",
+  },
+  {
+    label: "2.2x",
+    value: "2.2",
+  },
+  {
+    label: "2.4x",
+    value: "2.4",
+  },
+  {
+    label: "2.8x",
+    value: "2.8",
+  },
+  {
+    label: "3.0x",
+    value: "3",
+  },
+  {
+    label: "3.2x",
+    value: "3.2",
+  },
+  {
+    label: "3.4x",
+    value: "3.4",
+  },
+  {
+    label: "3.6x",
+    value: "3.6",
+  },
+  {
+    label: "3.8x",
+    value: "3.8",
   },
 ];
 
@@ -459,28 +527,45 @@ export const TravelHandbookTypeItems = [
 
 export const TypeProductItems = [
   {
-    label: "Teraco",
-    value: "teraco",
+    label: "Giảm giá",
+    value: "giam-gia",
   },
   {
-    label: "SRM",
-    value: "srm",
+    label: "Tốc độ tối đa",
+    value: "toc-do-toi-da",
   },
   {
-    label: "Dothanh",
-    value: "dothanh",
+    label: "Quãng đường tối đa",
+    value: "quang-duong-toi-da",
   },
   {
-    label: "Tata",
-    value: "tata",
+    label: "Tăng hiệu suất kiếm coin",
+    value: "tang-hieu-suat-kiem-coin",
   },
   {
-    label: "Kenbo",
-    value: "kenbo",
+    label: "Thời gian chờ",
+    value: "thoi-gian-cho",
   },
   {
-    label: "TMT",
-    value: "tmt",
+    label: "Cảm biến theo dõi sức khỏe",
+    value: "cam-bien-theo-doi-suc-khoe",
+  },
+  {
+    label: "Sự kiện",
+    value: "su-kien",
+  },
+  {
+    label: "Nhiệm vụ",
+    value: "nhim-vu",
+  },
+
+  {
+    label: "Chạy đêm",
+    value: "chay-dem",
+  },
+  {
+    label: "Dùng thử",
+    value: "Dung-thu",
   },
 ];
 

@@ -109,7 +109,7 @@ const Header = () => {
                               >
                                 <div className="py-2 px-4 hover:text-blue-400 duration-300  font-light flex items-center justify-between w-full">
                                   {" "}
-                                  <p className="py-2 px-4 hover:text-maingreen duration-300 text-black">
+                                  <p className="py-2 w-max px-4 hover:text-maingreen duration-300 text-black">
                                     {items.label}
                                   </p>
                                   {sort.length > 0 && (

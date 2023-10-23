@@ -11,7 +11,7 @@ import { IconMapping, SocialMediaDashboard } from "@assets/item";
 const Hero = () => {
   const { SocialMedia, TradeMarkData } = useData();
   return (
-    <div className="my-24 ">
+    <div className="my-24 w-[1440px] mx-auto ">
       <div className="relative">
         <div className="flex justify-center ">
           <img

@@ -5,7 +5,6 @@ import React from "react";
 const PostsCategory = () => {
   return (
     <>
-      {" "}
       <div className="p-3">
         <h2 className="text-[20px] uppercase text-center pb-2 border-b border-black">
           Danh mục trang
