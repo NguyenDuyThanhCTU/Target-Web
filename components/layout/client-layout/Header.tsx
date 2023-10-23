@@ -48,7 +48,11 @@ const Header = () => {
           <div className="">
             <img src="https://camptraveler.com/hilink-logo.svg" alt="logo" />
           </div>
-          <div className="flex items-center gap-8 w-full mt-10 justify-center font-LexendDeca font-extralight">
+          <div
+            className={`${
+              theme === "light" ? "text-black" : "text-white"
+            } flex items-center gap-8 w-full mt-10 justify-center font-LexendDeca font-extralight`}
+          >
             {HeaderItems.map((item: any, idx: number) => (
               <div className="relative group/main " key={idx}>
                 <Link
@@ -58,7 +62,7 @@ const Header = () => {
                   <p> {item.name}</p>
                   {(item.name === "Hỗ trợ" ||
                     item.name === "Danh mục sản phẩm") && (
-                    <AiOutlineDown className="text-[10px] group-hover/main:rotate-180 duration-300" />
+                    <AiOutlineDown className="text-[10px] group-hover/main:rotate-180 duration-300 text-black" />
                   )}
                 </Link>
                 <div className="h-[2px] bg-gray-400 w-0 group-hover/main:w-full duration-300 mt-3 "></div>
@@ -73,7 +77,7 @@ const Header = () => {
                             href={`/bai-viet/${items.value}`}
                             className="w-max  border-b"
                           >
-                            <p className="py-2 px-2 hover:text-blue-400 duration-300 ">
+                            <p className="py-2 px-4 hover:text-maingreen duration-300 text-black">
                               {" "}
                               {items.label}
                             </p>
@@ -105,7 +109,9 @@ const Header = () => {
                               >
                                 <div className="py-2 px-4 hover:text-blue-400 duration-300  font-light flex items-center justify-between w-full">
                                   {" "}
-                                  <p className="w-max"> {items.label}</p>
+                                  <p className="py-2 px-4 hover:text-maingreen duration-300 text-black">
+                                    {items.label}
+                                  </p>
                                   {sort.length > 0 && (
                                     <AiFillCaretRight
                                       className={` rotate-90 group-hover/lv1:rotate-0 duration-500 `}

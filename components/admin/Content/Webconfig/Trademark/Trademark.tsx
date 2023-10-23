@@ -64,6 +64,16 @@ const Trademark: React.FC = () => {
       type: "input",
       placeholder: TradeMarkData.websiteSlogan,
     },
+    {
+      name: "Ngày thành lập",
+      type: "input",
+      placeholder: TradeMarkData.websiteFounding,
+    },
+    {
+      name: "Lĩnh vực hoạt động",
+      type: "input",
+      placeholder: TradeMarkData.websitefield,
+    },
   ];
 
   const HandleUpdate = (idx: number) => {
@@ -78,11 +88,16 @@ const Trademark: React.FC = () => {
         newData = { websiteName: Data };
       } else if (idx === 1) {
         newData = { websiteSlogan: Data };
+      } else if (idx === 2) {
+        newData = { websiteFounding: Data };
       } else if (idx === 3) {
-        newData = { websiteLogo: Data ? Data : LogoUrl };
+        newData = { websitefield: Data };
       } else if (idx === 4) {
+        newData = { websiteLogo: Data ? Data : LogoUrl };
+      } else if (idx === 5) {
         newData = { websiteIco: Data ? Data : IcoUrl };
       }
+
       updateDocument("website", "Trademark", newData).then(() => {
         notification.success({
           message: "Thành công !",
@@ -144,7 +159,7 @@ const Trademark: React.FC = () => {
                 <div className="flex gap-5 d:flex-row p:flex-col">
                   {Type && (
                     <div
-                      onClick={() => setSelected(idx + 2)}
+                      onClick={() => setSelected(idx + 4)}
                       className="p:w-full d:w-auto"
                     >
                       <Type
@@ -155,10 +170,10 @@ const Trademark: React.FC = () => {
                     </div>
                   )}
                   <div className="w-[120px]">
-                    {isSelected === idx + 2 ? (
+                    {isSelected === idx + 4 ? (
                       <button
                         className="hover:bg-[#bb86fc37] hover:text-[#BB86FC] text-[#74affc] bg-[#74affc43] px-3 py-2 rounded-xl"
-                        onClick={() => HandleUpdate(idx + 2)}
+                        onClick={() => HandleUpdate(idx + 4)}
                       >
                         Cập nhật
                       </button>

@@ -41,8 +41,6 @@ const Fetch: React.FC = () => {
           setTradeMarkData(items);
         } else if (items.id === "SocialMedia") {
           setSocialMedia(items.Data);
-        } else if (items.id === "Introduction") {
-          setIntroduction(items);
         } else if (items.id === "Sale") {
           setSale(items);
         }
@@ -81,6 +79,9 @@ const Fetch: React.FC = () => {
     });
     getProducts("products").then((data: any) => {
       setProducts(data);
+    });
+    getProducts("introduction").then((data: any) => {
+      setIntroduction(data);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -145,6 +146,11 @@ const Fetch: React.FC = () => {
     } else if (isRefetch === "CRUD posts") {
       getProducts("posts").then((data: any) => {
         setPosts(data);
+      });
+      setIsRefetch("done");
+    } else if (isRefetch === "CRUD introduction") {
+      getProducts("introduction").then((data: any) => {
+        setIntroduction(data);
       });
       setIsRefetch("done");
     }

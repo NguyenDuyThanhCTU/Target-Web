@@ -6,22 +6,22 @@ import { notification } from "antd";
 import { useStateProvider } from "@context/StateProvider";
 import { useData } from "@context/DataProviders";
 import { addDocument } from "@config/Services/Firebase/FireStoreDB";
+import { TypePostItems } from "@assets/item";
 import Input from "@components/admin/Item/Input";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import {
   convertToCodeFormat,
   uploadImage,
 } from "@components/items/server-items/Handle";
-import { TypePostItems } from "@assets/item";
 
 const UploadPost: React.FC = () => {
   const [Title, setTitle] = useState<string>("");
-  const [url, setUrl] = useState<string>("");
-  const [topicUrl, setTopicUrl] = useState<string>("");
   const [Topic, setTopic] = useState<string>("");
+  const [url, setUrl] = useState<string>("");
   const [imageUrl, setImageUrl] = useState<string>("");
   const { setDropDown, setIsRefetch } = useStateProvider();
   const { setUpdateId, Posts } = useData();
+  const [TopicUrl, setTopicUrl] = useState<string>("");
   const HandleUploadImage = (e: any, locate: string): void => {
     uploadImage(e, locate).then((data: any) => {
       setImageUrl(data);
@@ -38,47 +38,49 @@ const UploadPost: React.FC = () => {
 
   useEffect(() => {
     const handleChange = () => {
-      const userInput = Title;
+      const userInput = Topic;
       const formattedCode = convertToCodeFormat(userInput);
       if (formattedCode) {
-        setUrl(formattedCode);
+        setTopicUrl(formattedCode);
       }
     };
     handleChange();
-  }, [Title]);
+  }, [Topic]);
 
   const HandleUploadPosts = () => {
-    const data: any = {
-      title: Title,
-      url: url,
-      topic: Topic,
-      image: imageUrl,
-      content: "",
-    };
-    for (let key in data) {
-      if (data[key] === undefined || data[key] === "") {
-        delete data[key];
-      }
-    }
-
-    addDocument("posts", data).then((data) => {
-      notification.success({
-        message: "Thành công!",
-        description: `Thông tin đã được CẬP NHẬT !`,
+    if (!Topic) {
+      notification.error({
+        message: "Lỗi !",
+        description: `Vui lòng chọn loại bài viết trước khi TIẾP TỤC!`,
       });
+    } else {
+      const data = {
+        topic: Topic,
+        topicurl: TopicUrl,
+        title: Title,
+        url: url,
+        image: imageUrl,
+        content: "",
+      };
+      addDocument("posts", data).then((data) => {
+        notification.success({
+          message: "Thành công!",
+          description: `Thông tin đã được CẬP NHẬT !`,
+        });
 
-      setUpdateId(data);
-      setDropDown("add-post");
-      setIsRefetch("CRUD posts");
-      setTitle("");
-      setImageUrl("");
-    });
+        setUpdateId(data);
+        setDropDown("add-post");
+        setIsRefetch("CRUD posts");
+        setTopic("");
+        setImageUrl("");
+      });
+    }
   };
 
   const HandleChange = (value: string) => {
     const sort = TypePostItems.filter((item) => item.value === value);
-    setTopic(sort[0].label);
-    setTopicUrl(sort[0].value);
+    setTitle(sort[0].label);
+    setUrl(sort[0].value);
   };
 
   return (
@@ -103,11 +105,11 @@ const UploadPost: React.FC = () => {
         </div>
         <div className="h-[250px] text-black w-full">
           <div>
-            {Topic === "Tin tức" && (
+            {(url === "cong-trinh-thuc-te" || url === "dich-vu") && (
               <Input
                 text="Tiêu đề bài viết"
-                Value={Title}
-                setValue={setTitle}
+                Value={Topic}
+                setValue={setTopic}
                 Input={true}
                 PlaceHolder=""
               />
@@ -130,7 +132,7 @@ const UploadPost: React.FC = () => {
                 ))}
               </select>
             </div>
-            {Topic === "Tin tức" && (
+            {(url === "cong-trinh-thuc-te" || url === "dich-vu") && (
               <>
                 {" "}
                 <div className="flex gap-5  items-end ">
@@ -164,7 +166,7 @@ const UploadPost: React.FC = () => {
         </div>
 
         <div className="flex gap-5 mt-2">
-          {Topic === "Tin tức" ? (
+          {url === "cong-trinh-thuc-te" || url === "dich-vu" ? (
             <>
               <div
                 className="px-10 py-3 rounded-xl border-2 border-blue-500 bg-blue-500 text-white hover:bg-blue-700 duration-300 hover:border-blue-700 cursor-pointer"

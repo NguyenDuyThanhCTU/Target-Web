@@ -85,12 +85,19 @@ export const ProductSidebarAdmin = [
     icon: "AiOutlineSlack",
   },
   {
-    name: "Lịch chạy tàu",
+    name: "Sản phẩm",
     icon: "FaFirstOrderAlt",
   },
-
   {
-    name: "Chi nhánh phòng vé",
+    name: "Sale",
+    icon: "IoFlashOutline",
+  },
+  {
+    name: "Đơn hàng",
+    icon: "AiOutlineUnorderedList",
+  },
+  {
+    name: "Chi nhánh",
     icon: "CgListTree",
   },
 ];
@@ -113,8 +120,8 @@ export const WebsiteSidebarAdmin = [
     icon: "MdOutlinePostAdd",
   },
   {
-    name: "Giá vé",
-    icon: "HiOutlineTicket",
+    name: "Video",
+    icon: "BiSlideshow",
   },
   {
     name: "Tài khoản",
@@ -258,7 +265,7 @@ export const HeaderItems = [
 
   {
     name: "Giới thiệu",
-    link: "bai-viet/gioi-thieu",
+    link: "gioi-thieu",
   },
   {
     name: "Tin tức",
@@ -360,10 +367,7 @@ export const TypePostItems = [
     label: "Tin tức",
     value: "tin-tuc",
   },
-  {
-    label: "Giới thiệu",
-    value: "gioi-thieu",
-  },
+
   {
     label: "Hướng dẫn sử dụng",
     value: "huong-dan-su-dung",
