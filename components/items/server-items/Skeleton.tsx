@@ -17,7 +17,7 @@ export const SkeletonProductCard = ({ isLoading }: { isLoading?: boolean }) => (
 
 export const SkeletonListCard = ({ isLoading }: { isLoading?: boolean }) => (
   <div
-    className={clsx("w-[900px] h-[200px] rounded-2xl bg-zinc-900/80 p-4", {
+    className={clsx("w-64 h-56 rounded-2xl bg-zinc-900/80 p-4", {
       "relative overflow-hidden before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1.5s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent":
         isLoading,
     })}

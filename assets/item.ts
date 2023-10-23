@@ -1,4 +1,4 @@
-import { SiZalo } from "react-icons/si";
+import { SiGooglemaps, SiZalo } from "react-icons/si";
 import {
   BsFacebook,
   BsMessenger,
@@ -76,6 +76,7 @@ export const IconMapping: IconMappingType = {
   BsFillSendXFill: BsFillSendXFill,
   CiViewList: CiViewList,
   HiOutlineTicket: HiOutlineTicket,
+  SiGooglemaps: SiGooglemaps,
 };
 
 export const ProductSidebarAdmin = [
@@ -165,10 +166,10 @@ export const SocialMediaDashboard = [
   },
 
   {
-    title: "Trang Twitter",
-    icon: "AiOutlineTwitter",
+    title: "Google map",
+    icon: "SiGooglemaps",
     image:
-      "https://vietnix.vn/wp-content/uploads/2022/07/mang-xa-hoi-twitter.webp",
+      "https://viondigital.com/wp-content/uploads/2021/11/google-maps-10.jpg",
     style: "hover:bg-white hover:text-blue-600 p-1",
   },
   {
@@ -266,7 +267,7 @@ export const HeaderItems = [
 
   {
     name: "Hỗ trợ",
-    link: "ho-tro",
+    link: "bai-viet/huong-dan-su-dung",
   },
   {
     name: "Liên hệ",
@@ -294,7 +295,7 @@ export const ToolsTipsSocialMediaItems = [
     title: "www.tiktok.com/...",
   },
   {
-    title: "www.twitter.com/...",
+    title: "maps.app.goo.gl/...",
   },
   {
     title: "www.youtube.com/...",

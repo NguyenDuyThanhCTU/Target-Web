@@ -10,10 +10,9 @@ import { RxCross2 } from "react-icons/rx";
 function FloatButton() {
   const [isOpen, setIsOpen] = useState(false);
   const { setTheme, theme } = useStateProvider();
-  const pathname = usePathname();
 
   return (
-    <div className="fixed bottom-7 right-10  box-border flex flex-col gap-5">
+    <div className="fixed p:bottom-14 d:bottom-7 p:right-5 d:right-10  box-border flex flex-col gap-5 z-10">
       {theme === "light" ? (
         <div className="flex items-center ">
           <div
@@ -42,15 +41,19 @@ function FloatButton() {
         </div>
       )}
 
-      <div className="flex items-center ">
+      <div className="flex items-center    ">
         <div
-          className="text-[30px] p-2 rounded-full shadow-xl duration-300 bg-white shadow-gray-300 cursor-pointer hover:shadow-gray-400"
+          className={`${
+            theme === "light"
+              ? "bg-black shadow-gray-300 hover:shadow-gray-400 text-white black-animation"
+              : "bg-white shadow-gray-300 hover:shadow-gray-400 while-animation"
+          } text-[30px] p-2 rounded-full shadow-xl   duration-300  cursor-pointer `}
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? (
-            <RxCross2 className="text-black " />
+            <RxCross2 className=" " />
           ) : (
-            <BiSolidMagicWand className="text-black " />
+            <BiSolidMagicWand className=" " />
           )}
         </div>
       </div>

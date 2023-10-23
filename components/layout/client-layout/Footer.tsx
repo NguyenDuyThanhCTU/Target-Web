@@ -1,13 +1,19 @@
 "use client";
-import { IconMapping, SocialMediaCustom } from "@assets/item";
+import { IconMapping, SocialMediaCustom, TypePostItems } from "@assets/item";
 import { useData } from "@context/DataProviders";
 import { useStateProvider } from "@context/StateProvider";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
+import { BiLogoTelegram } from "react-icons/bi";
+import { GiRotaryPhone } from "react-icons/gi";
+import { IoLocation } from "react-icons/io5";
 
 const Footer = () => {
   const { ContactData, SocialMedia } = useData();
+  console.log(SocialMedia);
   const { theme } = useStateProvider();
+  const router = useRouter();
   const LearnMoreItems = [
     {
       topic: "Giới thiệu",
@@ -29,48 +35,80 @@ const Footer = () => {
   return (
     <div
       className={`${
-        theme === "light" ? "bg-white text-black" : "bg-black text-white"
-      } border-b duration-300`}
+        theme === "light"
+          ? "bg-white text-black border-gray-400"
+          : "bg-black text-white border-white"
+      } border-y duration-300`}
     >
-      <div className="d:w-[1440px] p:w-auto d:mx-auto p:mx-2 py-20 font-Inter">
-        <div className="grid grid-cols-5 ">
-          <div>
-            <img src="https://camptraveler.com/hilink-logo.svg" alt="logo" />
+      <div className="d:w-[1440px] p:w-auto d:mx-auto p:mx-2 py-20  font-LexendDeca font-extralight ">
+        <div className="grid p:grid-cols-2 d:grid-cols-6 gap-4 ">
+          <div className="col-span-2">
+            <div>
+              <img src="https://camptraveler.com/hilink-logo.svg" alt="logo" />
+            </div>
+            <h2 className="text-[18px] font-normal  mt-5">
+              ALPHA SMART - Nhà Công Nghệ
+            </h2>
+            <div className="mt-4 flex flex-col text-[14px]">
+              <p>
+                ALPHA SMART - Nhà Công Nghệ Chuyên các loại khóa cửa điện tử,
+                khóa cổng vân tay, chuông cửa màn hình.
+              </p>
+              <div>
+                <img
+                  src="https://file.hstatic.net/1000300454/file/logo_bct_019590229b4c4dfda690236b67f7aff4.png"
+                  alt="logo"
+                />
+              </div>
+            </div>
           </div>
+
           <div>
-            <h2 className="text-[18px] font-bold">Tìm hiểu thêm</h2>
-            <div className="flex flex-col gap-4 mt-4">
-              {LearnMoreItems.map((items: any, idx: number) => (
+            <h2 className="text-[18px] font-normal">Tìm hiểu thêm</h2>
+            <div className="flex flex-col gap-2 mt-5">
+              {TypePostItems.map((items: any, idx: number) => (
                 <Link
-                  href={`/${items.link}`}
+                  href={`/bai-viet/${items.value}`}
                   key={idx}
-                  className="text-[14px] text-[#7b7b7b]"
+                  className="text-[14px] text-[#7b7b7b] hover:underline hover:text-blue-500"
                 >
-                  {items.topic}
+                  {items.label}
                 </Link>
               ))}
             </div>
           </div>
+
           <div>
-            <h2 className="text-[18px] font-bold">Cộng đồng</h2>
-            <div className="flex flex-col gap-4 mt-4"></div>
-          </div>
-          <div>
-            <h2 className="text-[18px] font-bold">Thông tin liên hệ</h2>
-            <div className="flex flex-col gap-4 mt-4">
-              <p className="text-[14px] text-[#7b7b7b]">
-                <strong>Địa chỉ:</strong> {ContactData.address}
-              </p>
-              <p className="text-[14px] text-[#7b7b7b]">
-                <strong>Số ĐT:</strong> {ContactData.phone}
-              </p>
-              <p className="text-[14px] text-[#7b7b7b]">
-                <strong>Email:</strong> {ContactData.gmail}
-              </p>
+            <h2 className="text-[18px] font-normal">Thông tin liên hệ</h2>
+            <div className="mt-5 flex flex-col gap-2 text-[14px]">
+              <div className=" flex gap-3">
+                <div className="flex mt-1">
+                  <IoLocation className="" />
+                </div>
+                <Link
+                  href={`https://${SocialMedia[6]}`}
+                  className="hover:underline hover:text-blue-500 cursor-pointer"
+                >
+                  {ContactData.address}
+                </Link>
+              </div>
+
+              <div className="flex items-center gap-3 cursor-pointer hover:underline ">
+                <GiRotaryPhone />
+                <Link href={`tel:${ContactData.phone}`}>
+                  {ContactData.phone}
+                </Link>
+              </div>
+              <div className="flex items-center gap-3">
+                <BiLogoTelegram />
+                <Link
+                  href={`mailto:${ContactData.gmail}`}
+                  className="hover:underline cursor-pointer"
+                >
+                  {ContactData.gmail}
+                </Link>
+              </div>
             </div>
-          </div>
-          <div>
-            <h2 className="text-[18px] font-bold">Mạng xã hội</h2>
             <div className="flex flex-col gap-4 mt-4">
               <div className="flex mt-2 gap-5">
                 {SocialMediaCustom.map((items: any, idx: number) => {
@@ -82,14 +120,25 @@ const Footer = () => {
                       className={`text-[20px] cursor-pointer  p-1  hover:scale-125 duration-300`}
                     >
                       {Icon && (
-                        <a href={`https://${Point} `} target="_blank">
+                        <Link href={`https://${Point} `} target="_blank">
                           <Icon />
-                        </a>
+                        </Link>
                       )}
                     </div>
                   );
                 })}
               </div>
+            </div>
+          </div>
+          <div className="col-span-2">
+            <h2 className="text-[18px] font-normal ">Fanpage</h2>
+            <div className="h-52 overflow-hidden mt-4">
+              <iframe
+                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdichvuquangcaotrongoicantho%2F&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+                width="600"
+                height="500"
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              ></iframe>
             </div>
           </div>
         </div>

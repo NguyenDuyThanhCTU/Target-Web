@@ -14,9 +14,19 @@
 } */
 
 /*<---------------------------------------------------------- Animation ----------------------------------------------------------> */
-.call-animation {
+
+.while-animation {
   padding: 10px;
-  background-color: rgb(221, 51, 51);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.black-animation {
+  padding: 10px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -41,20 +51,20 @@
   }
 }
 
-.call-animation::before {
+.while-animation::before {
   content: "";
   position: absolute;
-  border: 1px solid #ed1b2e;
+  border: 1px solid #ffffff;
   width: calc(100% + 40px);
   height: calc(100% + 40px);
   border-radius: 50%;
   animation: pulse 1s linear infinite;
 }
 
-.call-animation::after {
+.while-animation::after {
   content: "";
   position: absolute;
-  border: 1px solid #ed1b2e;
+  border: 1px solid #ffffff;
   width: calc(100% + 40px);
   height: calc(100% + 40px);
   border-radius: 50%;
@@ -62,6 +72,26 @@
   animation-delay: 0.3s;
 }
 
+.black-animation::before {
+  content: "";
+  position: absolute;
+  border: 1px solid #000;
+  width: calc(100% + 40px);
+  height: calc(100% + 40px);
+  border-radius: 50%;
+  animation: pulse 1s linear infinite;
+}
+
+.black-animation::after {
+  content: "";
+  position: absolute;
+  border: 1px solid #000;
+  width: calc(100% + 40px);
+  height: calc(100% + 40px);
+  border-radius: 50%;
+  animation: pulse 1s linear infinite;
+  animation-delay: 0.3s;
+}
 @keyframes pulse {
   0% {
     transform: scale(0.5);
@@ -80,44 +110,13 @@
 }
 
 
-@keyframes zoom {
-  0% {
-    color: red;
-    transform: scale(0.9);
-  }
-  50% {
-    color: blue;
-    transform: scale(1);
-  }
-  100% {
-    color: red;
-    transform: scale(0.9);
-  }
-}
-
-.zoom {
-  animation: zoom 2s infinite; 
-  text-align: center;
-}
 
 
-@keyframes flicker {
-  0% {
-      color: #f2f2f2;
-  }
-  50% {
-      color: #f3b41e;
-  }
-  100% {
-      color: #f2f2f2;
-  }
-}
 
-.flicker {
-  animation: flicker 1s infinite; 
-  text-align: center;
 
-}
+
+
+
 
 
 
