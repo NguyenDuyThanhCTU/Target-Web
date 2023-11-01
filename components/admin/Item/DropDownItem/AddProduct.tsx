@@ -15,11 +15,7 @@ import {
   uploadImage,
 } from "@components/items/server-items/Handle";
 import { addDocument } from "@config/Services/Firebase/FireStoreDB";
-import {
-  ProductFunctionType,
-  ProductPriceItems,
-  TypeProductItems,
-} from "@assets/item";
+import { TypeProductItems } from "@assets/item";
 import TextEditor from "@components/admin/Item/CKEditor/TextEditor";
 
 const AddProduct = ({}) => {
@@ -288,7 +284,7 @@ const AddProduct = ({}) => {
                 </div>
               </div>
 
-              <div className="  flex flex-col gap-3">
+              {/* <div className="  flex flex-col gap-3">
                 <div className="flex flex-col gap-2 w-full">
                   <div className="flex flex-col gap-2">
                     <label className="text-md font-medium ">
@@ -325,7 +321,7 @@ const AddProduct = ({}) => {
                     </Select>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="flex gap-6 mt-10 w-full justify-center">

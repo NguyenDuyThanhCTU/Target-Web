@@ -256,7 +256,7 @@ export const HeaderItems = [
   },
   {
     name: "Danh mục sản phẩm",
-    Link: "san-pham/giam-gia",
+    link: "san-pham/giam-gia",
   },
   {
     name: "Sản phẩm",
