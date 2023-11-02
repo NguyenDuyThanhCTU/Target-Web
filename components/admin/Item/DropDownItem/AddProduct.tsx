@@ -26,24 +26,22 @@ import {
 import { addDocument } from "@config/Services/Firebase/FireStoreDB";
 import { TypeProductItems } from "@assets/item";
 import TextEditor from "@components/admin/Item/CKEditor/TextEditor";
+import { useSmartContract } from "@context/ContractProviders";
+import { ethers } from "ethers";
 
 const AddProduct = ({}) => {
-  const [ListSubImage, setListSubImage] = useState<any>([]);
   const { setDropDown, setIsRefetch } = useStateProvider();
   const { productTypes } = useData();
+  const { createShoe } = useSmartContract();
   const [open, setOpen] = useState(false);
   const [openDescription, setOpenDescription] = useState(false);
   const [openFunction, setOpenFunction] = useState(false);
-  const [form, setForm] = useState({
+
+  const [formSmartContract, setFormSmartContract] = useState<any>({
     name: "",
-    level: 1,
-    description: "",
-    introduction: "",
     url: "",
     image: "",
-    subimage: [],
     price: 0,
-    buyers: [],
     typeurl: "",
     parenturl: "",
     limitspeed: 0,
@@ -52,6 +50,14 @@ const AddProduct = ({}) => {
     limittime: 0,
     nightmode: false,
     test: false,
+    level: 1,
+  });
+
+  const [form, setForm] = useState<any>({
+    url: "",
+    description: "",
+    introduction: "",
+    subimage: [],
     state: false,
   });
 
@@ -64,65 +70,52 @@ const AddProduct = ({}) => {
   //convert to url,ex: "Hộp quà - giỏ quà" => "hop-qua-gio-qua"
 
   const handleDiscard = () => {
-    // setTitle("");
-    // setTitleUrl("");
-    // setPrice("");
-    // setContent("");
-    // setDescribe("");
-    // setIsType("");
-    // setIsParent("");
-    // setIsChildren("");
-    // setTypeUrl("");
-    // setParentUrl("");
-    // setChildrenUrl("");
-    // setListSubImage([]);
-    // setImageUrl("");
+    // setForm({
+    //   name: "",
+    //   level: 1,
+    //   description: "",
+    //   introduction: "",
+    //   url: "",
+    //   image: "",
+    //   subimage: [],
+    //   price: 0,
+    //   typeurl: "",
+    //   parenturl: "",
+    //   limitspeed: 0,
+    //   limitdistance: 0,
+    //   limitcoinearning: 0,
+    //   limittime: 0,
+    //   nightmode: false,
+    //   test: false,
+    //   state: false,
+    // });
   };
 
-  const HandleSubmit = () => {
-    if (!form.name) {
+  const HandleSubmit = async (e: any) => {
+    e.preventDefault();
+    if (!formSmartContract.name) {
       notification["error"]({
         message: "Lỗi !!!",
         description: `Tên giày không được để trống !`,
       });
     } else {
-      const data: any = {
-        // title: Title,
-        // content: Content,
-        // describe: describe,
-        // price: Price,
-        // image: imageUrl,
-        // type: isType,
-        // typeUrl: typeUrl,
-        // parent: isParent,
-        // parentUrl: parentUrl,
-        // state: "Còn hàng",
-        // url: titleUrl,
-        // sale: {
-        //   discount: 0,
-        //   newPrice: "0",
-        // },
-        // access: Math.floor(Math.random() * (10000 - 100 + 1)) + 100,
-        // subimage: ListSubImage,
-        // function: ProductFunction,
-        // priceSegment: ProductPrice,
-      };
+      const formattedName = convertToCodeFormat(formSmartContract.name);
+      setForm({ ...form, url: formattedName });
+      setFormSmartContract({ ...formSmartContract, url: formattedName });
 
-      for (let key in data) {
-        if (data[key] === undefined || data[key] === "") {
-          delete data[key];
-        }
-      }
+      // await createShoe({
+      //   ...form,
+      //   target: ethers.utils.parseUnits(form.target, 18),
+      // });
 
-      addDocument("products", data).then(() => {
-        notification["success"]({
-          message: "Tải lên thành công!",
-          description: `giày của bạn đã được tải lên !`,
-        });
-
-        setIsRefetch("CRUD products");
-        // handleDiscard();
-      });
+      // addDocument("products", data).then(() => {
+      //   notification["success"]({
+      //     message: "Tải lên thành công!",
+      //     description: `giày của bạn đã được tải lên !`,
+      //   });
+      //   setIsRefetch("CRUD products");
+      //   // handleDiscard();
+      // });
     }
   };
 
@@ -144,33 +137,29 @@ const AddProduct = ({}) => {
 
     try {
       const url = await uploadImage(options.file, "avatar");
-      const newUrl = {
+
+      const newUrl: any = {
         uid: options.file.uid,
         url: url,
       };
-      setListSubImage((prev: any) => [...prev, newUrl]);
+      setForm({ ...form, subimage: [...form.subimage, newUrl] });
     } catch (error) {
       console.error("Error uploading file:", error);
     }
   };
 
   const handleRemove = (file: any) => {
-    const newImageUrl = ListSubImage.filter(
+    const newImageUrl = form.subimage.filter(
       (item: any) => item.uid !== file.uid
     );
     setForm({ ...form, image: newImageUrl });
   };
 
-  const handleFormFieldChange = (fieldName: any, e: any) => {
-    if (fieldName === "name") {
-      setForm({ ...form, name: e.target.value });
-      const formattedName = convertToCodeFormat(e.target.value);
-      if (formattedName) {
-        setForm({ ...form, url: formattedName });
-      }
-    } else {
-      setForm({ ...form, [fieldName]: e.target.value });
-    }
+  // const handleFormFieldChange = (fieldName: any, e: any) => {
+  //   setForm({ ...form, [fieldName]: e.target.value });
+  // };
+  const handleSmartContractFormFieldChange = (fieldName: any, e: any) => {
+    setFormSmartContract({ ...formSmartContract, [fieldName]: e.target.value });
   };
 
   return (
@@ -214,7 +203,7 @@ const AddProduct = ({}) => {
 
                 <div className="overflow-y-auto border rounded-xl w-full  h-[200px] mt-5">
                   <div className="p-1">
-                    <img src={form.image} alt="product" />
+                    <img src={formSmartContract.image} alt="product" />
                   </div>
                 </div>
               </div>
@@ -222,13 +211,17 @@ const AddProduct = ({}) => {
             <div className="  flex flex-col gap-3">
               <Input
                 text="Tên giày"
-                Value={form.name}
-                setValue={(e: any) => handleFormFieldChange("name", e)}
+                Value={formSmartContract.name}
+                setValue={(e: any) =>
+                  handleSmartContractFormFieldChange("name", e)
+                }
               />
               <Input
                 text="Giá giày"
-                Value={form.price}
-                setValue={(e: any) => handleFormFieldChange("price", e)}
+                Value={formSmartContract.price}
+                setValue={(e: any) =>
+                  handleSmartContractFormFieldChange("price", e)
+                }
               />
 
               <div className="">
@@ -268,7 +261,12 @@ const AddProduct = ({}) => {
                   <label className="text-md font-medium ">Mục bài viết:</label>
                   <select
                     className="outline-none lg:w-650 border-2 border-gray-200 text-md capitalize lg:p-4 p-2 rounded cursor-pointer"
-                    onChange={(e: any) => handleFormFieldChange("parenturl", e)}
+                    onChange={(e) =>
+                      setForm({
+                        ...formSmartContract,
+                        parenturl: e.target.value,
+                      })
+                    }
                   >
                     <option> -- Chọn mục bài viết --</option>
 
@@ -289,12 +287,15 @@ const AddProduct = ({}) => {
                     style={{ width: "100%" }}
                     placeholder="Chọn loại bài viết"
                     onChange={(values) =>
-                      setForm({ ...form, description: values })
+                      setForm({ ...formSmartContract, description: values })
                     }
                     optionLabelProp="label"
                   >
                     {productTypes
-                      ?.filter((item: any) => item.parentUrl === form.parenturl)
+                      ?.filter(
+                        (item: any) =>
+                          item.parentUrl === formSmartContract.parenturl
+                      )
                       .map((item: any, idx: any) => (
                         <Option value={item.type} label={item.type}>
                           <Space>{item.type}</Space>
@@ -323,7 +324,10 @@ const AddProduct = ({}) => {
                     <div>
                       <Radio.Group
                         onChange={(e) =>
-                          setForm({ ...form, level: e.target.value })
+                          setForm({
+                            ...formSmartContract,
+                            level: e.target.value,
+                          })
                         }
                         value={form.level}
                       >
@@ -404,35 +408,58 @@ const AddProduct = ({}) => {
         >
           <Input
             text="Tốc độ tối đa (Km/h)"
-            Value={form.limitspeed}
-            setValue={(e: any) => handleFormFieldChange("limitspeed", e)}
+            Value={formSmartContract.limitspeed}
+            setValue={(e: any) =>
+              handleSmartContractFormFieldChange("limitspeed", e)
+            }
           />
           <Input
             text="Quãng đường tối đa (Km)"
-            Value={form.limitdistance}
-            setValue={(e: any) => handleFormFieldChange("limitdistance", e)}
+            Value={formSmartContract.limitdistance}
+            setValue={(e: any) =>
+              handleSmartContractFormFieldChange("limitdistance", e)
+            }
           />
           <Input
             text="Số coin kiếm được tối đa "
-            Value={form.limitcoinearning}
-            setValue={(e: any) => handleFormFieldChange("limitcoinearning", e)}
+            Value={formSmartContract.limitcoinearning}
+            setValue={(e: any) =>
+              handleSmartContractFormFieldChange("limitcoinearning", e)
+            }
           />
           <Input
             text="Thời gian giữa các lần chạy (giờ)"
-            Value={form.limittime}
-            setValue={(e: any) => handleFormFieldChange("limittime", e)}
+            Value={formSmartContract.limittime}
+            setValue={(e: any) =>
+              handleSmartContractFormFieldChange("limittime", e)
+            }
           />
 
           <div className="flex flex-col gap-3 p-6 border rounded-xl">
             <Checkbox
-              onChange={(e) => setForm({ ...form, nightmode: e.target.value })}
+              onChange={(e) =>
+                setFormSmartContract({
+                  ...formSmartContract,
+                  nightmode: e.target.checked,
+                })
+              }
             >
               Night Mode
             </Checkbox>
             <Checkbox
-              onChange={(e) => setForm({ ...form, test: e.target.value })}
+              onChange={(e) =>
+                setFormSmartContract({
+                  ...formSmartContract,
+                  test: e.target.checked,
+                })
+              }
             >
               Thử Nghiệm
+            </Checkbox>
+            <Checkbox
+              onChange={(e) => setForm({ ...form, test: e.target.checked })}
+            >
+              Trạng thái
             </Checkbox>
           </div>
         </Drawer>

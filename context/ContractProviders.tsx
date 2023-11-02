@@ -17,38 +17,43 @@ export type ContractContextType = {
   address?: string;
   contract?: any;
   connect?: () => void;
-  createCampaign?: (form: any) => void;
+  createShoe: (form: any) => void;
 };
 
 export const ContractContext = createContext<ContractContextType>({
-  address: undefined,
-  contract: undefined,
-  connect: undefined,
-  createCampaign: undefined,
+  address: "",
+  contract: "",
+  connect: () => {},
+  createShoe: () => {},
 });
 
 export const ContractProvider: React.FC<Props> = ({ children }) => {
   const { contract } = useContract(
     "0xf59A1f8251864e1c5a6bD64020e3569be27e6AA9"
   );
-  const { mutateAsync: createCampaign } = useContractWrite(
-    contract,
-    "createCampaign"
-  );
+  const { mutateAsync: createShoe } = useContractWrite(contract, "createShoe");
 
   const address = useAddress();
   const connect = useMetamask();
 
-  const publishCampaign = async (form: any) => {
+  const publishShoe = async (form: any) => {
     try {
-      const data = await createCampaign({
+      const data: any = await createShoe({
         args: [
           address, // owner
-          form.title, // title
-          form.description, // description
-          form.target,
-          new Date(form.deadline).getTime(), // deadline,
+          form.name,
+          form.url,
           form.image,
+          form.price,
+          form.typeurl,
+          form.parenturl,
+          form.limitspeed,
+          form.limitdistance,
+          form.limitcoinearning,
+          form.limittime,
+          form.nightmode,
+          form.test,
+          form.level,
         ],
       });
 
@@ -60,7 +65,7 @@ export const ContractProvider: React.FC<Props> = ({ children }) => {
 
   return (
     <ContractContext.Provider
-      value={{ address, contract, connect, createCampaign: publishCampaign }}
+      value={{ address, contract, connect, createShoe: publishShoe }}
     >
       {children}
     </ContractContext.Provider>
