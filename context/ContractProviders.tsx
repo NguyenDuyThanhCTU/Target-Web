@@ -16,7 +16,7 @@ interface Props {
 export type ContractContextType = {
   address?: string;
   contract?: any;
-  connect?: () => void;
+  connect: () => any;
   createShoe: (form: any) => void;
 };
 
@@ -37,6 +37,22 @@ export const ContractProvider: React.FC<Props> = ({ children }) => {
   const connect = useMetamask();
 
   const publishShoe = async (form: any) => {
+    console.log(
+      address, // owner
+      form.name,
+      form.url,
+      form.image,
+      form.price,
+      form.typeurl,
+      form.parenturl,
+      form.limitspeed,
+      form.limitdistance,
+      form.limitcoinearning,
+      form.limittime,
+      form.nightmode,
+      form.test,
+      form.level
+    );
     try {
       const data: any = await createShoe({
         args: [

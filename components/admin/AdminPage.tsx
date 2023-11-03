@@ -6,12 +6,18 @@ import Sidebar from "@components/layout/admin-layout/Sidebar";
 import ClientLogin from "@components/login/ClientLogin";
 import { ParticlesCustom } from "@components/login/Items/ParticlesCustom";
 import { useAuth } from "@context/AuthProviders";
+import { useSmartContract } from "@context/ContractProviders";
+import { Alert, Modal, Spin } from "antd";
 
-import React from "react";
+import React, { useEffect } from "react";
 
 const AdminPage = () => {
+  const [isModalOpen, setIsModalOpen] = React.useState(true);
+  const { connect, address } = useSmartContract();
   const { verify } = useAuth();
-
+  const HandleConnectMetamask = () => {
+    connect().then(() => setIsModalOpen(false));
+  };
   return (
     <div>
       {verify ? (
@@ -34,10 +40,25 @@ const AdminPage = () => {
               </div>
             </div>
           </div>
+          <Modal
+            footer={false}
+            closable={false}
+            className="bg-none"
+            open={isModalOpen}
+            style={{ background: "none" }}
+          >
+            <div className="w-full flex items-center justify-center">
+              <button
+                className={`font-epilogue font-semibold text-[16px] leading-[26px] text-white min-h-[52px] px-4 rounded-[10px] bg-[#1dc071] hover:bg-[#298257] duration-300`}
+                onClick={() => HandleConnectMetamask()}
+              >
+                Kết nối với ví Metamask
+              </button>
+            </div>
+          </Modal>
         </div>
       ) : (
         <>
-          {" "}
           <ParticlesCustom />
           <div className="bg-[rgba(0,0,0,0.3)] w-full h-full z-50 absolute">
             <div className="d:w-[880px] p:w-[90vw] h-[529px] absolute  bg-white bottom-[25%] p:left-[5%] d:left-[30%] flex font-LexendDeca cursor-pointer rounded-sm -z-10">

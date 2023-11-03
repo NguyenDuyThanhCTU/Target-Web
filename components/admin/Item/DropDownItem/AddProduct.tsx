@@ -38,19 +38,19 @@ const AddProduct = ({}) => {
   const [openFunction, setOpenFunction] = useState(false);
 
   const [formSmartContract, setFormSmartContract] = useState<any>({
-    name: "",
-    url: "",
-    image: "",
+    name: "adfsa",
+    url: "sdgsd",
+    image: "iag",
     price: 0,
-    typeurl: "",
-    parenturl: "",
+    typeurl: "baba",
+    parenturl: "aba",
     limitspeed: 0,
     limitdistance: 0,
     limitcoinearning: 0,
     limittime: 0,
     nightmode: false,
     test: false,
-    level: 1,
+    level: "1",
   });
 
   const [form, setForm] = useState<any>({
@@ -103,10 +103,21 @@ const AddProduct = ({}) => {
       setForm({ ...form, url: formattedName });
       setFormSmartContract({ ...formSmartContract, url: formattedName });
 
-      // await createShoe({
-      //   ...form,
-      //   target: ethers.utils.parseUnits(form.target, 18),
-      // });
+      await createShoe({
+        ...formSmartContract,
+        price: ethers.utils.parseUnits(formSmartContract.price, 18),
+        limitspeed: ethers.utils.parseUnits(formSmartContract.limitspeed, 18),
+        limitdistance: ethers.utils.parseUnits(
+          formSmartContract.limitdistance,
+          18
+        ),
+        limitcoinearning: ethers.utils.parseUnits(
+          formSmartContract.limitcoinearning,
+          18
+        ),
+        limittime: ethers.utils.parseUnits(formSmartContract.limittime, 18),
+        level: ethers.utils.parseUnits(formSmartContract.level, 18),
+      });
 
       // addDocument("products", data).then(() => {
       //   notification["success"]({
@@ -122,7 +133,7 @@ const AddProduct = ({}) => {
   const HandleUploadImage = (e: any, locate: string, type: string) => {
     if (type === "mainImage") {
       uploadImage(e, locate).then((data: any) => {
-        setForm({ ...form, image: data });
+        setFormSmartContract({ ...formSmartContract, image: data });
       });
     } else if (type === "subImage") {
       uploadImage(e, locate).then((data: any) => {
@@ -331,9 +342,9 @@ const AddProduct = ({}) => {
                         }
                         value={form.level}
                       >
-                        <Radio value={1}>1</Radio>
-                        <Radio value={2}>2</Radio>
-                        <Radio value={3}>3</Radio>
+                        <Radio value={"1"}>1</Radio>
+                        <Radio value={"2"}>2</Radio>
+                        <Radio value={"3"}>3</Radio>
                       </Radio.Group>
                     </div>
                   </div>
