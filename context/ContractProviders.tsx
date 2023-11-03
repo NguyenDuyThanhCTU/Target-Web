@@ -29,7 +29,7 @@ export const ContractContext = createContext<ContractContextType>({
 
 export const ContractProvider: React.FC<Props> = ({ children }) => {
   const { contract } = useContract(
-    "0xf59A1f8251864e1c5a6bD64020e3569be27e6AA9"
+    "0xb73B22e75028C24A81B6F4A5052AaBb9B08cd97C"
   );
   const { mutateAsync: createShoe } = useContractWrite(contract, "createShoe");
 
@@ -37,22 +37,6 @@ export const ContractProvider: React.FC<Props> = ({ children }) => {
   const connect = useMetamask();
 
   const publishShoe = async (form: any) => {
-    console.log(
-      address, // owner
-      form.name,
-      form.url,
-      form.image,
-      form.price,
-      form.typeurl,
-      form.parenturl,
-      form.limitspeed,
-      form.limitdistance,
-      form.limitcoinearning,
-      form.limittime,
-      form.nightmode,
-      form.test,
-      form.level
-    );
     try {
       const data: any = await createShoe({
         args: [

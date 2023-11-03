@@ -38,16 +38,16 @@ const AddProduct = ({}) => {
   const [openFunction, setOpenFunction] = useState(false);
 
   const [formSmartContract, setFormSmartContract] = useState<any>({
-    name: "adfsa",
-    url: "sdgsd",
-    image: "iag",
-    price: 0,
-    typeurl: "baba",
-    parenturl: "aba",
-    limitspeed: 0,
-    limitdistance: 0,
-    limitcoinearning: 0,
-    limittime: 0,
+    name: "",
+    url: "",
+    image: "",
+    price: "0",
+    typeurl: "",
+    parenturl: "",
+    limitspeed: "0",
+    limitdistance: "0",
+    limitcoinearning: "0",
+    limittime: "0",
     nightmode: false,
     test: false,
     level: "1",
@@ -66,8 +66,6 @@ const AddProduct = ({}) => {
   const initial1 =
     "<p>Chất liệu: </p> <br/> <p>Màu sắc: </p> <br/> <p>Size: </p> <br/> <p>Chiều dài: </p> <br/> <p>Chiều rộng: </p> <br/> <p>Chiều cao: </p> <br/> <p>Trọng lượng: </p> <br/> <p>Thương hiệu: </p> <br/> <p>Xuất xứ: </p> <br/> <p>Chất liệu";
   const initDescribe = "<p> mô tả giày </p>";
-
-  //convert to url,ex: "Hộp quà - giỏ quà" => "hop-qua-gio-qua"
 
   const handleDiscard = () => {
     // setForm({
@@ -90,13 +88,26 @@ const AddProduct = ({}) => {
     //   state: false,
     // });
   };
-
   const HandleSubmit = async (e: any) => {
     e.preventDefault();
-    if (!formSmartContract.name) {
+    if (
+      !formSmartContract.name ||
+      !formSmartContract.url ||
+      !form.image ||
+      !formSmartContract.price ||
+      !formSmartContract.typeurl ||
+      !formSmartContract.parenturl ||
+      !formSmartContract.limitspeed ||
+      !formSmartContract.limitdistance ||
+      !formSmartContract.limitcoinearning ||
+      !formSmartContract.limittime ||
+      !formSmartContract.nightmode ||
+      !formSmartContract.test ||
+      !formSmartContract.level
+    ) {
       notification["error"]({
         message: "Lỗi !!!",
-        description: `Tên giày không được để trống !`,
+        description: `Vui lòng điền đầy đủ các mục cho sản phẩm !`,
       });
     } else {
       const formattedName = convertToCodeFormat(formSmartContract.name);
