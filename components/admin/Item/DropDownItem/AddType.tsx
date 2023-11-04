@@ -42,7 +42,6 @@ const AddType: React.FC = () => {
         typeUrl: Params,
         parent: Parent,
         parentUrl: ParentParams,
-        children: [],
       };
 
       addDocument("productTypes", data).then(() => {
@@ -195,7 +194,7 @@ const AddType: React.FC = () => {
                 <Input
                   text={`Tên danh mục`}
                   Value={Name}
-                  setValue={setName}
+                  setValue={(e: any) => setName(e.target.value)}
                   Input={true}
                   PlaceHolder=""
                 />

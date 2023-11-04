@@ -31,17 +31,6 @@ const ListType: React.FC = () => {
                           <div key={idx}>
                             {" "}
                             <span className="text-[18px]">{item.type}</span>
-                            {item.children.length > 0 && (
-                              <div>
-                                {item.children.map((data: any, idx: any) => (
-                                  <div className="ml-6 indent-2 flex flex-col border-l-2 border-black">
-                                    <span className="text-[16px]">
-                                      {data.children}
-                                    </span>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
                           </div>
                         ))}
                       </div>

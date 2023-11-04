@@ -6,7 +6,6 @@ import ProductDetail from "./DropDownItem/ProductDetail";
 
 import AddBranch from "./DropDownItem/AddBranch";
 
-import AddChildrenType from "./DropDownItem/AddChildrenType";
 import { useStateProvider } from "@context/StateProvider";
 
 const AdminDropDown = () => {
@@ -19,8 +18,6 @@ const AdminDropDown = () => {
     >
       {isDropDown === "add-types" ? (
         <AddType />
-      ) : isDropDown === "add-children-type" ? (
-        <AddChildrenType />
       ) : isDropDown === "add-post" ? (
         <AddPost />
       ) : isDropDown === "add-product" ? (

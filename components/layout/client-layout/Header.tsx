@@ -107,7 +107,7 @@ const Header = () => {
                                 href={`/san-pham/${items.value}`}
                                 className="  border-b"
                               >
-                                <div className="py-2 px-4 hover:text-blue-400 duration-300  font-light flex items-center justify-between w-full">
+                                <div className="py-2 px-4 hover:bg-gray-100 hover:text-blue-400 duration-300  font-light flex items-center justify-between w-full">
                                   {" "}
                                   <p className="py-2 w-max px-4 hover:text-maingreen duration-300 text-black">
                                     {items.label}
@@ -129,7 +129,7 @@ const Header = () => {
                                           <Link
                                             href={`${`/san-pham/${items.typeUrl}`}`}
                                           >
-                                            <div className="py-2 px-4 hover:text-blue-400 duration-300  bg-white font-light flex items-center justify-between w-full">
+                                            <div className="py-4 px-10 hover:bg-gray-100 hover:text-blue-400 duration-300  bg-white font-light flex items-center justify-between w-full">
                                               <p>{items.type}</p>
                                             </div>
                                           </Link>

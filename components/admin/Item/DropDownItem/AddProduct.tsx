@@ -43,7 +43,7 @@ const AddProduct = ({}) => {
     image: "",
     price: "0",
     typeurl: "",
-    parenturl: "",
+    parent: "",
     limitspeed: "0",
     limitdistance: "0",
     limitcoinearning: "0",
@@ -67,36 +67,15 @@ const AddProduct = ({}) => {
     "<p>Chất liệu: </p> <br/> <p>Màu sắc: </p> <br/> <p>Size: </p> <br/> <p>Chiều dài: </p> <br/> <p>Chiều rộng: </p> <br/> <p>Chiều cao: </p> <br/> <p>Trọng lượng: </p> <br/> <p>Thương hiệu: </p> <br/> <p>Xuất xứ: </p> <br/> <p>Chất liệu";
   const initDescribe = "<p> mô tả giày </p>";
 
-  const handleDiscard = () => {
-    // setForm({
-    //   name: "",
-    //   level: 1,
-    //   description: "",
-    //   introduction: "",
-    //   url: "",
-    //   image: "",
-    //   subimage: [],
-    //   price: 0,
-    //   typeurl: "",
-    //   parenturl: "",
-    //   limitspeed: 0,
-    //   limitdistance: 0,
-    //   limitcoinearning: 0,
-    //   limittime: 0,
-    //   nightmode: false,
-    //   test: false,
-    //   state: false,
-    // });
-  };
+  const handleDiscard = () => {};
   const HandleSubmit = async (e: any) => {
     e.preventDefault();
+    console.log(formSmartContract);
     if (
       !formSmartContract.name ||
-      !formSmartContract.url ||
-      !form.image ||
+      !formSmartContract.image ||
       !formSmartContract.price ||
-      !formSmartContract.typeurl ||
-      !formSmartContract.parenturl ||
+      !formSmartContract.parent ||
       !formSmartContract.limitspeed ||
       !formSmartContract.limitdistance ||
       !formSmartContract.limitcoinearning ||
@@ -130,14 +109,15 @@ const AddProduct = ({}) => {
         level: ethers.utils.parseUnits(formSmartContract.level, 18),
       });
 
-      // addDocument("products", data).then(() => {
-      //   notification["success"]({
-      //     message: "Tải lên thành công!",
-      //     description: `giày của bạn đã được tải lên !`,
-      //   });
-      //   setIsRefetch("CRUD products");
-      //   // handleDiscard();
-      // });
+      addDocument("products", form).then(() => {
+        notification["success"]({
+          message: "Tải lên thành công!",
+          description: `giày của bạn đã được tải lên !`,
+        });
+        setIsRefetch("CRUD products");
+        handleDiscard();
+        setDropDown("");
+      });
     }
   };
 
@@ -284,9 +264,9 @@ const AddProduct = ({}) => {
                   <select
                     className="outline-none lg:w-650 border-2 border-gray-200 text-md capitalize lg:p-4 p-2 rounded cursor-pointer"
                     onChange={(e) =>
-                      setForm({
+                      setFormSmartContract({
                         ...formSmartContract,
-                        parenturl: e.target.value,
+                        parent: e.target.value,
                       })
                     }
                   >
@@ -313,10 +293,10 @@ const AddProduct = ({}) => {
                     }
                     optionLabelProp="label"
                   >
+                    <>{console.log(formSmartContract)}</>
                     {productTypes
                       ?.filter(
-                        (item: any) =>
-                          item.parentUrl === formSmartContract.parenturl
+                        (item: any) => item.parent === formSmartContract.parent
                       )
                       .map((item: any, idx: any) => (
                         <Option value={item.type} label={item.type}>
@@ -443,14 +423,14 @@ const AddProduct = ({}) => {
             }
           />
           <Input
-            text="Số coin kiếm được tối đa "
+            text="Tỷ lệ coin nhận được  "
             Value={formSmartContract.limitcoinearning}
             setValue={(e: any) =>
               handleSmartContractFormFieldChange("limitcoinearning", e)
             }
           />
           <Input
-            text="Thời gian giữa các lần chạy (giờ)"
+            text="Thời gian giữa các lần chạy (phút)"
             Value={formSmartContract.limittime}
             setValue={(e: any) =>
               handleSmartContractFormFieldChange("limittime", e)

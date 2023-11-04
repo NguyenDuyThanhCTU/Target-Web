@@ -11,10 +11,11 @@ export const uploadImage = async (fileOrEvent: any, locate: any) => {
       selectImage = fileOrEvent;
     }
 
-    const filetypes = ["image/jpeg", "image/jpg", "image/png"];
+    const filetypes = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
     if (filetypes.includes(selectImage.type)) {
       const storage = getStorage();
+
       let storageRef = ref(storage, `${locate}/${selectImage.name}`);
 
       const snapshot = await uploadBytes(storageRef, selectImage);

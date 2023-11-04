@@ -354,35 +354,35 @@ export const ProductLimitSpeedItems = [
 
 export const ProductLimitRoadItems = [
   {
-    label: "3Km",
+    label: "3 Km",
     value: "3",
   },
   {
-    label: "6Km",
+    label: "6 Km",
     value: "6",
   },
   {
-    label: "8Km",
+    label: "8 Km",
     value: "8",
   },
   {
-    label: "10Km",
+    label: "10 Km",
     value: "10",
   },
   {
-    label: "13Km",
+    label: "13 Km",
     value: "13",
   },
   {
-    label: "16Km",
+    label: "16 Km",
     value: "16",
   },
   {
-    label: "18Km",
+    label: "18 Km",
     value: "18",
   },
   {
-    label: "20Km",
+    label: "20 Km",
     value: "20",
   },
 ];
@@ -427,6 +427,25 @@ export const ProductLimitCoinItems = [
   {
     label: "3.8x",
     value: "3.8",
+  },
+];
+
+export const productLimitTime = [
+  {
+    label: "15 phút",
+    value: "15",
+  },
+  {
+    label: "30 phút",
+    value: "30",
+  },
+  {
+    label: "45 phút",
+    value: "45",
+  },
+  {
+    label: "60 phút",
+    value: "60",
   },
 ];
 
@@ -547,8 +566,8 @@ export const TypeProductItems = [
     value: "thoi-gian-cho",
   },
   {
-    label: "Cảm biến theo dõi sức khỏe",
-    value: "cam-bien-theo-doi-suc-khoe",
+    label: "Cấp độ giày",
+    value: "cap-do-giay",
   },
   {
     label: "Sự kiện",
