@@ -546,19 +546,19 @@ export const TravelHandbookTypeItems = [
 
 export const TypeProductItems = [
   {
-    label: "Giảm giá",
+    label: "Giày theo sự kiện",
     value: "giam-gia",
   },
   {
-    label: "Tốc độ tối đa",
+    label: "Giày theo chủ đề",
     value: "toc-do-toi-da",
   },
   {
-    label: "Quãng đường tối đa",
+    label: "Giày theo nhu cầu",
     value: "quang-duong-toi-da",
   },
   {
-    label: "Tăng hiệu suất kiếm coin",
+    label: "giày ",
     value: "tang-hieu-suat-kiem-coin",
   },
   {

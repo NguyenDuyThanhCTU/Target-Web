@@ -1,11 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import {
-  AiFillCloseCircle,
-  AiOutlineCloudUpload,
-  AiOutlineDelete,
-  AiOutlinePlus,
-} from "react-icons/ai";
+import React, { useState } from "react";
+import { AiFillCloseCircle, AiOutlinePlus } from "react-icons/ai";
 import {
   Checkbox,
   Drawer,
@@ -68,9 +63,9 @@ const AddProduct = ({}) => {
   const initDescribe = "<p> mô tả giày </p>";
 
   const handleDiscard = () => {};
+
   const HandleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(formSmartContract);
     if (
       !formSmartContract.name ||
       !formSmartContract.image ||
@@ -108,8 +103,15 @@ const AddProduct = ({}) => {
         limittime: ethers.utils.parseUnits(formSmartContract.limittime, 18),
         level: ethers.utils.parseUnits(formSmartContract.level, 18),
       });
+      const data = {
+        url: form.url,
+        description: form.description,
+        introduction: form.introduction,
+        subimage: form.subimage,
+        state: form.state,
+      };
 
-      addDocument("products", form).then(() => {
+      addDocument("products", data).then(() => {
         notification["success"]({
           message: "Tải lên thành công!",
           description: `giày của bạn đã được tải lên !`,
@@ -161,7 +163,18 @@ const AddProduct = ({}) => {
   //   setForm({ ...form, [fieldName]: e.target.value });
   // };
   const handleSmartContractFormFieldChange = (fieldName: any, e: any) => {
-    setFormSmartContract({ ...formSmartContract, [fieldName]: e.target.value });
+    if (fieldName === "name") {
+      setFormSmartContract({
+        ...formSmartContract,
+        [fieldName]: e.target.value,
+      });
+      setForm({ ...form, url: convertToCodeFormat(e.target.value) });
+    } else {
+      setFormSmartContract({
+        ...formSmartContract,
+        [fieldName]: e.target.value,
+      });
+    }
   };
 
   return (
@@ -293,7 +306,6 @@ const AddProduct = ({}) => {
                     }
                     optionLabelProp="label"
                   >
-                    <>{console.log(formSmartContract)}</>
                     {productTypes
                       ?.filter(
                         (item: any) => item.parent === formSmartContract.parent
