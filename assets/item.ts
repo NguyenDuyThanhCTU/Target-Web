@@ -7,6 +7,7 @@ import {
   BsFillSendExclamationFill,
   BsFillSendCheckFill,
   BsFillSendXFill,
+  BsCoin,
 } from "react-icons/bs";
 import { HiOutlineTicket, HiOutlineUserGroup } from "react-icons/hi";
 import {
@@ -20,6 +21,7 @@ import { AiOutlineTwitter } from "react-icons/ai";
 import { BiNetworkChart, BiSlideshow } from "react-icons/bi";
 import {
   TbCarouselHorizontal,
+  TbCoinOff,
   TbCubeSend,
   TbListDetails,
   TbSlideshow,
@@ -32,11 +34,20 @@ import {
 } from "react-icons/md";
 import { CgListTree, CgSize } from "react-icons/cg";
 import { IoMdColorWand } from "react-icons/io";
-import { GiExitDoor } from "react-icons/gi";
+import {
+  GiBackwardTime,
+  GiExitDoor,
+  GiLevelThree,
+  GiNightSky,
+  GiPartyFlags,
+  GiRoad,
+  GiSubmarineMissile,
+} from "react-icons/gi";
 
-import { CiViewList } from "react-icons/ci";
+import { CiDiscount1, CiViewList } from "react-icons/ci";
 import { IconType } from "react-icons/lib";
 import { IoFlashOutline } from "react-icons/io5";
+import { SlSpeedometer } from "react-icons/sl";
 
 interface IconMappingType {
   [key: string]: IconType;
@@ -77,6 +88,16 @@ export const IconMapping: IconMappingType = {
   CiViewList: CiViewList,
   HiOutlineTicket: HiOutlineTicket,
   SiGooglemaps: SiGooglemaps,
+  SlSpeedometer: SlSpeedometer,
+  GiRoad: GiRoad,
+  BsCoin: BsCoin,
+  GiBackwardTime: GiBackwardTime,
+  GiLevelThree: GiLevelThree,
+  GiPartyFlags: GiPartyFlags,
+  GiSubmarineMissile: GiSubmarineMissile,
+  CiDiscount1: CiDiscount1,
+  GiNightSky: GiNightSky,
+  TbCoinOff: TbCoinOff,
 };
 
 export const ProductSidebarAdmin = [
@@ -543,75 +564,96 @@ export const TravelHandbookTypeItems = [
     value: "thong-tin-can-biet",
   },
 ];
-// export const TypeProductItems = [
-//   {
-//     label: "Giày theo sự kiện",
-//     value: "giam-gia",
-//   },
-//   {
-//     label: "Giày theo chủ đề",
-//     value: "toc-do-toi-da",
-//   },
-//   {
-//     label: "Giày theo nhu cầu",
-//     value: "quang-duong-toi-da",
-//   },
-//   {
-//     label: "Giày theo thuộc tính",
-//     value: "tang-hieu-suat-kiem-coin",
-//   },
-//   {
-//     label: "Thời gian chờ",
-//     value: "thoi-gian-cho",
-//   },
-//   {
-//     label: "Cấp độ giày",
-//     value: "cap-do-giay",
-//   },
-//   {
-//     label: "Sự kiện",
-//     value: "su-kien",
-//   },
-//   {
-//     label: "Nhiệm vụ",
-//     value: "nhim-vu",
-//   },
-
-//   {
-//     label: "Chạy đêm",
-//     value: "chay-dem",
-//   },
-//   {
-//     label: "Dùng thử",
-//     value: "Dung-thu",
-//   },
-// ];
+export const TypeProductFunc = [
+  {
+    label: "Tăng tốc độ tối đa",
+    value: "bai-viet/tang-toc-do-toi-da",
+    icon: "SlSpeedometer",
+  },
+  {
+    label: "Tăng quãng đường tối đa",
+    value: "bai-viet/tang-quang-duong-toi-da",
+    icon: "GiRoad",
+  },
+  {
+    label: "Tăng quà nhận được",
+    value: "bai-viet/tang-qua-nhan-duoc",
+    icon: "BsCoin",
+  },
+  {
+    label: "Giảm thời gian chờ",
+    value: "bai-viet/giam-thoi-gian-cho",
+    icon: "GiBackwardTime",
+  },
+  {
+    label: "Giày theo cấp độ",
+    value: "bai-viet/giay-theo-cap-do",
+    icon: "GiLevelThree",
+  },
+  {
+    label: "Giày theo sự kiện",
+    value: "bai-viet/giay-theo-su-kien",
+    icon: "GiPartyFlags",
+  },
+  {
+    label: "Giày có nhiệm vụ kèm theo",
+    value: "bai-viet/gia-co-nhiem-vu-kem-theo",
+    icon: "GiSubmarineMissile",
+  },
+  {
+    label: "Giảm giá",
+    value: "bai-viet/giam-gia",
+    icon: "CiDiscount1",
+  },
+  {
+    label: "Hỗ trợ chạy đêm",
+    value: "bai-viet/ho-tro-chay-dem",
+    icon: "GiNightSky",
+  },
+  {
+    label: "Dùng thử",
+    value: "bai-viet/Dung-thu",
+    icon: "TbCoinOff",
+  },
+];
 export const TypeProductItems = [
   {
     label: "Giày tốc độ",
     value: "giay-toc-do",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/target-31b09.appspot.com/o/Untitled%20design.jpg?alt=media&token=44d776a1-1027-4071-99b0-4ef438668324",
   },
   {
     label: "Nón không giới hạn",
     value: "non-khong-gioi-han",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/target-31b09.appspot.com/o/UI%2Fhat.jpg?alt=media&token=53b27d57-de62-4967-b391-5d1fef711863",
   },
 
   {
     label: "Áo bức phá",
     value: "ao-buc-pha",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/target-31b09.appspot.com/o/UI%2Fshirt.jpg?alt=media&token=92386420-6732-4e7b-b492-031e264a017d",
   },
   {
     label: "Quần phong cách",
     value: "quan-phong-cach",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/target-31b09.appspot.com/o/UI%2Fshort.jpg?alt=media&token=4a941d7d-0892-4b48-902c-d078eba9d7b5",
   },
 
   {
     label: "Phụ kiện sáng tạo",
     value: "phu-kien-sang-tao",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/target-31b09.appspot.com/o/UI%2Faccessory.jpg?alt=media&token=fb1205b4-1ebc-4b55-9d64-8828449d1be3",
   },
   {
     label: "Khác",
     value: "khac",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/target-31b09.appspot.com/o/UI%2Fanother.jpg?alt=media&token=f8494224-9618-47af-9965-2230fcacae62",
   },
 ];
 

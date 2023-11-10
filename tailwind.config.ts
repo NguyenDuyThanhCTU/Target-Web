@@ -36,6 +36,7 @@ const config: Config = {
         maingreen: "#30af5b",
         mainwhite: "#f2f2f2",
         mainorange: "#f3b41e",
+        mainyellow: "#ffa800",
       },
 
       // custom

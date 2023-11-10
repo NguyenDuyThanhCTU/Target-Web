@@ -21,14 +21,14 @@ export const metadata: Metadata = {
 const layout: React.FC<ClientLayoutProps> = ({ children }) => {
   return (
     <div className="relative h-screen">
-      <Header />
+      {/* <Header /> */}
       <div>{children}</div>
-      <FloatButton />
+      {/* <FloatButton /> */}
 
-      <div className="relative z-50">
+      {/* <div className="relative z-50">
         <BookingButton />
-      </div>
-      <div className="relative z-50">
+      </div> */}
+      {/* <div className="relative z-50">
         <OnTop />
       </div>
       <TopFooter />
@@ -36,7 +36,7 @@ const layout: React.FC<ClientLayoutProps> = ({ children }) => {
       <Copyright />
       <div className="w-full d:hidden p:fixed bottom-0">
         <MobileFooter />
-      </div>
+      </div> */}
     </div>
   );
 };
