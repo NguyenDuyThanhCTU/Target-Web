@@ -285,15 +285,17 @@ const AddProduct = ({}) => {
                   >
                     <option> -- Chọn mục bài viết --</option>
 
-                    {TypeProductItems.map((item, idx) => (
-                      <option
-                        key={idx}
-                        className=" outline-none capitalize bg-white text-gray-700 text-md p-2 hover:bg-slate-300"
-                        value={item.label}
-                      >
-                        {item.label}
-                      </option>
-                    ))}
+                    {TypeProductItems.slice(0, TypeProductItems.length - 1).map(
+                      (item, idx) => (
+                        <option
+                          key={idx}
+                          className=" outline-none capitalize bg-white text-gray-700 text-md p-2 hover:bg-slate-300"
+                          value={item.value}
+                        >
+                          {item.label}
+                        </option>
+                      )
+                    )}
                   </select>
                 </div>
                 <div className="flex flex-col gap-2 w-[190px]">

@@ -1,5 +1,6 @@
 import {
   getAllDocuments,
+  getDocumentsBy2Field,
   getDocumentsByField,
   getProducts,
 } from "@config/Services/Firebase/FireStoreDB";
@@ -17,6 +18,21 @@ export async function getDataByTypeProps(
 ) {
   const Data = await JSON.parse(
     JSON.stringify(await getDocumentsByField(Collection, field, id))
+  );
+  return Data;
+}
+
+export async function getDataBySortProps(
+  Collection: string,
+  field1: string,
+  value1: string,
+  field2: string,
+  value2: string
+) {
+  const Data = await JSON.parse(
+    JSON.stringify(
+      await getDocumentsBy2Field(Collection, field1, value1, field2, value2)
+    )
   );
   return Data;
 }

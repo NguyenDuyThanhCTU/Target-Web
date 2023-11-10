@@ -194,6 +194,32 @@ export const getDocumentsByField = async (
   }
 };
 
+export const getDocumentsBy2Field = async (
+  Collection: string,
+  field1: string,
+  value1: any,
+  field2: string,
+  value2: any
+) => {
+  try {
+    const q = query(
+      collection(db, Collection),
+      where(field1, "==", value1),
+      where(field2, "==", value2)
+    );
+    const querySnapshot = await getDocs(q);
+    const data: Array<any> = [];
+
+    querySnapshot.forEach((doc: any) => {
+      data.push({ id: doc.id, ...doc.data() });
+    });
+
+    return data;
+  } catch (error) {
+    console.error("Error get document: ", error);
+  }
+};
+
 export const updateDocument = async (
   collectionName: string,
   id: string,

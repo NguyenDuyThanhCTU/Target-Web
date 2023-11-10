@@ -14,24 +14,23 @@ type ClientLayoutProps = {
 };
 
 export const metadata: Metadata = {
-  title: "Vé Tàu Cao Tốc Rạch Giá",
-  description: "Vé Tàu Cao Tốc Rạch Giá",
+  title: "RunTech Motion+",
+  description: "New Era of Technology",
 };
 
 const layout: React.FC<ClientLayoutProps> = ({ children }) => {
   return (
-    <div className="relative">
+    <div className="relative h-screen">
       <Header />
       <div>{children}</div>
       <FloatButton />
-      {/* 
+
       <div className="relative z-50">
         <BookingButton />
       </div>
       <div className="relative z-50">
         <OnTop />
-     
-      </div> */}
+      </div>
       <TopFooter />
       <Footer />
       <Copyright />

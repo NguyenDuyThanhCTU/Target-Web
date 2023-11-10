@@ -13,13 +13,7 @@ import { getDocumentsByField } from "@config/Services/Firebase/FireStoreDB";
 import Verify from "../Items/Verify";
 import { useRouter } from "next/navigation";
 
-interface ChangePasswordProps {
-  setIsChangePasswords: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export const Login: React.FC<ChangePasswordProps> = ({
-  setIsChangePasswords,
-}) => {
+export const Login = ({ setChangeState, role }: any) => {
   const [errorMessage, setErrorMessage] = useState(false);
   const [Hide, setHide] = useState(false);
   const [Username, setUsername] = useState("");
@@ -31,10 +25,9 @@ export const Login: React.FC<ChangePasswordProps> = ({
 
   const { setVerify } = useAuth();
   const { setHeaderAdmin, Accounts } = useData();
-
   const HandleChangePass = () => {
     if (Accounts.username === Username) {
-      setIsChangePasswords(true);
+      setChangeState(1);
     } else {
       notification["error"]({
         message: "Lỗi !",
@@ -174,11 +167,25 @@ export const Login: React.FC<ChangePasswordProps> = ({
       <div className=" font-normal w-full">
         <button
           onClick={() => HandleChangePass()}
-          className="ml-3 mb-2 hover:underline italic text-[13px]"
+          className="ml-3 mb-2 hover:underline hover:text-blue-500 duration-300 text-[13px]"
         >
           Thay đổi mật khẩu
         </button>
       </div>
+      {role === "client" && (
+        <div className=" font-normal w-full">
+          <div className="ml-3 mb-2 c text-[13px]">
+            Bạn chưa có tài khoản?{" "}
+            <button
+              className="hover:underline hover:text-blue-500 duration-300"
+              onClick={() => setChangeState(2)}
+            >
+              đăng ký ngay
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className=" mb-4 w-full ">
         <button
           className="py-3 mb-6 bg-blue-800 text-white w-full hover:bg-blue-900 rounded-lg"

@@ -543,48 +543,75 @@ export const TravelHandbookTypeItems = [
     value: "thong-tin-can-biet",
   },
 ];
+// export const TypeProductItems = [
+//   {
+//     label: "Giày theo sự kiện",
+//     value: "giam-gia",
+//   },
+//   {
+//     label: "Giày theo chủ đề",
+//     value: "toc-do-toi-da",
+//   },
+//   {
+//     label: "Giày theo nhu cầu",
+//     value: "quang-duong-toi-da",
+//   },
+//   {
+//     label: "Giày theo thuộc tính",
+//     value: "tang-hieu-suat-kiem-coin",
+//   },
+//   {
+//     label: "Thời gian chờ",
+//     value: "thoi-gian-cho",
+//   },
+//   {
+//     label: "Cấp độ giày",
+//     value: "cap-do-giay",
+//   },
+//   {
+//     label: "Sự kiện",
+//     value: "su-kien",
+//   },
+//   {
+//     label: "Nhiệm vụ",
+//     value: "nhim-vu",
+//   },
 
+//   {
+//     label: "Chạy đêm",
+//     value: "chay-dem",
+//   },
+//   {
+//     label: "Dùng thử",
+//     value: "Dung-thu",
+//   },
+// ];
 export const TypeProductItems = [
   {
-    label: "Giày theo sự kiện",
-    value: "giam-gia",
+    label: "Giày tốc độ",
+    value: "giay-toc-do",
   },
   {
-    label: "Giày theo chủ đề",
-    value: "toc-do-toi-da",
-  },
-  {
-    label: "Giày theo nhu cầu",
-    value: "quang-duong-toi-da",
-  },
-  {
-    label: "giày ",
-    value: "tang-hieu-suat-kiem-coin",
-  },
-  {
-    label: "Thời gian chờ",
-    value: "thoi-gian-cho",
-  },
-  {
-    label: "Cấp độ giày",
-    value: "cap-do-giay",
-  },
-  {
-    label: "Sự kiện",
-    value: "su-kien",
-  },
-  {
-    label: "Nhiệm vụ",
-    value: "nhim-vu",
+    label: "Nón không giới hạn",
+    value: "non-khong-gioi-han",
   },
 
   {
-    label: "Chạy đêm",
-    value: "chay-dem",
+    label: "Áo bức phá",
+    value: "ao-buc-pha",
   },
   {
-    label: "Dùng thử",
-    value: "Dung-thu",
+    label: "Quần phong cách",
+    value: "quan-phong-cach",
+  },
+
+  {
+    label: "Phụ kiện sáng tạo",
+    value: "phu-kien-sang-tao",
+  },
+  {
+    label: "Khác",
+    value: "khac",
   },
 ];
 

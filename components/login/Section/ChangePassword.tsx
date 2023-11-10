@@ -8,13 +8,7 @@ import { useData } from "@context/DataProviders";
 import { updateDocument } from "@config/Services/Firebase/FireStoreDB";
 import Link from "next/link";
 
-interface ChangePasswordProps {
-  setIsChangePasswords: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export const ChangePassword: React.FC<ChangePasswordProps> = ({
-  setIsChangePasswords,
-}) => {
+export const ChangePassword = ({ setChangeState }: any) => {
   const [errorMessage, setErrorMessage] = useState(false);
   const [Hide, setHide] = useState(false);
   const [currentPassword, setCurrentPassword] = useState("");
@@ -37,7 +31,7 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({
           });
           setIsRefetch("CRUD accounts");
           setTimeout(() => {
-            setIsChangePasswords(false);
+            setChangeState(0);
           }, 1000);
         });
       } else {
@@ -55,7 +49,7 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({
       <SlArrowLeft
         className="absolute top-0 left-0"
         onClick={() => {
-          setIsChangePasswords(false);
+          setChangeState(0);
         }}
       />
       <div className="flex flex-col items-center m-2">
@@ -110,7 +104,6 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({
             Tiếp tục
           </button>
         </div>
-
         <div className="text-center text-[13px] font-normal text-colortopdownGray">
           <p>Bằng việc nhấn nút tiếp tục, bạn đã đồng ý với</p>
           <p>
