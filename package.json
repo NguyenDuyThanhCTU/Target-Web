@@ -21,6 +21,7 @@
     "ethers": "^5.7.2",
     "firebase": "^10.4.0",
     "lokijs": "^1.5.12",
+    "lottie-react": "^2.4.0",
     "moment": "^2.29.4",
     "next": "13.5.4",
     "pino-pretty": "^10.2.3",

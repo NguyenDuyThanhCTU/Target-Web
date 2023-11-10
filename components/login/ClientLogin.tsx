@@ -4,7 +4,7 @@ import { ChangePassword } from "./Section/ChangePassword";
 import { Login } from "./Section/Login";
 import Register from "./Section/Register";
 
-const ClientLogin = ({ role }: any) => {
+const ClientLogin = () => {
   const [isChangePasswords, setIsChangePasswords] = useState(false);
   const [changeState, setChangeState] = useState(0);
 

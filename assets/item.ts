@@ -1,4 +1,8 @@
 import { SiGooglemaps, SiZalo } from "react-icons/si";
+import paymentAnimation from "./animation/payment.json";
+import policyAnimation from "./animation/policy.json";
+import rulesAnimation from "./animation/rules.json";
+import securityAnimation from "./animation/security.json";
 import {
   BsFacebook,
   BsMessenger,
@@ -31,6 +35,7 @@ import {
   MdManageAccounts,
   MdOutlineLocalCarWash,
   MdOutlinePostAdd,
+  MdSecurity,
 } from "react-icons/md";
 import { CgListTree, CgSize } from "react-icons/cg";
 import { IoMdColorWand } from "react-icons/io";
@@ -488,20 +493,23 @@ export const TypePostItems = [
   {
     label: "Điều khoản sử dụng",
     value: "dieu-khoan-su-dung",
+    animation: rulesAnimation,
   },
   {
     label: "Chính sách và quy định chung",
     value: "chinh-sach-va-quy-dinh-chung",
+    animation: policyAnimation,
   },
 
   {
     label: "Chính sách bảo mật",
     value: "chinh-sach-bao-mat",
+    animation: securityAnimation,
   },
-
   {
     label: "Phương thức thanh toán",
     value: "phuong-thuc-thanh-toan",
+    animation: paymentAnimation,
   },
 ];
 
@@ -631,8 +639,8 @@ export const TypeProductItems = [
   },
 
   {
-    label: "Áo bức phá",
-    value: "ao-buc-pha",
+    label: "Áo thách thức",
+    value: "ao-thach-thuc",
     image:
       "https://firebasestorage.googleapis.com/v0/b/target-31b09.appspot.com/o/UI%2Fshirt.jpg?alt=media&token=92386420-6732-4e7b-b492-031e264a017d",
   },
@@ -654,79 +662,6 @@ export const TypeProductItems = [
     value: "khac",
     image:
       "https://firebasestorage.googleapis.com/v0/b/target-31b09.appspot.com/o/UI%2Fanother.jpg?alt=media&token=f8494224-9618-47af-9965-2230fcacae62",
-  },
-];
-
-export const IntroduceItems = [
-  {
-    label: "Giới thiệu",
-    value: "/",
-  },
-  {
-    label: "Tổng quan",
-    value: "tong-quan",
-  },
-  {
-    label: "Sơ đồ tổ chức",
-    value: "so-do-to-chuc",
-  },
-  {
-    label: "Điều lệ vận chuyển",
-    value: "dieu-le-van-chuyen",
-  },
-  {
-    label: "Điều khoản và điều kiện sử dụng",
-    value: "dieu-khoan-va-dieu-kien-su-dung",
-  },
-  {
-    label: "Chính sách bảo mật thông tin",
-    value: "chinh-sach-bao-mat-thong-tin",
-  },
-  {
-    label: "Điều kiện đặt vé trực tuyến",
-    value: "dieu-kien-dat-ve-truc-tuyen",
-  },
-  {
-    label: "Quy định hoàn đổi vé online",
-    value: "quydinh-hoan-doi-ve-online",
-  },
-];
-
-export const PolicyItems = [
-  {
-    title: "Điều lệ vận chuyển",
-    content: "Nội dung bài viết 1",
-    url: "dieu-le-van-chuyen",
-    type: "policy",
-    image: "",
-  },
-  {
-    title: "Điều khoản và điều kiện sử dụng",
-    content: "Nội dung bài viết ",
-    url: "dieu-khoan-va-dieu-kien-su-dung",
-    type: "policy",
-    image: "",
-  },
-  {
-    title: "Chính sách bảo mật thông tin",
-    content: "Nội dung bài viết ",
-    url: "chinh-sach-bao-mat-thong-tin",
-    type: "policy",
-    image: "",
-  },
-  {
-    title: "Điều kiện đặt vé trực tuyến",
-    content: "Nội dung bài viết ",
-    url: "dieu-kien-dat-ve-truc-tuyen",
-    type: "policy",
-    image: "",
-  },
-  {
-    title: "Quy định hoàn đổi vé online",
-    content: "Nội dung bài viết ",
-    url: "quy-dinh-hoan-doi-ve-online",
-    type: "policy",
-    image: "",
   },
 ];
 

@@ -7,7 +7,7 @@ const ThemeLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div
       className={`${
-        theme === "light" ? "bg-white text-black" : "bg-black text-white"
+        theme === "light" ? " text-black" : "bg-black text-white"
       } w-full duration-300 `}
     >
       {children}

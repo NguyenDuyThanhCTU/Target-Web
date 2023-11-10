@@ -8,7 +8,7 @@ const LoginPage = () => {
       <ParticlesCustom />
       <div className="bg-[rgba(0,0,0,0.3)] w-full h-full z-50 absolute flex justify-center items-center">
         <div className="d:w-[880px] p:w-[90vw] h-max   bg-white   flex font-LexendDeca cursor-pointer rounded-sm -z-10">
-          <ClientLogin role="client" />
+          <ClientLogin />
 
           <div className="d:flex flex-1 p:hidden ">
             <div className="overflow-hidden h-full">
