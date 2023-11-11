@@ -4,6 +4,7 @@ import React from "react";
 import { BsFillPlayFill } from "react-icons/bs";
 import Lottie from "lottie-react";
 import hero from "@assets/animation/hero.json";
+
 const Hero = () => {
   const { theme } = useStateProvider();
   return (

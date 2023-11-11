@@ -1,6 +1,7 @@
 "use client";
 import { addDocument } from "@config/Services/Firebase/FireStoreDB";
 import { useData } from "@context/DataProviders";
+import { useStateProvider } from "@context/StateProvider";
 import { notification } from "antd";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -13,9 +14,16 @@ const Register = ({ setChangeState }: any) => {
   const [Password, setPassword] = useState("");
   const [retypePassword, setRetypePassword] = useState("");
   const { Accounts } = useData();
+  const { setIsRefetch } = useStateProvider();
 
   const HandleSubmit = () => {
-    if (!Username || !Password || !retypePassword) {
+    const UsernameFormat = /^[a-zA-Z0-9]+$/;
+    if (!UsernameFormat.test(Username)) {
+      notification["warning"]({
+        message: "Thao tác không thành công",
+        description: `Tài khoản không được chứa kí tự đặc biệt !`,
+      });
+    } else if (!Username || !Password || !retypePassword) {
       notification["warning"]({
         message: "Thao tác không thành công",
         description: `Vui lòng nhập đầy đủ thông tin !`,
@@ -48,6 +56,7 @@ const Register = ({ setChangeState }: any) => {
           description: `Đăng ký tài khoản thành công !`,
         });
         setChangeState(0);
+        setIsRefetch("CRUD accounts");
       });
     }
   };

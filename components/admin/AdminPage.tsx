@@ -13,7 +13,7 @@ import React, { useEffect } from "react";
 
 const AdminPage = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(true);
-  const { connect, address } = useSmartContract();
+  const { connect } = useSmartContract();
   const { verify } = useAuth();
   const HandleConnectMetamask = () => {
     connect().then(() => setIsModalOpen(false));

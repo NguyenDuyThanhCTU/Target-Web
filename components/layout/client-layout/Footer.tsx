@@ -11,7 +11,6 @@ import { IoLocation } from "react-icons/io5";
 
 const Footer = () => {
   const { ContactData, SocialMedia } = useData();
-  console.log(SocialMedia);
   const { theme } = useStateProvider();
   const router = useRouter();
   const LearnMoreItems = [
@@ -43,15 +42,19 @@ const Footer = () => {
       <div className="d:w-[1440px] p:w-auto d:mx-auto p:mx-2 py-20  font-LexendDeca font-extralight ">
         <div className="grid p:grid-cols-2 d:grid-cols-6 gap-4 ">
           <div className="col-span-2">
-            <div>
-              <img src="https://camptraveler.com/hilink-logo.svg" alt="logo" />
-            </div>
+            <Link href={`/`}>
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/target-31b09.appspot.com/o/avatar%2FRUN%20(500%20x%2084%20px).png?alt=media&token=186d300b-00c8-4f0c-84d5-76c9bd51d095"
+                alt="logo"
+                className="w-[80%]"
+              />
+            </Link>
             <h2 className="text-[18px] font-normal  mt-5">
-              ALPHA SMART - Nhà Công Nghệ
+              Runtech Motion - Kỷ nguyên mới của công nghệ
             </h2>
             <div className="mt-4 flex flex-col text-[14px]">
               <p>
-                ALPHA SMART - Nhà Công Nghệ Chuyên các loại khóa cửa điện tử,
+                Runtech Motion - Nhà Công Nghệ Chuyên các loại khóa cửa điện tử,
                 khóa cổng vân tay, chuông cửa màn hình.
               </p>
               <div>

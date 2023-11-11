@@ -11,17 +11,19 @@ export const googleSignIn = async () => {
   const GoogleProvider = new GoogleAuthProvider();
   const result = await signInWithPopup(auth, GoogleProvider);
   const { isNewUser }: any = getAdditionalUserInfo(result);
-
+  let Data: any;
   if (isNewUser) {
-    addDocument("accounts", {
+    Data = {
       displayName: result.user?.displayName,
       email: result.user?.email,
       username: result.user?.email,
       password: "admin",
       photoURL: result.user?.photoURL,
-      role: "editor",
-      status: "block",
-    });
+      role: "client",
+      status: "active",
+    };
+    addDocument("accounts", Data);
   }
-  return result.user?.email;
+
+  return Data;
 };

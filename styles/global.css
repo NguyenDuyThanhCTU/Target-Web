@@ -225,6 +225,14 @@
   }
 }
 
+.profile-background{
+  background-color:#ffd899;
+  background-image:
+  radial-gradient(at 33% 45%, hsla(5,71%,79%,1) 0px, transparent 50%),
+  radial-gradient(at 91% 54%, hsla(165,76%,61%,1) 0px, transparent 50%),
+  radial-gradient(at 99% 35%, hsla(137,67%,75%,1) 0px, transparent 50%);
+}
+
 
 
 

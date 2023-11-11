@@ -8,6 +8,7 @@ import { ThirdwebProvider } from "@thirdweb-dev/react";
 import "@styles/global.css";
 import { ContractProvider } from "@context/ContractProviders";
 import { Sepolia } from "@thirdweb-dev/chains";
+import { Metadata } from "next";
 
 export default function RootLayout({
   children,

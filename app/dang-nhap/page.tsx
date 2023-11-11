@@ -1,7 +1,11 @@
 import ClientLogin from "@components/login/ClientLogin";
 import { ParticlesCustom } from "@components/login/Items/ParticlesCustom";
+import { Metadata } from "next";
 import React from "react";
-
+export const metadata: Metadata = {
+  title: "RunTech Motion+",
+  description: "New Era of Technology",
+};
 const LoginPage = () => {
   return (
     <>

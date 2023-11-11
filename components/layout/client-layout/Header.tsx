@@ -7,11 +7,16 @@ import Link from "next/link";
 import React from "react";
 import { AiFillCaretRight, AiOutlineDown, AiOutlineUser } from "react-icons/ai";
 import { FaListUl } from "react-icons/fa";
+import Lottie from "lottie-react";
+import optionAmination from "@assets/animation/optionAdmin.json";
+import { BiLogOutCircle } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
+import { MdAdminPanelSettings } from "react-icons/md";
 
 const Header = () => {
   const [open, setOpen] = React.useState(false);
-  const { theme } = useStateProvider();
-  const { productTypes } = useData();
+  const { theme, setIsLoading } = useStateProvider();
+  const { productTypes, currentUser, setCurrentUser } = useData();
 
   const SupportItems = [
     {
@@ -24,6 +29,35 @@ const Header = () => {
     },
   ];
 
+  const UserItems = [
+    {
+      label: "Thông tin người dùng",
+      value: `thong-tin-nguoi-dung/${currentUser?.name}?key=${currentUser?.id}`,
+      icon: CgProfile,
+    },
+    {
+      label: "Đăng xuất",
+      value: "dang-xuat",
+      icon: BiLogOutCircle,
+    },
+  ];
+  if (currentUser?.role === "admin") {
+    //push admin option in userItems[0] array
+    UserItems.unshift({
+      label: "Trang quản trị",
+      value: "admin",
+      icon: MdAdminPanelSettings,
+    });
+    //delete userItems[1] array
+    UserItems.splice(1, 1);
+  }
+  const HandleLogout = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setCurrentUser(null);
+    }, 1000);
+  };
+
   return (
     <div
       className={`${
@@ -34,9 +68,12 @@ const Header = () => {
     >
       <div className="d:w-[1440px] p:w-auto d:mx-auto p:mx-2 h-[98px] ">
         <div className="d:hidden p:flex justify-between items-center h-full px-4">
-          <div className="">
-            <img src="https://camptraveler.com/hilink-logo.svg" alt="logo" />
-          </div>
+          <Link href={`/`} className="">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/target-31b09.appspot.com/o/avatar%2FRUN%20(500%20x%2084%20px).png?alt=media&token=186d300b-00c8-4f0c-84d5-76c9bd51d095"
+              alt="logo"
+            />
+          </Link>
           <div className="border border-black p-1">
             <FaListUl
               className="text-[22px] text-black"
@@ -45,9 +82,13 @@ const Header = () => {
           </div>
         </div>
         <div className="p:hidden d:flex justify-between items-center h-full">
-          <div className="">
-            <img src="https://camptraveler.com/hilink-logo.svg" alt="logo" />
-          </div>
+          <Link href={`/`} className="">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/target-31b09.appspot.com/o/avatar%2FRUN%20(500%20x%2084%20px).png?alt=media&token=186d300b-00c8-4f0c-84d5-76c9bd51d095"
+              alt="logo"
+              className=""
+            />
+          </Link>
           <div
             className={`${
               theme === "light" ? "text-black" : "text-white"
@@ -193,19 +234,69 @@ const Header = () => {
               </div>
             ))}
           </div>
-          <div className="flex">
-            <Link
-              href={`/dang-nhap`}
-              className={`${
-                theme === "light"
-                  ? "bg-gray-800 hover:bg-black"
-                  : "bg-gray-800 hover:bg-gray-600 "
-              }  flex items-center gap-2 py-3 cursor-pointer px-6 text-white rounded-full`}
-            >
-              <AiOutlineUser />
-              <p className="w-max"> Đăng nhập</p>
-            </Link>
-          </div>
+          {currentUser ? (
+            <div className="group">
+              <div className="flex items-center  gap-2 font-LexendDeca cursor-pointer  pr-2 pl-8 py-1 rounded-full bg-slate-100 ">
+                <div className="w-10 h-10 ">
+                  <Lottie animationData={optionAmination} />
+                </div>
+                <div className="w-[50px] h-[50px] rounded-full">
+                  <img
+                    src={currentUser.photoURL}
+                    alt="avatar"
+                    className="rounded-full w-full h-full bg-cover"
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col  absolute">
+                <div className=" top-9 hidden group-hover:block duration-300">
+                  <div className=" flex flex-col bg-white shadow-md border-t-2 border-gray-500 ">
+                    {UserItems.map((items: any, idx: number) => {
+                      const Icon = items.icon;
+                      return (
+                        <div
+                          key={idx}
+                          onClick={() => {
+                            items.value === "dang-xuat"
+                              ? HandleLogout()
+                              : (window.location.href = `/${items.value}`);
+                          }}
+                          className={`${
+                            items.value === "dang-xuat"
+                              ? "text-redPrimmary"
+                              : "text-black"
+                          } w-full  border-b py-2 cursor-pointer px-4 hover:bg-gray-100  `}
+                        >
+                          <div className="flex gap-2 items-center ">
+                            <Icon />
+                            <p className={`$ duration-300`}>{items.label}</p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <>
+              {" "}
+              <div className="flex">
+                <Link
+                  href={`/dang-nhap`}
+                  className={`${
+                    theme === "light"
+                      ? "bg-gray-800 hover:bg-black"
+                      : "bg-gray-800 hover:bg-gray-600 "
+                  }  flex items-center gap-2 py-3 cursor-pointer px-6 text-white rounded-full`}
+                >
+                  <AiOutlineUser />
+                  <p className="w-max"> Đăng nhập</p>
+                </Link>
+              </div>
+            </>
+          )}
         </div>
       </div>
       <>

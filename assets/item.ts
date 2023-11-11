@@ -155,6 +155,29 @@ export const WebsiteSidebarAdmin = [
   },
 ];
 
+export const ProfileSidebarItems = [
+  {
+    name: "Thông Tin Người Dùng",
+    icon: "AiOutlineSlack",
+  },
+  {
+    name: "Hoạt Động Chạy Bộ",
+    icon: "FaFirstOrderAlt",
+  },
+  {
+    name: "Nâng Cấp và Điểm Thưởng",
+    icon: "IoFlashOutline",
+  },
+  {
+    name: "Quản Lý Tài Khoản",
+    icon: "AiOutlineUnorderedList",
+  },
+  {
+    name: "Thành tựu",
+    icon: "CgListTree",
+  },
+];
+
 export const SocialMediaDashboard = [
   {
     title: "Trang zalo",
@@ -632,8 +655,8 @@ export const TypeProductItems = [
       "https://firebasestorage.googleapis.com/v0/b/target-31b09.appspot.com/o/Untitled%20design.jpg?alt=media&token=44d776a1-1027-4071-99b0-4ef438668324",
   },
   {
-    label: "Nón không giới hạn",
-    value: "non-khong-gioi-han",
+    label: "Nón vượt giới hạn",
+    value: "non-vuot-gioi-han",
     image:
       "https://firebasestorage.googleapis.com/v0/b/target-31b09.appspot.com/o/UI%2Fhat.jpg?alt=media&token=53b27d57-de62-4967-b391-5d1fef711863",
   },

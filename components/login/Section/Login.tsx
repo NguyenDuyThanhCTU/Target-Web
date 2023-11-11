@@ -10,10 +10,9 @@ import { useAuth } from "@context/AuthProviders";
 import { useData } from "@context/DataProviders";
 import { googleSignIn } from "@config/Services/Auth/GoogleAuth";
 import { getDocumentsByField } from "@config/Services/Firebase/FireStoreDB";
-import Verify from "../Items/Verify";
 import { useRouter } from "next/navigation";
 
-export const Login = ({ setChangeState, role }: any) => {
+export const Login = ({ setChangeState }: any) => {
   const [errorMessage, setErrorMessage] = useState(false);
   const [Hide, setHide] = useState(false);
   const [Username, setUsername] = useState("");
@@ -24,7 +23,7 @@ export const Login = ({ setChangeState, role }: any) => {
   const { setIsLoading } = useStateProvider();
 
   const { setVerify } = useAuth();
-  const { setHeaderAdmin, Accounts } = useData();
+  const { setHeaderAdmin, Accounts, setCurrentUser } = useData();
   const HandleChangePass = () => {
     if (Accounts.username === Username) {
       setChangeState(1);
@@ -42,16 +41,19 @@ export const Login = ({ setChangeState, role }: any) => {
       const sort = Accounts?.filter(
         (item: any) => item.username === Username && item.password === Password
       );
+
       if (sort.length > 0) {
+        if (sort[0].role === "admin") {
+          setVerify(true);
+        }
         setHeaderAdmin(sort[0]);
         setIsLoading(true);
-        setVerify(true);
         notification["success"]({
           message: "Đăng nhập thành công !",
-          description: `Chào mừng ${sort[0].username} đến với ${window.location.hostname} !`,
+          description: `Chào mừng ${sort[0].username} đến với Runtech Notion+`,
         });
-
-        router.push("/admin");
+        setCurrentUser(sort[0]);
+        router.push("/");
       } else if (!Username || !Password) {
         setErrorMessage(true);
         setTimeout(() => {
@@ -70,30 +72,18 @@ export const Login = ({ setChangeState, role }: any) => {
 
   const HandleGoogleAuth = () => {
     googleSignIn().then((data) => {
-      getDocumentsByField("accounts", "email", data).then((data: any) => {
-        if (data[0].status === "active") {
-          setHeaderAdmin(data[0]);
-          setVerify(true);
-          notification["success"]({
-            message: "Đăng nhập thành công !",
-            description: `Chào mừng đến với ${window.location.hostname} !`,
-          });
-
-          setIsLoading(true);
-
-          router.push("/admin");
-        } else {
-          setIsVerify(true);
-          setIsId(data[0].id);
-        }
+      setCurrentUser(data);
+      notification["success"]({
+        message: "Đăng nhập thành công !",
+        description: `Chào mừng đến với Runtech Notion+`,
       });
+      setIsLoading(true);
+      router.push("/");
     });
   };
 
   return (
     <div className="flex-1  m-5 mt-8 mb-2 flex-col flex items-center justify-center  relative">
-      {isVerify && <Verify verify={setIsVerify} isId={isId} />}
-
       <h3 className="text-colortopdownGray text-[20px] font-medium">
         Người quản trị
       </h3>
@@ -172,19 +162,17 @@ export const Login = ({ setChangeState, role }: any) => {
           Thay đổi mật khẩu
         </button>
       </div>
-      {role === "client" && (
-        <div className=" font-normal w-full">
-          <div className="ml-3 mb-2 c text-[13px]">
-            Bạn chưa có tài khoản?{" "}
-            <button
-              className="hover:underline hover:text-blue-500 duration-300"
-              onClick={() => setChangeState(2)}
-            >
-              đăng ký ngay
-            </button>
-          </div>
+      <div className=" font-normal w-full">
+        <div className="ml-3 mb-2 c text-[13px]">
+          Bạn chưa có tài khoản?{" "}
+          <button
+            className="hover:underline text-blue-500 duration-300"
+            onClick={() => setChangeState(2)}
+          >
+            đăng ký ngay
+          </button>
         </div>
-      )}
+      </div>
 
       <div className=" mb-4 w-full ">
         <button
