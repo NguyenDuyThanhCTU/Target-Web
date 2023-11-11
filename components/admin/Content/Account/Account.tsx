@@ -16,11 +16,17 @@ type FormType = {
   reNewPassword: string;
 };
 
-const Account: React.FC = () => {
+const Account = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { HeaderAdmin } = useData();
+  const { HeaderAdmin, currentUser } = useData();
   const { setIsRefetch, setIsLoading } = useStateProvider();
   const router = useRouter();
+  let Data: any;
+  if (!HeaderAdmin) {
+    Data = currentUser;
+  } else {
+    Data = HeaderAdmin;
+  }
 
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -28,11 +34,11 @@ const Account: React.FC = () => {
 
   const onFinish = (values: any) => {
     //compare password with HeaderAdmin.password if true then update password with values.newPassword using updateDocument
-    if (values.password === HeaderAdmin.password) {
-      const Data = {
+    if (values.password === Data.password) {
+      const data = {
         password: values.newPassword,
       };
-      updateDocument("accounts", HeaderAdmin.id, Data).then(() => {
+      updateDocument("accounts", Data.id, data).then(() => {
         notification["success"]({
           message: "Đổi mật khẩu thành công !",
           description: `Mật khẩu của bạn đã được cập nhật !`,
@@ -154,7 +160,7 @@ const Account: React.FC = () => {
               ),
               key: "2",
               children: <Manage />,
-              disabled: `${HeaderAdmin.role}` === `admin` ? false : true,
+              disabled: `${Data?.role}` === `admin` ? false : true,
             },
           ]}
         />

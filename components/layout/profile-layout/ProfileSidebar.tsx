@@ -30,9 +30,9 @@ const ProfileSidebar: React.FC = () => {
   };
 
   return (
-    <div className=" w-[20vw]  h-full text-black border-r border-gray-800 overflow-y-auto pr-2">
-      <div className="w-full flex items-center justify-center border-b border-gray-800 py-3">
-        <div className="p-5">
+    <div className=" w-[20vw]  h-full text-while   border-r-2 border-white  overflow-y-auto pr-2">
+      <div className="w-full flex items-center justify-center border-b border-white py-3">
+        <div className="p-5 bg-[rgba(255,255,255,0.81)]">
           <img
             src="https://firebasestorage.googleapis.com/v0/b/target-31b09.appspot.com/o/avatar%2FRUN%20(500%20x%2084%20px).png?alt=media&token=186d300b-00c8-4f0c-84d5-76c9bd51d095"
             alt="logo"
@@ -50,14 +50,18 @@ const ProfileSidebar: React.FC = () => {
                 <div
                   key={idx}
                   className={`flex gap-3 items-center cursor-pointer hover:scale-125 duration-300 ${
-                    isSelected === idx ? "text-blue-500" : "border-black"
+                    isSelected === idx
+                      ? "text-blue-500"
+                      : "border-while text-white"
                   }`}
                   onClick={() => HandleSelect(idx)}
                 >
                   {Icon && (
                     <Icon
                       className={`border-2 rounded-full text-[30px] p-[3px] ${
-                        isSelected === idx ? "border-blue-500" : "border-black"
+                        isSelected === idx
+                          ? "border-blue-500"
+                          : "border-while text-white"
                       }`}
                     />
                   )}

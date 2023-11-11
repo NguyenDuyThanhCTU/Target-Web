@@ -22,7 +22,7 @@ export const Login = ({ setChangeState }: any) => {
   const router = useRouter();
   const { setIsLoading } = useStateProvider();
 
-  const { setVerify } = useAuth();
+  const { setVerify, verify } = useAuth();
   const { setHeaderAdmin, Accounts, setCurrentUser } = useData();
   const HandleChangePass = () => {
     if (Accounts.username === Username) {
@@ -43,17 +43,22 @@ export const Login = ({ setChangeState }: any) => {
       );
 
       if (sort.length > 0) {
-        if (sort[0].role === "admin") {
-          setVerify(true);
-        }
-        setHeaderAdmin(sort[0]);
         setIsLoading(true);
         notification["success"]({
+          placement: "topLeft",
           message: "Đăng nhập thành công !",
           description: `Chào mừng ${sort[0].username} đến với Runtech Notion+`,
         });
+
+        if (sort[0].role === "admin") {
+          setVerify(true);
+          setHeaderAdmin(sort[0]);
+          router.push("/");
+          console.log(verify);
+        } else {
+          router.push("/");
+        }
         setCurrentUser(sort[0]);
-        router.push("/");
       } else if (!Username || !Password) {
         setErrorMessage(true);
         setTimeout(() => {

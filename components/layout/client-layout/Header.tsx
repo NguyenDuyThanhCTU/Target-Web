@@ -32,7 +32,7 @@ const Header = () => {
   const UserItems = [
     {
       label: "Thông tin người dùng",
-      value: `thong-tin-nguoi-dung/${currentUser?.name}?key=${currentUser?.id}`,
+      value: `thong-tin-nguoi-dung/${currentUser?.username}?key=${currentUser?.id}`,
       icon: CgProfile,
     },
     {
@@ -64,7 +64,7 @@ const Header = () => {
         theme === "light"
           ? "bg-white shadow-lg shadow-gray-400"
           : "bg-black border-b border-white"
-      } h-max   duration-300 relative z-10`}
+      } h-max   duration-300 relative z-50`}
     >
       <div className="d:w-[1440px] p:w-auto d:mx-auto p:mx-2 h-[98px] ">
         <div className="d:hidden p:flex justify-between items-center h-full px-4">

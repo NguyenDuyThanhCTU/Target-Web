@@ -1,4 +1,5 @@
 "use client";
+import { useData } from "@context/DataProviders";
 import { useStateProvider } from "@context/StateProvider";
 import { Timeline } from "antd";
 
@@ -11,6 +12,7 @@ import { TfiLayoutSliderAlt } from "react-icons/tfi";
 
 const AccountInfo = ({ HeaderAdmin }: any) => {
   const { setSelected } = useStateProvider();
+  const { currentUser } = useData();
   return (
     <>
       <div className="flex-[60%]">
@@ -93,7 +95,7 @@ const AccountInfo = ({ HeaderAdmin }: any) => {
         <div className="text-center mt-14 flex  justify-center  ">
           <div className=" w-[870px] flex flex-col gap-3">
             <h3 className="uppercase text-[#ff753f] font-semibold text-[20px]">
-              Hi there, I'm {HeaderAdmin?.displayName}
+              Hi there, I'm {HeaderAdmin?.name}
             </h3>
 
             <p className="text-[20px] text-gray-500 px-2">
@@ -161,7 +163,7 @@ const AccountInfo = ({ HeaderAdmin }: any) => {
                 children: `Ngày sinh: ${HeaderAdmin?.dateofbirth}`,
               },
               {
-                children: `Giới tính: ${HeaderAdmin.gender}`,
+                children: `Giới tính: ${HeaderAdmin?.gender}`,
               },
             ]}
           />

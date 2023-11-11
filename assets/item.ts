@@ -40,6 +40,7 @@ import {
 import { CgListTree, CgSize } from "react-icons/cg";
 import { IoMdColorWand } from "react-icons/io";
 import {
+  GiAchievement,
   GiBackwardTime,
   GiExitDoor,
   GiLevelThree,
@@ -103,6 +104,7 @@ export const IconMapping: IconMappingType = {
   CiDiscount1: CiDiscount1,
   GiNightSky: GiNightSky,
   TbCoinOff: TbCoinOff,
+  GiAchievement: GiAchievement,
 };
 
 export const ProductSidebarAdmin = [
@@ -174,7 +176,7 @@ export const ProfileSidebarItems = [
   },
   {
     name: "Thành tựu",
-    icon: "CgListTree",
+    icon: "GiAchievement",
   },
 ];
 

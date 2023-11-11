@@ -11,18 +11,18 @@ const HeaderDropDown: React.FC = () => {
   return (
     <>
       <div className="p-3 min-w-[160px] border-colortopdownBlue border border-solid rounded bg-white relative z-30 ">
-        <ul className="text-colortopdownGray leading-6 text-[13px] font-semibold">
+        <ul className="text-colortopdownGray leading-6 text-[16px]  font-semibold">
           <li
-            className=" hover:bg-purple-300  duration-300 element-dropdown py-2"
+            className=" hover:bg-purple-300  duration-300 element-dropdown py-2 flex justify-center items-center  "
             onClick={() => setSelected(5)}
           >
             <AiOutlineProfile className="inline-block text-colortopdownBlue mr-2" />
-            Hồ sơ
+            <p> Trang chủ</p>
           </li>
-          <Link href="/login">
-            <li className="hover:bg-purple-400  duration-300 element-dropdown text-redPrimmary py-2">
+          <Link href="/">
+            <li className="hover:bg-purple-400  duration-300 element-dropdown text-redPrimmary py-2 flex justify-center items-center">
               <GiExitDoor className="inline-block  mr-2" />
-              Thoát
+              Đăng xuất
             </li>
           </Link>
         </ul>

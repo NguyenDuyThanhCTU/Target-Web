@@ -14,7 +14,7 @@ export const googleSignIn = async () => {
   let Data: any;
   if (isNewUser) {
     Data = {
-      displayName: result.user?.displayName,
+      name: result.user?.displayName,
       email: result.user?.email,
       username: result.user?.email,
       password: "admin",

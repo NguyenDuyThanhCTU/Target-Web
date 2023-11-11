@@ -18,13 +18,20 @@ import InfoAccount from "../Item/AccountInfo";
 import { useData } from "@context/DataProviders";
 import { updateDocument } from "@config/Services/Firebase/FireStoreDB";
 import { uploadImage } from "@components/items/server-items/Handle";
+import { useStateProvider } from "@context/StateProvider";
 
 const { TextArea } = Input;
 
 const Information = ({ showModal }: any) => {
   const [imageUrl, setImageUrl] = useState<any>();
-  const { HeaderAdmin } = useData();
-
+  const { HeaderAdmin, currentUser } = useData();
+  const { setIsRefetch, setIsLoading } = useStateProvider();
+  let Data: any;
+  if (!HeaderAdmin) {
+    Data = currentUser;
+  } else {
+    Data = HeaderAdmin;
+  }
   const onFinish = (values: any) => {
     const formattedDate = values.dateofbirth
       ? moment(values.dateofbirth.$d).format("DD-MM-YYYY")
@@ -38,10 +45,15 @@ const Information = ({ showModal }: any) => {
       }
     }
 
-    updateDocument("accounts", HeaderAdmin.id, values).then(() => {
+    updateDocument("accounts", Data?.id, values).then(() => {
       notification.success({
         message: "Cập nhật thành công",
       });
+      setIsRefetch("CRUD accounts");
+      setIsLoading(true);
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     });
   };
 
@@ -99,17 +111,15 @@ const Information = ({ showModal }: any) => {
           <div>
             <div className="flex items-center gap-2 text-[14px] text-red-400 border-red-4 00 border p-2">
               <AiOutlineUser className=" text-[20px]" />
-              Tài khoản: <span className=" ">{HeaderAdmin.username}</span>
+              Tài khoản: <span className=" ">{Data?.username}</span>
             </div>
           </div>
-          {HeaderAdmin.daysSinceCreation > 0 ? (
+          {Data?.daysSinceCreation > 0 ? (
             <div className="flex items-center gap-2 text-[14px] text-orange-300 border-orange-300 border p-2">
               <MdOutlineUpdate className=" text-[20px]" />
               <p className=" truncate   ">
                 <span className="underline">Lần cuối cập nhật:</span>{" "}
-                <span className="">
-                  {HeaderAdmin.daysSinceCreation} ngày trước
-                </span>
+                <span className="">{Data?.daysSinceCreation} ngày trước</span>
               </p>
             </div>
           ) : (
@@ -211,7 +221,7 @@ const Information = ({ showModal }: any) => {
         </Form>
       </div>
 
-      <InfoAccount HeaderAdmin={HeaderAdmin} />
+      <InfoAccount HeaderAdmin={Data} />
     </div>
   );
 };

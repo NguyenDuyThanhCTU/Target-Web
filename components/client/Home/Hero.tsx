@@ -13,7 +13,7 @@ const Hero = () => {
         theme === "light"
           ? "  text-black"
           : "bg-black overflow-hidden text-white"
-      } py-20 duration-300`}
+      } h-[80vh] flex items-center duration-300`}
     >
       <div className=" d:w-[1440px]  relative items-start gap-5 p:w-auto d:mx-auto p:mx-2 flex justify-between font-Inter">
         <div className="flex-1 flex flex-col gap-10">
