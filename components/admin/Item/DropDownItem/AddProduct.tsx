@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillCloseCircle, AiOutlinePlus } from "react-icons/ai";
 import {
   Checkbox,
@@ -38,14 +38,14 @@ const AddProduct = ({}) => {
     image: "",
     price: "0",
     typeurl: "",
-    parent: "",
+    parenturl: "",
     limitspeed: "0",
     limitdistance: "0",
     limitcoinearning: "0",
     limittime: "0",
     nightmode: false,
     test: false,
-    level: "1",
+    level: "0",
   });
 
   const [form, setForm] = useState<any>({
@@ -64,45 +64,37 @@ const AddProduct = ({}) => {
 
   const handleDiscard = () => {};
 
+  useEffect(() => {
+    const formattedName = convertToCodeFormat(formSmartContract.name);
+    if (formattedName) {
+      setForm({ ...form, url: formattedName });
+      setFormSmartContract({ ...formSmartContract, url: formattedName });
+    }
+  }, [formSmartContract.name]);
   const HandleSubmit = async (e: any) => {
     e.preventDefault();
-    if (
-      !formSmartContract.name ||
-      !formSmartContract.image ||
-      !formSmartContract.price ||
-      !formSmartContract.parent ||
-      !formSmartContract.limitspeed ||
-      !formSmartContract.limitdistance ||
-      !formSmartContract.limitcoinearning ||
-      !formSmartContract.limittime ||
-      !formSmartContract.nightmode ||
-      !formSmartContract.test ||
-      !formSmartContract.level
-    ) {
+
+    if (!formSmartContract.name) {
       notification["error"]({
         message: "Lỗi !!!",
         description: `Vui lòng điền đầy đủ các mục cho sản phẩm !`,
       });
     } else {
-      const formattedName = convertToCodeFormat(formSmartContract.name);
-      setForm({ ...form, url: formattedName });
-      setFormSmartContract({ ...formSmartContract, url: formattedName });
-
-      await createShoe({
-        ...formSmartContract,
-        price: ethers.utils.parseUnits(formSmartContract.price, 18),
-        limitspeed: ethers.utils.parseUnits(formSmartContract.limitspeed, 18),
-        limitdistance: ethers.utils.parseUnits(
-          formSmartContract.limitdistance,
-          18
-        ),
-        limitcoinearning: ethers.utils.parseUnits(
-          formSmartContract.limitcoinearning,
-          18
-        ),
-        limittime: ethers.utils.parseUnits(formSmartContract.limittime, 18),
-        level: ethers.utils.parseUnits(formSmartContract.level, 18),
-      });
+      // await createShoe({
+      //   ...formSmartContract,
+      //   price: ethers.utils.parseUnits(formSmartContract.price, 18),
+      //   limitspeed: ethers.utils.parseUnits(formSmartContract.limitspeed, 18),
+      //   limitdistance: ethers.utils.parseUnits(
+      //     formSmartContract.limitdistance,
+      //     18
+      //   ),
+      //   limitcoinearning: ethers.utils.parseUnits(
+      //     formSmartContract.limitcoinearning,
+      //     18
+      //   ),
+      //   limittime: ethers.utils.parseUnits(formSmartContract.limittime, 18),
+      //   level: ethers.utils.parseUnits(formSmartContract.level, 18),
+      // });
       const data = {
         url: form.url,
         description: form.description,
@@ -110,7 +102,6 @@ const AddProduct = ({}) => {
         subimage: form.subimage,
         state: form.state,
       };
-
       addDocument("products", data).then(() => {
         notification["success"]({
           message: "Tải lên thành công!",
@@ -127,11 +118,6 @@ const AddProduct = ({}) => {
     if (type === "mainImage") {
       uploadImage(e, locate).then((data: any) => {
         setFormSmartContract({ ...formSmartContract, image: data });
-      });
-    } else if (type === "subImage") {
-      uploadImage(e, locate).then((data: any) => {
-        // setListSubImage((prevUrls: any) => [...prevUrls, data]);
-        setForm({ ...form, subimage: data });
       });
     }
   };
@@ -279,7 +265,7 @@ const AddProduct = ({}) => {
                     onChange={(e) =>
                       setFormSmartContract({
                         ...formSmartContract,
-                        parent: e.target.value,
+                        parenturl: e.target.value,
                       })
                     }
                   >
@@ -304,16 +290,17 @@ const AddProduct = ({}) => {
                     style={{ width: "100%" }}
                     placeholder="Chọn loại bài viết"
                     onChange={(values) =>
-                      setForm({ ...formSmartContract, description: values })
+                      setForm({ ...formSmartContract, typeurl: values })
                     }
                     optionLabelProp="label"
                   >
                     {productTypes
                       ?.filter(
-                        (item: any) => item.parent === formSmartContract.parent
+                        (item: any) =>
+                          item.parentUrl === formSmartContract.parenturl
                       )
                       .map((item: any, idx: any) => (
-                        <Option value={item.type} label={item.type}>
+                        <Option value={item.type} label={item.type} key={idx}>
                           <Space>{item.type}</Space>
                         </Option>
                       ))}
@@ -474,6 +461,7 @@ const AddProduct = ({}) => {
             </Checkbox>
             <Checkbox
               onChange={(e) => setForm({ ...form, test: e.target.checked })}
+              defaultChecked={form.test}
             >
               Trạng thái
             </Checkbox>

@@ -18,7 +18,6 @@ const ListProducts: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { setDropDown } = useStateProvider();
   const { Products } = useData();
-
   return (
     <div className="rounded-xl">
       <div className="p-4 flex gap-5 border flex-col">
@@ -51,7 +50,7 @@ const ListProducts: React.FC = () => {
                         {Products.map((items: any) => (
                           <SwiperSlide key={items.id}>
                             <img
-                              src={items.image}
+                              src={items.subimage[0].url}
                               alt="banner"
                               className="h-[200px] w-full object-contain p-4"
                             />

@@ -3,11 +3,9 @@ import Content from "@components/admin/Content/Content";
 import AdminDropDown from "@components/admin/Item/AdminDropDown";
 import Header from "@components/layout/admin-layout/Header";
 import Sidebar from "@components/layout/admin-layout/Sidebar";
-import ClientLogin from "@components/login/ClientLogin";
-import { ParticlesCustom } from "@components/login/Items/ParticlesCustom";
 import { useAuth } from "@context/AuthProviders";
 import { useSmartContract } from "@context/ContractProviders";
-import { Alert, Modal, Spin } from "antd";
+import { Modal } from "antd";
 import { useRouter } from "next/navigation";
 
 import React, { useEffect } from "react";
@@ -16,13 +14,17 @@ const AdminPage = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(true);
   const { connect } = useSmartContract();
   const { verify } = useAuth();
-  const router = useRouter();
   const HandleConnectMetamask = () => {
     connect().then(() => setIsModalOpen(false));
   };
-  verify ? router.push("/dang-nhap") : null;
+  const router = useRouter();
+  useEffect(() => {
+    if (!verify) {
+      router.push("/dang-nhap");
+    }
+  }, []);
   return (
-    <div>
+    <>
       <div className="grid grid-flow-col font-LexendDeca relative ">
         <AdminDropDown />
 
@@ -59,7 +61,7 @@ const AdminPage = () => {
           </div>
         </Modal>
       </div>
-    </div>
+    </>
   );
 };
 

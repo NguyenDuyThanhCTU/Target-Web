@@ -9,6 +9,7 @@ import HeaderDropDown from "@components/admin/Item/HeaderDropdown";
 const ProfileHeader = ({ Data }: any) => {
   const { Notification, setCurrentUser } = useData();
   const [Option, setOption] = useState(false);
+
   setCurrentUser(Data);
   const items: MenuProps["items"] = [];
 

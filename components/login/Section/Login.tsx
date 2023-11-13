@@ -54,7 +54,6 @@ export const Login = ({ setChangeState }: any) => {
           setVerify(true);
           setHeaderAdmin(sort[0]);
           router.push("/");
-          console.log(verify);
         } else {
           router.push("/");
         }

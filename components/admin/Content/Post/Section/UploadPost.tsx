@@ -27,9 +27,9 @@ const UploadPost: React.FC = () => {
       setImageUrl(data);
     });
   };
-
+  console.log(Title);
   const HandleContinue = () => {
-    const sort = Posts.filter((item: any) => item.url === url);
+    const sort = Posts.filter((item: any) => item.url === TopicUrl);
     if (sort) {
       setUpdateId(sort[0]?.id);
       setDropDown("add-post");
@@ -38,17 +38,17 @@ const UploadPost: React.FC = () => {
 
   useEffect(() => {
     const handleChange = () => {
-      const userInput = Topic;
+      const userInput = Title;
       const formattedCode = convertToCodeFormat(userInput);
       if (formattedCode) {
-        setTopicUrl(formattedCode);
+        setUrl(formattedCode);
       }
     };
     handleChange();
-  }, [Topic]);
+  }, [Title]);
 
   const HandleUploadPosts = () => {
-    if (!Topic) {
+    if (!Title) {
       notification.error({
         message: "Lỗi !",
         description: `Vui lòng chọn loại bài viết trước khi TIẾP TỤC!`,
@@ -56,7 +56,6 @@ const UploadPost: React.FC = () => {
     } else {
       const data = {
         topic: Topic,
-        topicurl: TopicUrl,
         title: Title,
         url: url,
         image: imageUrl,
@@ -71,7 +70,7 @@ const UploadPost: React.FC = () => {
         setUpdateId(data);
         setDropDown("add-post");
         setIsRefetch("CRUD posts");
-        setTopic("");
+        setTitle("");
         setImageUrl("");
       });
     }
@@ -79,8 +78,8 @@ const UploadPost: React.FC = () => {
 
   const HandleChange = (value: string) => {
     const sort = TypePostItems.filter((item) => item.value === value);
-    setTitle(sort[0].label);
-    setUrl(sort[0].value);
+    setTopic(sort[0].label);
+    setTopicUrl(sort[0].value);
   };
 
   return (
@@ -105,11 +104,11 @@ const UploadPost: React.FC = () => {
         </div>
         <div className="h-[250px] text-black w-full">
           <div>
-            {(url === "cong-trinh-thuc-te" || url === "dich-vu") && (
+            {TopicUrl === "tin-tuc" && (
               <Input
                 text="Tiêu đề bài viết"
-                Value={Topic}
-                setValue={setTopic}
+                Value={Title}
+                setValue={setTitle}
                 Input={true}
                 PlaceHolder=""
               />
@@ -132,7 +131,7 @@ const UploadPost: React.FC = () => {
                 ))}
               </select>
             </div>
-            {(url === "cong-trinh-thuc-te" || url === "dich-vu") && (
+            {TopicUrl === "tin-tuc" && (
               <>
                 {" "}
                 <div className="flex gap-5  items-end ">
@@ -166,7 +165,7 @@ const UploadPost: React.FC = () => {
         </div>
 
         <div className="flex gap-5 mt-2">
-          {url === "cong-trinh-thuc-te" || url === "dich-vu" ? (
+          {TopicUrl === "tin-tuc" ? (
             <>
               <div
                 className="px-10 py-3 rounded-xl border-2 border-blue-500 bg-blue-500 text-white hover:bg-blue-700 duration-300 hover:border-blue-700 cursor-pointer"

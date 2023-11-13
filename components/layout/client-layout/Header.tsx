@@ -12,12 +12,13 @@ import optionAmination from "@assets/animation/optionAdmin.json";
 import { BiLogOutCircle } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { MdAdminPanelSettings } from "react-icons/md";
+import { useAuth } from "@context/AuthProviders";
 
 const Header = () => {
   const [open, setOpen] = React.useState(false);
   const { theme, setIsLoading } = useStateProvider();
   const { productTypes, currentUser, setCurrentUser } = useData();
-
+  const { verify } = useAuth();
   const SupportItems = [
     {
       label: "Hướng dẫn sử dụng",
@@ -41,6 +42,7 @@ const Header = () => {
       icon: BiLogOutCircle,
     },
   ];
+
   if (currentUser?.role === "admin") {
     //push admin option in userItems[0] array
     UserItems.unshift({
@@ -255,24 +257,47 @@ const Header = () => {
                     {UserItems.map((items: any, idx: number) => {
                       const Icon = items.icon;
                       return (
-                        <div
-                          key={idx}
-                          onClick={() => {
-                            items.value === "dang-xuat"
-                              ? HandleLogout()
-                              : (window.location.href = `/${items.value}`);
-                          }}
-                          className={`${
-                            items.value === "dang-xuat"
-                              ? "text-redPrimmary"
-                              : "text-black"
-                          } w-full  border-b py-2 cursor-pointer px-4 hover:bg-gray-100  `}
-                        >
-                          <div className="flex gap-2 items-center ">
-                            <Icon />
-                            <p className={`$ duration-300`}>{items.label}</p>
-                          </div>
-                        </div>
+                        <>
+                          {items.label === "Đăng xuất" ? (
+                            <>
+                              <div
+                                onClick={() => HandleLogout()}
+                                key={idx}
+                                className={`${
+                                  items.value === "dang-xuat"
+                                    ? "text-redPrimmary"
+                                    : "text-black"
+                                } w-full  border-b py-2 cursor-pointer px-4 hover:bg-gray-100  `}
+                              >
+                                <div className="flex gap-2 items-center ">
+                                  <Icon />
+                                  <p className={`$ duration-300`}>
+                                    {items.label}
+                                  </p>
+                                </div>
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <Link
+                                href={`${items.value}`}
+                                key={idx}
+                                className={`${
+                                  items.value === "dang-xuat"
+                                    ? "text-redPrimmary"
+                                    : "text-black"
+                                } w-full  border-b py-2 cursor-pointer px-4 hover:bg-gray-100  `}
+                              >
+                                <div className="flex gap-2 items-center ">
+                                  <Icon />
+                                  <p className={`$ duration-300`}>
+                                    {items.label}
+                                  </p>
+                                </div>
+                              </Link>
+                            </>
+                          )}
+                        </>
                       );
                     })}
                   </div>
