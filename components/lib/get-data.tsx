@@ -27,7 +27,7 @@ export async function getDataBySortProps(
   field1: string,
   value1: string,
   field2: string,
-  value2: string
+  value2: any
 ) {
   const Data = await JSON.parse(
     JSON.stringify(

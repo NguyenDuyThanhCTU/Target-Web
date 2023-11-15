@@ -6,27 +6,24 @@ import ProductCard from "./ProductCard";
 import { Pagination, PaginationProps } from "antd";
 
 const DisplayProducts = () => {
-  const [shoes, setshoes] = useState([]);
+  const [shoes, setshoes] = useState<any>([]);
   const [ProductSort, setProductSort] = useState<any>([]);
   const [KeyFilter, setKeyFilter] = useState<any>();
   const [KeySort, setKeySort] = useState<any>();
   const [currentPage, setCurrentPage] = useState(1);
-  const { getShoes, contract, address } = useSmartContract();
+  const { Shoes } = useSmartContract();
 
-  const fetchCampaigns = async () => {
-    const data = await getShoes();
-    const sort = data?.sort((a: any, b: any) => {
+  useEffect(() => {
+    const sort = Shoes?.sort((a: any, b: any) => {
       return b.pId - a.pId;
     });
-    const productsort = data?.slice(0, 20).sort((a: any, b: any) => {
+    const productsort = Shoes?.slice(0, 20).sort((a: any, b: any) => {
       return b.pId - a.pId;
     });
     setProductSort(productsort);
     setshoes(sort);
-  };
-  useEffect(() => {
-    if (contract) fetchCampaigns();
-  }, [address, contract]);
+  }, [Shoes]);
+
   useEffect(() => {
     if (KeyFilter === "oldest") {
       const sort = shoes?.sort((a: any, b: any) => {

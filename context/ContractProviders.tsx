@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import {
   useAddress,
   useContract,
@@ -14,6 +14,8 @@ interface Props {
 }
 
 export type ContractContextType = {
+  Shoes: any[];
+  setShoes: (value: any[]) => void;
   address?: string;
   contract?: any;
   connect: () => any;
@@ -23,6 +25,8 @@ export type ContractContextType = {
 };
 
 export const ContractContext = createContext<ContractContextType>({
+  Shoes: [],
+  setShoes: () => {},
   address: "",
   contract: "",
   connect: () => {},
@@ -32,6 +36,7 @@ export const ContractContext = createContext<ContractContextType>({
 });
 
 export const ContractProvider: React.FC<Props> = ({ children }) => {
+  const [Shoes, setShoes] = useState<any[]>([]);
   const { contract }: any = useContract(
     "0xb73B22e75028C24A81B6F4A5052AaBb9B08cd97C"
   );
@@ -97,11 +102,21 @@ export const ContractProvider: React.FC<Props> = ({ children }) => {
     return shoes;
   };
 
+  const fetchCampaigns = async () => {
+    const data = await getShoes();
+    setShoes(data);
+  };
+
+  useEffect(() => {
+    if (contract) fetchCampaigns();
+  }, [address, contract]);
+
   return (
     <ContractContext.Provider
       value={{
         getShoe,
-
+        Shoes,
+        setShoes,
         address,
         contract,
         connect,

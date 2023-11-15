@@ -44,7 +44,7 @@ const ProductCard = ({ Data }: any) => {
                   <img
                     src={Data.image}
                     alt="product"
-                    className="w-full h-full hover:scale-110 duration-300"
+                    className="w-full h-full px-4 hover:scale-110 duration-300"
                   />
                 </div>
                 <h3 className=" mt-2 truncate1 d:text-[16px] p:text-[14px] font-normal text-center">

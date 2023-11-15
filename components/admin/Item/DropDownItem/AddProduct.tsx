@@ -54,7 +54,8 @@ const AddProduct = ({}) => {
     description: "",
     introduction: "",
     subimage: [],
-    state: false,
+    access: Math.floor(Math.random() * (10000 - 100 + 1)) + 100,
+    state: true,
   });
 
   const { Option } = Select;
