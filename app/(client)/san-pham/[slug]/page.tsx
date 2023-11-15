@@ -1,3 +1,4 @@
+import DisplayProducts from "@components/client/Product/DisplayProducts";
 import {
   FilterProduct,
   SortProduct,
@@ -70,39 +71,7 @@ const ProductPage = async ({
           className="w-full h-full object-cover object-center"
         /> */}
       </div>
-      <div className="p:w-auto p:mx-2 d:w-[1460px] d:mx-auto">
-        <div className="flex flex-col font-LexendDeca font-extralight py-10 ">
-          <div className="bg-black text-white border border-white">
-            <div className="p-6">
-              {/* <h1 className="text-[24px] font-semibold  ">
-            {params.slug === "tat-ca"
-              ? "Tất cả sản phẩm"
-              : ProductSort[0]?.parent}
-          </h1> */}
-              <p>indian price drop....</p>
-            </div>
-          </div>
-          <div className="w-full justify-between flex pt-10">
-            <p>
-              <strong>Hiển thị 1-18 </strong>trong 3125125 sản phẩm
-            </p>
-
-            <FilterProduct />
-          </div>
-          <div className="py-5 flex gap-5 d:flex-row p:flex-col">
-            <SortProduct />
-            <div>
-              <div className="grid p:grid-cols-2 d:grid-cols-4 gap-2 bg-gray-200">
-                {/* {ProductSort.map((item: any, idx: number) => (
-              <div key={idx}>
-                <ProductCard Data={item} />
-              </div>
-            ))} */}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <DisplayProducts />
     </ThemeLayout>
   );
 };

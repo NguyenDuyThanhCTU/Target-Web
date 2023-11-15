@@ -49,6 +49,7 @@ const AddProduct = ({}) => {
   });
 
   const [form, setForm] = useState<any>({
+    image: "",
     url: "",
     description: "",
     introduction: "",
@@ -71,6 +72,14 @@ const AddProduct = ({}) => {
       setFormSmartContract({ ...formSmartContract, url: formattedName });
     }
   }, [formSmartContract.name]);
+
+  let data = {
+    url: form.url,
+    description: form.description,
+    introduction: form.introduction,
+    subimage: form.subimage,
+    state: form.state,
+  };
   const HandleSubmit = async (e: any) => {
     e.preventDefault();
 
@@ -80,36 +89,30 @@ const AddProduct = ({}) => {
         description: `Vui lòng điền đầy đủ các mục cho sản phẩm !`,
       });
     } else {
-      // await createShoe({
-      //   ...formSmartContract,
-      //   price: ethers.utils.parseUnits(formSmartContract.price, 18),
-      //   limitspeed: ethers.utils.parseUnits(formSmartContract.limitspeed, 18),
-      //   limitdistance: ethers.utils.parseUnits(
-      //     formSmartContract.limitdistance,
-      //     18
-      //   ),
-      //   limitcoinearning: ethers.utils.parseUnits(
-      //     formSmartContract.limitcoinearning,
-      //     18
-      //   ),
-      //   limittime: ethers.utils.parseUnits(formSmartContract.limittime, 18),
-      //   level: ethers.utils.parseUnits(formSmartContract.level, 18),
-      // });
-      const data = {
-        url: form.url,
-        description: form.description,
-        introduction: form.introduction,
-        subimage: form.subimage,
-        state: form.state,
-      };
       addDocument("products", data).then(() => {
         notification["success"]({
           message: "Tải lên thành công!",
           description: `giày của bạn đã được tải lên !`,
         });
         setIsRefetch("CRUD products");
-        handleDiscard();
-        setDropDown("");
+        // handleDiscard();
+        // setDropDown("");
+      });
+
+      await createShoe({
+        ...formSmartContract,
+        price: ethers.utils.parseUnits(formSmartContract.price, 18),
+        limitspeed: ethers.utils.parseUnits(formSmartContract.limitspeed, 18),
+        limitdistance: ethers.utils.parseUnits(
+          formSmartContract.limitdistance,
+          18
+        ),
+        limitcoinearning: ethers.utils.parseUnits(
+          formSmartContract.limitcoinearning,
+          18
+        ),
+        limittime: ethers.utils.parseUnits(formSmartContract.limittime, 18),
+        level: ethers.utils.parseUnits(formSmartContract.level, 18),
       });
     }
   };
@@ -118,6 +121,7 @@ const AddProduct = ({}) => {
     if (type === "mainImage") {
       uploadImage(e, locate).then((data: any) => {
         setFormSmartContract({ ...formSmartContract, image: data });
+        setForm({ ...form, image: data });
       });
     }
   };
@@ -327,12 +331,12 @@ const AddProduct = ({}) => {
                     <div>
                       <Radio.Group
                         onChange={(e) =>
-                          setForm({
+                          setFormSmartContract({
                             ...formSmartContract,
                             level: e.target.value,
                           })
                         }
-                        value={form.level}
+                        value={formSmartContract.level}
                       >
                         <Radio value={"1"}>1</Radio>
                         <Radio value={"2"}>2</Radio>

@@ -14,59 +14,73 @@ import { FacebookProvider, Comments } from "react-facebook";
 import moment from "moment";
 import { useStateProvider } from "@context/StateProvider";
 import { useData } from "@context/DataProviders";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import Contact from "./Contact";
+import { useSmartContract } from "@context/ContractProviders";
 
 const ProductDetail = () => {
-  const [similarProduct, setSimilarProduct] = useState([]);
-  const [ProductFetch, setProductFetch] = useState<any>();
-  const [isCombo, setIsCombo] = useState(1);
-  const [openContact, setOpenContact] = useState<any>(false);
-  const { setCartItems, Sale } = useData();
-  const { setOpenCart, OpenCart } = useStateProvider();
-  const router = useRouter();
-  const { Products } = useData();
-  const params = useParams();
+  const [ContractData, setContractData] = useState<any>();
+  const { getShoe, contract, address } = useSmartContract();
+  const searchParams = useSearchParams();
+  const search = searchParams.get("pId");
+  console.log(search);
+  const fetchCampaigns = async () => {
+    const data = await getShoe(search);
+    setContractData(data);
+  };
 
   useEffect(() => {
-    const sort = Products.filter((item: any) => item.url === params.slug);
-    if (sort) {
-      setProductFetch(sort[0]);
-    }
-  }, [params.slug, Products]);
+    if (contract) fetchCampaigns();
+  }, [address, contract]);
+  // const [similarProduct, setSimilarProduct] = useState([]);
+  // const [ProductFetch, setProductFetch] = useState<any>();
+  // const [isCombo, setIsCombo] = useState(1);
+  // const [openContact, setOpenContact] = useState<any>(false);
+  // const { setCartItems, Sale } = useData();
+  // const { setOpenCart, OpenCart } = useStateProvider();
+  // const router = useRouter();
+  // const { Products } = useData();
+  // const params = useParams();
 
-  useEffect(() => {
-    const similarproduct = Products.filter(
-      (item: any) => item.type === ProductFetch?.type
-    );
-    setSimilarProduct(similarproduct);
-  }, [Products, ProductFetch]);
+  // useEffect(() => {
+  //   const sort = Products.filter((item: any) => item.url === params.slug);
+  //   if (sort) {
+  //     setProductFetch(sort[0]);
+  //   }
+  // }, [params.slug, Products]);
 
-  const onMinus = () => {
-    if (isCombo > 0) {
-      setIsCombo(isCombo - 1);
-    }
-  };
-  const currentTime = new Date();
-  const formatCurrentTime = moment(currentTime).format("YYYY-MM-DD");
-  const isSale =
-    ProductFetch?.sale.discount === 0 || formatCurrentTime > Sale.end;
+  // useEffect(() => {
+  //   const similarproduct = Products.filter(
+  //     (item: any) => item.type === ProductFetch?.type
+  //   );
+  //   setSimilarProduct(similarproduct);
+  // }, [Products, ProductFetch]);
 
-  const HandleOrder = (id: string, type: string) => {
-    if (type === "buy") {
-      setCartItems((prevItems: any) => [...prevItems, id]);
-      router.push("/thanh-toan");
-    } else {
-      setCartItems((prevItems: any) => [
-        ...prevItems,
-        ...Array(isCombo).fill(id),
-      ]);
-      setOpenCart(true);
-    }
-  };
+  // const onMinus = () => {
+  //   if (isCombo > 0) {
+  //     setIsCombo(isCombo - 1);
+  //   }
+  // };
+  // const currentTime = new Date();
+  // const formatCurrentTime = moment(currentTime).format("YYYY-MM-DD");
+  // const isSale =
+  //   ProductFetch?.sale.discount === 0 || formatCurrentTime > Sale.end;
+
+  // const HandleOrder = (id: string, type: string) => {
+  //   if (type === "buy") {
+  //     setCartItems((prevItems: any) => [...prevItems, id]);
+  //     router.push("/thanh-toan");
+  //   } else {
+  //     setCartItems((prevItems: any) => [
+  //       ...prevItems,
+  //       ...Array(isCombo).fill(id),
+  //     ]);
+  //     setOpenCart(true);
+  //   }
+  // };
   const items = [
     {
       key: "1",
@@ -76,7 +90,7 @@ const ProductDetail = () => {
           <h3 className="text-[24px] font-semibold ">Chi tiết sản phẩm</h3>
           <div
             className=""
-            dangerouslySetInnerHTML={{ __html: ProductFetch?.content }}
+            // dangerouslySetInnerHTML={{ __html: ProductFetch?.content }}
           ></div>
         </>
       ),
@@ -107,10 +121,10 @@ const ProductDetail = () => {
             <Image.PreviewGroup>
               <Image
                 className="p-2 h-full w-full object-contain hover:scale-110 duration-500"
-                src={ProductFetch?.image}
+                src={ContractData?.image}
               />
             </Image.PreviewGroup>
-            {ProductFetch?.subimage?.length > 0 && (
+            {/* {ProductFetch?.subimage?.length > 0 && (
               <>
                 {" "}
                 <div className="w-full bg-gray-100 mt-3">
@@ -132,12 +146,11 @@ const ProductDetail = () => {
                           (item: any, idx: number) => (
                             <SwiperSlide>
                               {" "}
-                              {/* <div className="mx-4 w-[150px] h-[150px] overflow-hidden flex items-center"> */}
                               <Image
                                 className="p-2 h-full w-full object-contain"
                                 src={item.url}
                               />
-                              {/* </div> */}
+
                             </SwiperSlide>
                           )
                         )}
@@ -146,14 +159,14 @@ const ProductDetail = () => {
                   </div>
                 </div>
               </>
-            )}
+            )} */}
           </div>
           <div className="flex-[70%] flex flex-col gap-5">
             <div>
-              <h3 className="text-[26px] uppercase">{ProductFetch?.title}</h3>
+              <h3 className="text-[26px] uppercase">{ContractData?.name}</h3>
               <div className="bg-black w-24 h-1"></div>
             </div>
-            <div className="flex gap-1 flex-col text-[20px]">
+            {/* <div className="flex gap-1 flex-col text-[20px]">
               {ProductFetch?.sale?.discount === 0 ? (
                 <>
                   <p>
@@ -184,8 +197,8 @@ const ProductDetail = () => {
                   </div>
                 </div>
               )}
-            </div>
-            <div className="w-[200px] ">
+            </div> */}
+            {/* <div className="w-[200px] ">
               {ProductFetch?.state ? (
                 <div className=" text-green-500 rounded-xl font-bold">
                   Tình trạng: Còn hàng
@@ -195,62 +208,17 @@ const ProductDetail = () => {
                   Tình trạng: Hết hàng
                 </div>
               )}
-            </div>
-            <div>
-              <h3 className="py-1">Đặt hàng:</h3>
-              <div className="border border-blue-500   h-12 rounded-sm w-[200px] ">
-                <div className="flex justify-between items-center h-full mx-5">
-                  <BiMinus
-                    onClick={() => onMinus()}
-                    className="cursor-pointer"
-                  />
-                  <input
-                    type="text"
-                    value={`Số lượng: ${isCombo}`}
-                    className=" focus-visible:outline-none w-full text-center border-0 px-0 py-[9px] h-auto text-13 "
-                  />
-                  <BiPlus
-                    onClick={() => setIsCombo(isCombo + 1)}
-                    className="cursor-pointer"
-                  />
-                </div>
-              </div>
-            </div>
-            {ProductFetch?.parentUrl === "motor-cong-tu-dong" ? (
-              <div className="flex">
-                {" "}
-                <div
-                  className="py-3 px-6 bg-mainblue text-white hover:bg-red-700 rounded-sm cursor-pointer duration-300"
-                  onClick={() => {
-                    setOpenContact(true);
-                  }}
-                >
-                  Liên hệ
-                </div>
-              </div>
-            ) : (
-              <>
-                {" "}
-                <div className="grid grid-cols-4 gap-5 ">
-                  <div
-                    className="rounded-sm col-span-3 w-full text-[18px] text-primary bg-[#f0edf8] hover:bg-[#e1dbf0] flex items-center  py-2 justify-center cursor-pointer gap-1"
-                    onClick={() => HandleOrder(ProductFetch?.id, "add")}
-                  >
-                    <BsFillCartPlusFill className="text-[23px] " />
-                    <p>Thêm vào giỏ</p>
-                  </div>
+            </div> */}
 
-                  <div
-                    className="col-span-1 p-3 w-max bg-orange-500 text-white hover:bg-orange-600 rounded-sm cursor-pointer duration-300"
-                    onClick={() => HandleOrder(ProductFetch?.id, "buy")}
-                  >
-                    Mua ngay
-                  </div>
-                </div>
-              </>
-            )}
+            <div
+              className="rounded-sm col-span-3 w-full text-[18px] text-primary bg-[#f0edf8] hover:bg-[#e1dbf0] flex items-center  py-2 justify-center cursor-pointer gap-1"
+              // onClick={() => HandleOrder(ProductFetch?.id, "add")}
+            >
+              <BsFillCartPlusFill className="text-[23px] " />
+              <p> Mua ngay</p>
+            </div>
 
-            <div className="py-4 border-t border-b w-full font-light">
+            {/* <div className="py-4 border-t border-b w-full font-light">
               <h3>Mô tả</h3>
               <div
                 dangerouslySetInnerHTML={{ __html: ProductFetch?.describe }}
@@ -258,7 +226,7 @@ const ProductDetail = () => {
             </div>
             <div className="flex gap-3 items-center font-light">
               <span className="">Lượt xem {ProductFetch?.access}</span>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -275,7 +243,7 @@ const ProductDetail = () => {
             <h3 className="text-mainred py-2 border-b-2 border-mainred uppercase font-bold">
               Sản phẩm liên quan
             </h3>
-            <div>
+            {/* <div>
               {similarProduct?.map((item: any, idx: number) => (
                 <>
                   <div className="flex gap-3 py-3 border-b" key={idx}>
@@ -297,16 +265,16 @@ const ProductDetail = () => {
                   </div>
                 </>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
 
-      <>
+      {/* <>
         {openContact && (
           <Contact setOpenContact={setOpenContact} OpenContact={openContact} />
         )}
-      </>
+      </> */}
     </div>
   );
 };

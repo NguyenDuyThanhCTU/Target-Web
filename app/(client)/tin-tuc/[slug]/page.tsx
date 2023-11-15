@@ -13,7 +13,6 @@ const NewsDetailPage = async ({ params }: { params: { slug: string } }) => {
   const DetailPostDate = moment
     .unix(Data[0]?.createdAt.seconds)
     .format("MMMM DD, YYYY");
-  console.log(Data);
   return (
     <div className="p:w-auto d:w-[1300px] p:mx-auto d:mx-auto grid p:grid-cols-1 d:grid-cols-7 font-LexendDeca font-extralight gap-10">
       <div className="border h-max border-gray-400 col-span-2 d:block p:hidden">

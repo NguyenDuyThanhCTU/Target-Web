@@ -19,7 +19,7 @@ const Table = ({ Data, del, onEdit, onUpdate }: any) => {
         description: `Yêu cầu của bạn đã được thực hiện thành công !`,
       });
     });
-    setIsRefetch(`CRUD ${del}`);
+    setIsRefetch(`CRUD products`);
   };
 
   const HandleEdit = (id: string) => {

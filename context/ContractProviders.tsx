@@ -18,6 +18,8 @@ export type ContractContextType = {
   contract?: any;
   connect: () => any;
   createShoe: (form: any) => void;
+  getShoes: () => any;
+  getShoe: (pId: any) => any;
 };
 
 export const ContractContext = createContext<ContractContextType>({
@@ -25,10 +27,12 @@ export const ContractContext = createContext<ContractContextType>({
   contract: "",
   connect: () => {},
   createShoe: () => {},
+  getShoes: () => {},
+  getShoe: () => {},
 });
 
 export const ContractProvider: React.FC<Props> = ({ children }) => {
-  const { contract } = useContract(
+  const { contract }: any = useContract(
     "0xb73B22e75028C24A81B6F4A5052AaBb9B08cd97C"
   );
   const { mutateAsync: createShoe } = useContractWrite(contract, "createShoe");
@@ -63,9 +67,47 @@ export const ContractProvider: React.FC<Props> = ({ children }) => {
     }
   };
 
+  const getShoes = async () => {
+    const shoes = await contract.call("getAllShoes");
+
+    const parsedShoes = shoes.map((shoe: any, i: any) => ({
+      owner: shoe.owner,
+      name: shoe.name,
+      url: shoe.url,
+      image: shoe.image,
+      price: shoe.price,
+      typeurl: shoe.typeurl,
+      parenturl: shoe.parenturl,
+      limitspeed: shoe.limitspeed,
+      limitdistance: shoe.limitdistance,
+      limitcoinearning: shoe.limitcoinearning,
+      limittime: shoe.limittime,
+      nightmode: shoe.nightmode,
+      test: shoe.test,
+      level: shoe.level,
+      pId: i,
+    }));
+
+    return parsedShoes;
+  };
+
+  const getShoe = async (pId: any) => {
+    const shoes = await contract.call("getShoe", [pId]);
+
+    return shoes;
+  };
+
   return (
     <ContractContext.Provider
-      value={{ address, contract, connect, createShoe: publishShoe }}
+      value={{
+        getShoe,
+
+        address,
+        contract,
+        connect,
+        createShoe: publishShoe,
+        getShoes,
+      }}
     >
       {children}
     </ContractContext.Provider>

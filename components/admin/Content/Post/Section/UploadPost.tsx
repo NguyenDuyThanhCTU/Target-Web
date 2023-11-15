@@ -27,7 +27,6 @@ const UploadPost: React.FC = () => {
       setImageUrl(data);
     });
   };
-  console.log(Title);
   const HandleContinue = () => {
     const sort = Posts.filter((item: any) => item.url === TopicUrl);
     if (sort) {
@@ -108,7 +107,7 @@ const UploadPost: React.FC = () => {
               <Input
                 text="Tiêu đề bài viết"
                 Value={Title}
-                setValue={setTitle}
+                setValue={(e: any) => setTitle(e.target.value)}
                 Input={true}
                 PlaceHolder=""
               />
@@ -138,7 +137,7 @@ const UploadPost: React.FC = () => {
                   <Input
                     text="Liên kết hình ảnh"
                     Value={imageUrl}
-                    setValue={setImageUrl}
+                    setValue={(e: any) => setImageUrl(e.target.value)}
                     Input={true}
                     PlaceHolder=""
                   />

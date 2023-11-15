@@ -7,8 +7,8 @@ const HomeNews = ({ Data }: any) => {
   const DetailFirstPostDate = moment
     .unix(Data[0]?.createdAt.seconds)
     .format("MMMM DD, YYYY");
-  const truncatedContent = Data[0].content
-    ? Data[0].content.substring(0, 300)
+  const truncatedContent = Data[0]?.content
+    ? Data[0]?.content.substring(0, 300)
     : "";
   const markupFirst = { __html: truncatedContent };
   return (
