@@ -37,20 +37,21 @@ const AddProduct = ({}) => {
     url: "",
     image: "",
     price: "0",
-    typeurl: "",
-    parenturl: "",
+    level: "0",
+  });
+
+  const [form, setForm] = useState<any>({
     limitspeed: "0",
     limitdistance: "0",
     limitcoinearning: "0",
     limittime: "0",
     nightmode: false,
     test: false,
-    level: "0",
-  });
-
-  const [form, setForm] = useState<any>({
+    typeurl: "",
+    parenturl: "",
     image: "",
     url: "",
+    name: "",
     description: "",
     introduction: "",
     subimage: [],
@@ -75,12 +76,24 @@ const AddProduct = ({}) => {
   }, [formSmartContract.name]);
 
   let data = {
+    limitspeed: form.limitspeed,
+    limitdistance: form.limitdistance,
+    limitcoinearning: form.limitcoinearning,
+    limittime: form.limittime,
+    nightmode: form.nightmode,
+    test: form.test,
+    type: form.typeurl,
+    image: form.image,
+    parentUrl: form.parenturl,
+    title: form.name,
     url: form.url,
     description: form.description,
     introduction: form.introduction,
     subimage: form.subimage,
     state: form.state,
+    level: formSmartContract.level,
   };
+
   const HandleSubmit = async (e: any) => {
     e.preventDefault();
 
@@ -99,20 +112,9 @@ const AddProduct = ({}) => {
         // handleDiscard();
         // setDropDown("");
       });
-
       await createShoe({
         ...formSmartContract,
         price: ethers.utils.parseUnits(formSmartContract.price, 18),
-        limitspeed: ethers.utils.parseUnits(formSmartContract.limitspeed, 18),
-        limitdistance: ethers.utils.parseUnits(
-          formSmartContract.limitdistance,
-          18
-        ),
-        limitcoinearning: ethers.utils.parseUnits(
-          formSmartContract.limitcoinearning,
-          18
-        ),
-        limittime: ethers.utils.parseUnits(formSmartContract.limittime, 18),
         level: ethers.utils.parseUnits(formSmartContract.level, 18),
       });
     }
@@ -150,9 +152,13 @@ const AddProduct = ({}) => {
     setForm({ ...form, image: newImageUrl });
   };
 
-  // const handleFormFieldChange = (fieldName: any, e: any) => {
-  //   setForm({ ...form, [fieldName]: e.target.value });
-  // };
+  const handleFormFieldChange = (fieldName: any, e: any) => {
+    setForm({
+      ...form,
+      [fieldName]: e.target.value,
+    });
+  };
+
   const handleSmartContractFormFieldChange = (fieldName: any, e: any) => {
     if (fieldName === "name") {
       setFormSmartContract({
@@ -160,6 +166,7 @@ const AddProduct = ({}) => {
         [fieldName]: e.target.value,
       });
       setForm({ ...form, url: convertToCodeFormat(e.target.value) });
+      setForm({ ...form, name: e.target.value });
     } else {
       setFormSmartContract({
         ...formSmartContract,
@@ -268,8 +275,8 @@ const AddProduct = ({}) => {
                   <select
                     className="outline-none lg:w-650 border-2 border-gray-200 text-md capitalize lg:p-4 p-2 rounded cursor-pointer"
                     onChange={(e) =>
-                      setFormSmartContract({
-                        ...formSmartContract,
+                      setForm({
+                        ...form,
                         parenturl: e.target.value,
                       })
                     }
@@ -295,17 +302,21 @@ const AddProduct = ({}) => {
                     style={{ width: "100%" }}
                     placeholder="Chọn loại bài viết"
                     onChange={(values) =>
-                      setForm({ ...formSmartContract, typeurl: values })
+                      setForm({
+                        ...form,
+                        typeurl: values,
+                      })
                     }
                     optionLabelProp="label"
                   >
                     {productTypes
-                      ?.filter(
-                        (item: any) =>
-                          item.parentUrl === formSmartContract.parenturl
-                      )
+                      ?.filter((item: any) => item.parentUrl === form.parenturl)
                       .map((item: any, idx: any) => (
-                        <Option value={item.type} label={item.type} key={idx}>
+                        <Option
+                          value={item.typeUrl}
+                          label={item.type}
+                          key={idx}
+                        >
                           <Space>{item.type}</Space>
                         </Option>
                       ))}
@@ -416,38 +427,30 @@ const AddProduct = ({}) => {
         >
           <Input
             text="Tốc độ tối đa (Km/h)"
-            Value={formSmartContract.limitspeed}
-            setValue={(e: any) =>
-              handleSmartContractFormFieldChange("limitspeed", e)
-            }
+            Value={form.limitspeed}
+            setValue={(e: any) => handleFormFieldChange("limitspeed", e)}
           />
           <Input
             text="Quãng đường tối đa (Km)"
-            Value={formSmartContract.limitdistance}
-            setValue={(e: any) =>
-              handleSmartContractFormFieldChange("limitdistance", e)
-            }
+            Value={form.limitdistance}
+            setValue={(e: any) => handleFormFieldChange("limitdistance", e)}
           />
           <Input
             text="Tỷ lệ coin nhận được  "
-            Value={formSmartContract.limitcoinearning}
-            setValue={(e: any) =>
-              handleSmartContractFormFieldChange("limitcoinearning", e)
-            }
+            Value={form.limitcoinearning}
+            setValue={(e: any) => handleFormFieldChange("limitcoinearning", e)}
           />
           <Input
-            text="Thời gian giữa các lần chạy (phút)"
-            Value={formSmartContract.limittime}
-            setValue={(e: any) =>
-              handleSmartContractFormFieldChange("limittime", e)
-            }
+            text="Giảm thời gian giữa các lần chạy (%)"
+            Value={form.limittime}
+            setValue={(e: any) => handleFormFieldChange("limittime", e)}
           />
 
-          <div className="flex flex-col gap-3 p-6 border rounded-xl">
+          {/* <div className="flex flex-col gap-3 p-6 border rounded-xl">
             <Checkbox
               onChange={(e) =>
                 setFormSmartContract({
-                  ...formSmartContract,
+                  ...form,
                   nightmode: e.target.checked,
                 })
               }
@@ -457,7 +460,7 @@ const AddProduct = ({}) => {
             <Checkbox
               onChange={(e) =>
                 setFormSmartContract({
-                  ...formSmartContract,
+                  ...form,
                   test: e.target.checked,
                 })
               }
@@ -470,7 +473,7 @@ const AddProduct = ({}) => {
             >
               Trạng thái
             </Checkbox>
-          </div>
+          </div> */}
         </Drawer>
       </>
     </div>

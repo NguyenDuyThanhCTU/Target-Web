@@ -86,6 +86,10 @@ const ProfileSidebar: React.FC = () => {
             ? "translate-y-[200px]"
             : isSelected === 4
             ? "translate-y-[270px]"
+            : isSelected === 5
+            ? "translate-y-[340px]"
+            : isSelected === 6
+            ? "translate-y-[410px]"
             : null
         }`}
         ></div>

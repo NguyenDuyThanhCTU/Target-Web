@@ -20,7 +20,7 @@ import {
   AiOutlineSlack,
   AiOutlineUnorderedList,
 } from "react-icons/ai";
-import { FaFirstOrderAlt, FaTiktok } from "react-icons/fa";
+import { FaFirstOrderAlt, FaHeart, FaTiktok } from "react-icons/fa";
 import { AiOutlineTwitter } from "react-icons/ai";
 import { BiNetworkChart, BiSlideshow } from "react-icons/bi";
 import {
@@ -34,6 +34,7 @@ import {
   MdAirlineSeatReclineNormal,
   MdManageAccounts,
   MdOutlineLocalCarWash,
+  MdOutlinePassword,
   MdOutlinePostAdd,
   MdSecurity,
 } from "react-icons/md";
@@ -50,7 +51,7 @@ import {
   GiSubmarineMissile,
 } from "react-icons/gi";
 
-import { CiDiscount1, CiViewList } from "react-icons/ci";
+import { CiCoinInsert, CiDiscount1, CiViewList } from "react-icons/ci";
 import { IconType } from "react-icons/lib";
 import { IoFlashOutline } from "react-icons/io5";
 import { SlSpeedometer } from "react-icons/sl";
@@ -105,6 +106,9 @@ export const IconMapping: IconMappingType = {
   GiNightSky: GiNightSky,
   TbCoinOff: TbCoinOff,
   GiAchievement: GiAchievement,
+  FaHeart: FaHeart,
+  CiCoinInsert: CiCoinInsert,
+  MdOutlinePassword: MdOutlinePassword,
 };
 
 export const ProductSidebarAdmin = [
@@ -163,6 +167,14 @@ export const ProfileSidebarItems = [
     icon: "AiOutlineSlack",
   },
   {
+    name: "Sản phẩm yêu thích",
+    icon: "FaHeart",
+  },
+  {
+    name: "Lịch sử giao dịch",
+    icon: "CiCoinInsert",
+  },
+  {
     name: "Hoạt Động Chạy Bộ",
     icon: "FaFirstOrderAlt",
   },
@@ -170,13 +182,14 @@ export const ProfileSidebarItems = [
     name: "Nâng Cấp và Điểm Thưởng",
     icon: "IoFlashOutline",
   },
-  {
-    name: "Quản Lý Tài Khoản",
-    icon: "AiOutlineUnorderedList",
-  },
+
   {
     name: "Thành tựu",
     icon: "GiAchievement",
+  },
+  {
+    name: "Đổi mật khẩu",
+    icon: "MdOutlinePassword",
   },
 ];
 

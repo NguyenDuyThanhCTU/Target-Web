@@ -38,7 +38,7 @@ export const ContractContext = createContext<ContractContextType>({
 export const ContractProvider: React.FC<Props> = ({ children }) => {
   const [Shoes, setShoes] = useState<any[]>([]);
   const { contract }: any = useContract(
-    "0xb73B22e75028C24A81B6F4A5052AaBb9B08cd97C"
+    "0x1006C5D5e1EC1710686cCf8eE34ffd8Db9096e68"
   );
   const { mutateAsync: createShoe } = useContractWrite(contract, "createShoe");
 
@@ -54,14 +54,6 @@ export const ContractProvider: React.FC<Props> = ({ children }) => {
           form.url,
           form.image,
           form.price,
-          form.typeurl,
-          form.parenturl,
-          form.limitspeed,
-          form.limitdistance,
-          form.limitcoinearning,
-          form.limittime,
-          form.nightmode,
-          form.test,
           form.level,
         ],
       });
@@ -81,14 +73,6 @@ export const ContractProvider: React.FC<Props> = ({ children }) => {
       url: shoe.url,
       image: shoe.image,
       price: shoe.price,
-      typeurl: shoe.typeurl,
-      parenturl: shoe.parenturl,
-      limitspeed: shoe.limitspeed,
-      limitdistance: shoe.limitdistance,
-      limitcoinearning: shoe.limitcoinearning,
-      limittime: shoe.limittime,
-      nightmode: shoe.nightmode,
-      test: shoe.test,
       level: shoe.level,
       pId: i,
     }));

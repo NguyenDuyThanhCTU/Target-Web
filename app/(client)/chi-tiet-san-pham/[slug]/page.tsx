@@ -12,17 +12,10 @@ const ProductDetailPage = async ({
   params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
-  let Data: any;
-  if (searchParams.level === "") {
-    Data = await getDataByTypeProps("products", "url", params.slug);
-  } else {
-    Data = await getDataBySortProps(
-      "products",
-      "url",
-      params.slug,
-      "level",
-      searchParams.level
-    );
+  let Data: any = await getDataByTypeProps("products", "url", params.slug);
+
+  if (searchParams.level !== "") {
+    Data.filter((item: any) => item.level === searchParams.level);
   }
   console.log(Data);
   return (

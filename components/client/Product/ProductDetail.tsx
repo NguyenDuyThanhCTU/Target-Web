@@ -17,6 +17,7 @@ import speed from "@assets/animation/speed.json";
 
 import wait from "@assets/animation/wait.json";
 import levelup from "@assets/animation/level-up.json";
+import iconCoin from "@assets/animation/coin-icon.json";
 
 import { useRouter } from "next/navigation";
 import { BsFillCartPlusFill } from "react-icons/bs";
@@ -278,13 +279,15 @@ const ProductDetail = ({ DbData }: any) => {
                 </div>
               )} */}
               <>
-                <p>
-                  Giá:{" "}
+                <div className="flex items-center g">
+                  <div className="w-20">
+                    <Lottie animationData={iconCoin} />
+                  </div>
                   <span className="text-red-500">
                     {price}
                     <sup>$</sup>
                   </span>
-                </p>
+                </div>
               </>
             </div>
             <div className="w-[200px] ">
@@ -371,10 +374,12 @@ const ProductDetail = ({ DbData }: any) => {
                     <div className="flex-[60%]">
                       <h3 className="truncate1">{item.name}</h3>
 
-                      <h3 className="text-mainred text-[18px] font-semibold text-redPrimmary">
+                      <div className="flex items-center  text-mainred text-[18px] font-semibold text-redPrimmary">
                         {price}
-                        <sup>$</sup>
-                      </h3>
+                        <div className="w-10 ">
+                          <Lottie animationData={iconCoin} />
+                        </div>
+                      </div>
                       <div className="flex">
                         <div className="py-1 px-4 bg-mainred text-white flex gap-2 items-center text-[15px]">
                           <FiPhoneCall />
