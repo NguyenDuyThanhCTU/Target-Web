@@ -36,7 +36,7 @@ const NewsDetailPage = async ({ params }: { params: { slug: string } }) => {
             </div>
             <div className="flex items-center gap-1 text-gray-400">
               <AiOutlineUser />
-              <p className=""> khoacuatudong</p>
+              <p className=""> RunTech+</p>
             </div>
           </div>
         </div>

@@ -2,14 +2,13 @@ import {
   getAllDocuments,
   getDocumentsBy2Field,
   getDocumentsByField,
-  getProducts,
 } from "@config/Services/Firebase/FireStoreDB";
 
-export async function getDataByPaginationProps(Collection: string) {
-  const Data = await JSON.parse(JSON.stringify(await getProducts(Collection)));
+// export async function getDataByPaginationProps(Collection: string) {
+//   const Data = await JSON.parse(JSON.stringify(await getProducts(Collection)));
 
-  return Data;
-}
+//   return Data;
+// }
 
 export async function getDataByTypeProps(
   Collection: string,

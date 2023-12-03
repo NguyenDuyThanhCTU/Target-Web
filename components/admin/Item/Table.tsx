@@ -76,7 +76,7 @@ const Table = ({ Data, del, onEdit, onUpdate }: any) => {
             </div>
           </div>
           <img
-            src={data.subimage[0].url}
+            src={data.image}
             alt="product"
             className="w-14 h-14 rounded-lg object-cover"
           />

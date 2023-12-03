@@ -52,10 +52,10 @@ export const Login = ({ setChangeState }: any) => {
           description: `Chào mừng ${sort[0].username} đến với Runtech Notion+`,
         });
 
-        if (sort[0].role === "admin") {
+        if (sort[0].role === "admin" || sort[0].role === "editor") {
           setVerify(true);
           setHeaderAdmin(sort[0]);
-          router.push("/");
+          router.push("/admin");
         } else {
           router.push("/");
         }

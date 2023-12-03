@@ -2,11 +2,12 @@
 import React from "react";
 
 import { useStateProvider } from "@context/StateProvider";
-import Account from "@components/admin/Content/Account/Account";
 import { useData } from "@context/DataProviders";
-import UserFavorite from "@components/admin/Content/Account/UserFavorite";
-import UserOrders from "@components/admin/Content/Account/UserOrders";
-import UserChangePassword from "@components/admin/Content/Account/UserChangePassword";
+import UserFavorite from "@components/client/Profile/UserFavorite";
+import UserOrders from "@components/client/Profile/UserOrders";
+import Account from "@components/admin/Content/Account/Account";
+import UserChangePassword from "@components/client/Profile/UserChangePassword";
+import ProfileAccount from "@components/client/Profile/ProfileAccount";
 
 const ProfileContent = () => {
   const { isSelected } = useStateProvider();
@@ -18,7 +19,7 @@ const ProfileContent = () => {
         {isSelected === 0 ? (
           <div className="p-5 d:px-10 flex justify-start gap-10 d:flex-row p:flex-col p:px-2">
             <>
-              <Account />
+              <ProfileAccount />
             </>
           </div>
         ) : isSelected === 1 ? (

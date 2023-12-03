@@ -50,7 +50,7 @@ const ListProducts: React.FC = () => {
                         {Products.map((items: any) => (
                           <SwiperSlide key={items.id}>
                             <img
-                              src={items.subimage[0].url}
+                              src={items.image}
                               alt="banner"
                               className="h-[200px] w-full object-contain p-4"
                             />

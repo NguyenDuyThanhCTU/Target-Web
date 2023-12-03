@@ -63,7 +63,7 @@ const AddProduct = ({}) => {
 
   const initial1 =
     "<p>Chất liệu: </p> <br/> <p>Màu sắc: </p> <br/> <p>Size: </p> <br/> <p>Chiều dài: </p> <br/> <p>Chiều rộng: </p> <br/> <p>Chiều cao: </p> <br/> <p>Trọng lượng: </p> <br/> <p>Thương hiệu: </p> <br/> <p>Xuất xứ: </p> <br/> <p>Chất liệu";
-  const initDescribe = "<p> mô tả giày </p>";
+  const initDescribe = "<p> mô tả sản phẩm </p>";
 
   const handleDiscard = () => {};
 
@@ -183,14 +183,14 @@ const AddProduct = ({}) => {
     >
       <div className="w-auto h-auto bg-white relative p-10  font-LexendDeca cursor-pointer rounded-sm flex flex-col justify-center">
         <p className="text-2xl font-bold text-center text-[30px] mb-5">
-          Tải lên sản phẩm giày của bạn
+          Tải lên sản phẩm của bạn
         </p>
         <form onSubmit={HandleSubmit} className="flex flex-col">
           <div className="justify-center w-full grid grid-cols-3 items-start gap-5">
             <div className="">
               <div className="">
                 <p className="text-md text-gray-400 mt-1">
-                  Chọn ảnh cho giày của bạn
+                  Chọn ảnh cho sản phẩm của bạn
                 </p>
               </div>
               <div className=" border-dashed rounded-xl border-4 border-gray-200 flex flex-col justify-center items-center  outline-none mt-5 w-[260px] h-[458px] p-10 cursor-pointer hover:border-red-300 hover:bg-gray-100">
@@ -223,14 +223,14 @@ const AddProduct = ({}) => {
             </div>
             <div className="  flex flex-col gap-3">
               <Input
-                text="Tên giày"
+                text="Tên sản phẩm"
                 Value={formSmartContract.name}
                 setValue={(e: any) =>
                   handleSmartContractFormFieldChange("name", e)
                 }
               />
               <Input
-                text="Giá giày"
+                text="Giá sản phẩm (SepoliaETH)"
                 Value={formSmartContract.price}
                 setValue={(e: any) =>
                   handleSmartContractFormFieldChange("price", e)
@@ -238,21 +238,21 @@ const AddProduct = ({}) => {
               />
 
               <div className="">
-                <label>Thông tin giày</label>
+                <label>Thông tin sản phẩm</label>
                 <div
                   className="bg-gray-100 hover:bg-gray-200 duration-300 mt-2 py-3 text-center  cursor-pointer"
                   onClick={() => setOpen(true)}
                 >
-                  Thêm thông tin giày
+                  Thêm thông tin sản phẩm
                 </div>
               </div>
               <div className="">
-                <label>Mô tả giày</label>
+                <label>Mô tả sản phẩm</label>
                 <div
                   className="bg-gray-100 hover:bg-gray-200  duration-300 mt-2 py-3 text-center  cursor-pointer"
                   onClick={() => setOpenDescription(true)}
                 >
-                  Thêm mô tả giày
+                  Thêm mô tả sản phẩm
                 </div>
               </div>
               <Form.Item label="Ảnh phụ">
@@ -328,18 +328,18 @@ const AddProduct = ({}) => {
                 <div className="flex flex-col gap-2 w-full">
                   <div className="flex flex-col gap-2">
                     <label className="text-md font-medium ">
-                      Thông số giày
+                      Thông số sản phẩm
                     </label>
                     <div
                       className="py-3 bg-gray-100 text-center hover:bg-gray-200 duration-300"
                       onClick={() => setOpenFunction(true)}
                     >
-                      Thêm thông số giày
+                      Thêm thông số sản phẩm
                     </div>
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <label className="text-md font-medium ">Cấp giày</label>
+                    <label className="text-md font-medium ">Cấp sản phẩm</label>
                     <div>
                       <Radio.Group
                         onChange={(e) =>
@@ -386,7 +386,7 @@ const AddProduct = ({}) => {
       </div>
       <>
         <Drawer
-          title="Thêm thông tin giày"
+          title="Thêm thông tin sản phẩm"
           placement="right"
           onClose={() => setOpen(false)}
           open={open}
@@ -402,7 +402,7 @@ const AddProduct = ({}) => {
       </>
       <>
         <Drawer
-          title="Thêm mô tả giày"
+          title="Thêm mô tả sản phẩm"
           placement="right"
           onClose={() => setOpenDescription(false)}
           open={openDescription}
@@ -419,7 +419,7 @@ const AddProduct = ({}) => {
 
       <>
         <Drawer
-          title="Thêm mô tả giày"
+          title="Thêm mô tả sản phẩm"
           placement="right"
           onClose={() => setOpenFunction(false)}
           open={openFunction}

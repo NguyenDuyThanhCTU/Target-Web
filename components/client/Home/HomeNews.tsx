@@ -34,9 +34,7 @@ const HomeNews = ({ Data }: any) => {
             </div>
             <div className="col-span-2 font-LexendDeca font-extralight mt-5">
               <Link href={`/tin-tuc/${Data[0]?.url}`}>
-                <p className="text[15px]  ">
-                  adminruntech | {DetailFirstPostDate}
-                </p>
+                <p className="text[15px]  ">NemVietA | {DetailFirstPostDate}</p>
                 <h2 className="font-normal mt-2 hover:text-blue-400 duration-300 text-[20px]">
                   {Data[0].title}
                 </h2>
@@ -76,7 +74,7 @@ const HomeNews = ({ Data }: any) => {
                     <div className="col-span-2 ">
                       <Link href={`/tin-tuc/${item.url}`}>
                         <p className="text[15px]  ">
-                          adminruntech | {DetailPostDate}
+                          NemVietA | {DetailPostDate}
                         </p>
                         <h2 className="font-normal mt-2 hover:text-blue-400 duration-300 text-[20px]">
                           {item.title}

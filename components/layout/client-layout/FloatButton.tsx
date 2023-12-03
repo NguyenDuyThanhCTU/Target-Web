@@ -104,6 +104,7 @@ function FloatButton() {
         closeIcon={false}
         open={isModalOpen}
         footer={null}
+        className="h-max"
         onCancel={() => setIsModalOpen(false)}
       >
         <div>
@@ -112,7 +113,7 @@ function FloatButton() {
               <div className=" pl-4 w-full  justify-between items-center grid grid-cols-7">
                 <input
                   type="text"
-                  className="outline-none mr-2 col-span-6 bg-maingreen"
+                  className="outline-none mr-2 col-span-6 "
                   placeholder="Tìm kiếm sản phẩm..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
@@ -128,18 +129,21 @@ function FloatButton() {
                   </div>
                 </div>
               </div>
-              <div className="bg-mainyellow border-mainyellow py-3 px-6 text-maingreen rounded-r-full cursor-pointer">
+              <Link
+                className="bg-mainyellow border-mainyellow py-3 px-6 text-gray-100 rounded-r-full cursor-pointer"
+                href={`/san-pham?search=${search}`}
+              >
                 <FaSearch />
-              </div>
+              </Link>
             </div>
             {search && (
-              <div className="absolute w-full bg-maingreen top-full flex flex-col shadow-inner z-50 mt-2">
+              <div className="absolute w-full bg-gray-100 top-full flex flex-col shadow-inner z-50 mt-2">
                 <div className=" flex flex-col">
                   {searchRs.map((product: any, idx: number) => (
                     <Link
                       href={`/chi-tiet-san-pham/${product.url}`}
                       key={idx}
-                      className="cursor-pointer p-2 hover:bg-green-800"
+                      className="cursor-pointer p-2 hover:bg-gray-200"
                     >
                       {product.title}
                     </Link>

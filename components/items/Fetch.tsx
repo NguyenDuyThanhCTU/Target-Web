@@ -1,8 +1,5 @@
 "use client";
-import {
-  getAllDocuments,
-  getProducts,
-} from "@config/Services/Firebase/FireStoreDB";
+import { getAllDocuments } from "@config/Services/Firebase/FireStoreDB";
 import { useData } from "@context/DataProviders";
 import { useStateProvider } from "@context/StateProvider";
 import React, { useEffect } from "react";
@@ -74,13 +71,13 @@ const Fetch: React.FC = () => {
     getAllDocuments("videos").then((data: any) => {
       setVideos(data?.reverse());
     });
-    getProducts("posts").then((data: any) => {
+    getAllDocuments("posts").then((data: any) => {
       setPosts(data);
     });
-    getProducts("products").then((data: any) => {
+    getAllDocuments("products").then((data: any) => {
       setProducts(data);
     });
-    getProducts("introduction").then((data: any) => {
+    getAllDocuments("introduction").then((data: any) => {
       setIntroduction(data);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -140,16 +137,16 @@ const Fetch: React.FC = () => {
       });
       setIsRefetch("done");
     } else if (isRefetch === "CRUD products") {
-      getProducts("products").then((data: any) => {
+      getAllDocuments("products").then((data: any) => {
         setProducts(data);
       });
     } else if (isRefetch === "CRUD posts") {
-      getProducts("posts").then((data: any) => {
+      getAllDocuments("posts").then((data: any) => {
         setPosts(data);
       });
       setIsRefetch("done");
     } else if (isRefetch === "CRUD introduction") {
-      getProducts("introduction").then((data: any) => {
+      getAllDocuments("introduction").then((data: any) => {
         setIntroduction(data);
       });
       setIsRefetch("done");
