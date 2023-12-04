@@ -12,7 +12,6 @@ const DisplayProducts = () => {
   const [KeySort, setKeySort] = useState<any>();
   const [currentPage, setCurrentPage] = useState(1);
   const { Shoes } = useSmartContract();
-
   useEffect(() => {
     const sort = Shoes?.sort((a: any, b: any) => {
       return b.pId - a.pId;

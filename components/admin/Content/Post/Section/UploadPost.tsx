@@ -50,7 +50,7 @@ const UploadPost: React.FC = () => {
     if (!Title) {
       notification.error({
         message: "Lỗi !",
-        description: `Vui lòng chọn loại bài viết trước khi TIẾP TỤC!`,
+        description: `Vui lòng điền đầy đủ các mục cho bài viết !`,
       });
     } else {
       const data = {
@@ -63,7 +63,7 @@ const UploadPost: React.FC = () => {
       addDocument("posts", data).then((data) => {
         notification.success({
           message: "Thành công!",
-          description: `Thông tin đã được CẬP NHẬT !`,
+          description: `Tải lên bài viết thành công!`,
         });
 
         setUpdateId(data);

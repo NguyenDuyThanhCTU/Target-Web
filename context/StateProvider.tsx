@@ -22,6 +22,8 @@ export type StateContextType = {
   setRefetch: (refetch: any) => void;
   theme: string;
   setTheme: (theme: string) => void;
+  LoginState: boolean;
+  setLoginState: (LoginState: boolean) => void;
 };
 
 export const StateContext = createContext<StateContextType>({
@@ -41,10 +43,13 @@ export const StateContext = createContext<StateContextType>({
   setRefetch: () => {},
   theme: "",
   setTheme: () => {},
+  LoginState: false,
+  setLoginState: () => {},
 });
 
 export const StateProvider = ({ children }: Props) => {
   const [isDropDown, setDropDown] = useState("");
+  const [LoginState, setLoginState] = useState(false);
 
   const [isRefetch, setIsRefetch] = useState("");
   //Refetch large data like products, posts
@@ -58,6 +63,8 @@ export const StateProvider = ({ children }: Props) => {
   return (
     <StateContext.Provider
       value={{
+        LoginState,
+        setLoginState,
         theme,
         setTheme,
         Refetch,

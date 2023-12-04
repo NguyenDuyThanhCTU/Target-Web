@@ -44,7 +44,7 @@ const DisplayProductPage = async ({
               <div className="py-5 flex gap-10 d:flex-row p:flex-col ">
                 <div className="w-full">
                   <div className="grid p:grid-cols-2 d:grid-cols-4  gap-10 w-full ">
-                    {Data.map((item: any, idx: number) => (
+                    {Data?.map((item: any, idx: number) => (
                       <div key={idx}>
                         <ProductCard Data={item} />
                       </div>

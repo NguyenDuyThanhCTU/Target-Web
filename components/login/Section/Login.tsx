@@ -17,10 +17,9 @@ export const Login = ({ setChangeState }: any) => {
   const [Hide, setHide] = useState(false);
   const [Username, setUsername] = useState("");
   const [Password, setPassword] = useState("");
-  const [isVerify, setIsVerify] = useState(false);
-  const [isId, setIsId] = useState("");
+
   const router = useRouter();
-  const { setIsLoading } = useStateProvider();
+  const { setIsLoading, LoginState, setLoginState } = useStateProvider();
 
   const { setVerify, verify } = useAuth();
   const { setHeaderAdmin, Accounts, setCurrentUser } = useData();
@@ -51,15 +50,19 @@ export const Login = ({ setChangeState }: any) => {
           message: "Đăng nhập thành công !",
           description: `Chào mừng ${sort[0].username} đến với Runtech Notion+`,
         });
-
-        if (sort[0].role === "admin" || sort[0].role === "editor") {
-          setVerify(true);
-          setHeaderAdmin(sort[0]);
-          router.push("/admin");
+        if (LoginState) {
+          setLoginState(false);
+          setCurrentUser(sort[0]);
         } else {
-          router.push("/");
+          if (sort[0].role === "admin" || sort[0].role === "editor") {
+            setVerify(true);
+            setHeaderAdmin(sort[0]);
+            router.push("/admin");
+          } else {
+            router.push("/");
+          }
+          setCurrentUser(sort[0]);
         }
-        setCurrentUser(sort[0]);
       } else if (!Username || !Password) {
         setErrorMessage(true);
         setTimeout(() => {

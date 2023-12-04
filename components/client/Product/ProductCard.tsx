@@ -1,35 +1,41 @@
 "use client";
 import { useSmartContract } from "@context/ContractProviders";
+import { useData } from "@context/DataProviders";
 import { Badge } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { BiPhoneCall } from "react-icons/bi";
+import { FaEthereum } from "react-icons/fa";
 
 const ProductCard = ({ Data }: any) => {
   // const resultString = `${myObject._hex} - ${myObject._isBigNumber.toString()}`;
+  const { Products } = useData();
   const priceString = `${Data.price}`;
   const levelString = `${Data.level}`;
+
   //delete 18 final character
-  const price = priceString.slice(0, -18);
+  const price = priceString.slice(0, -16);
+
   const level = levelString.slice(0, -18);
   const router = useRouter();
 
   const HandleNavigate = (Url: any, Level: any) => {
     router.push(`/chi-tiet-san-pham/${Url}?level=${Level}&pId=${Data.pId}`);
   };
+  const topic = Products.filter((item: any) => item.url === Data.url);
 
   return (
     <div onClick={() => HandleNavigate(Data.url, level)}>
       <Badge.Ribbon
         text={
-          `${Data.parenturl}` === "giay-toc-do"
+          `${topic[0]?.parentUrl}` === "giay-toc-do"
             ? "Giày tốc độ"
-            : `${Data.parenturl}` === "non-vuot-gioi-han"
+            : `${topic[0]?.parentUrl}` === "non-vuot-gioi-han"
             ? "Nón vượt giới hạn"
-            : `${Data.parenturl}` === "ao-thach-thuc"
+            : `${topic[0]?.parentUrl}` === "ao-thach-thuc"
             ? "Áo thách thức"
-            : `${Data.parenturl}` === "quan-phong-cach"
+            : `${topic[0]?.parentUrl}` === "quan-phong-cach"
             ? "Quần phong cách"
             : "Phụ kiện sáng tạo"
         }
@@ -50,7 +56,10 @@ const ProductCard = ({ Data }: any) => {
                 <h3 className=" mt-2 truncate1 d:text-[16px] p:text-[14px] font-normal text-center">
                   {Data.name}
                 </h3>
-                <p className="text-redPrimmary font-light">{price}$</p>
+                <p className="text-redPrimmary font-light flex gap-2 items-center mt-2">
+                  <FaEthereum />
+                  <span> 0.0{price} SepoliaETH</span>
+                </p>
               </div>
 
               <div className="flex w-full justify-between pl-2 py-4 d:text-[16px] p:text-[12px]">
