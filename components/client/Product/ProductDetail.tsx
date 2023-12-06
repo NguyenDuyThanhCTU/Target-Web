@@ -27,7 +27,7 @@ const ProductDetail = ({ DbData }: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [ContractData, setContractData] = useState<any>();
   const [similarProduct, setSimilarProduct] = useState([]);
-  const { getShoe, contract, address, Shoes } = useSmartContract();
+  const { getShoe, contract, address, Shoes, buyShoe } = useSmartContract();
   const [similarProductUpdate, setSimilarProductUpdate] = useState<any>([]);
   const searchParams = useSearchParams();
   const search = searchParams.get("pId");
@@ -94,6 +94,9 @@ const ProductDetail = ({ DbData }: any) => {
     },
   ];
 
+  const HandleBuy = () => {
+    buyShoe(1, 0.01);
+  };
   return (
     <div className="flex flex-col gap-5 mt-[98px]  d:w-[1500px] d:mx-auto p:w-auto p:mx-2">
       <div>
@@ -124,7 +127,7 @@ const ProductDetail = ({ DbData }: any) => {
                         className="mySwiper"
                       >
                         {DbData?.subimage?.map((item: any, idx: number) => (
-                          <SwiperSlide>
+                          <SwiperSlide key={idx}>
                             {" "}
                             <Image
                               className="p-2 h-full w-full object-contain"
@@ -185,6 +188,7 @@ const ProductDetail = ({ DbData }: any) => {
 
             <div
               className="rounded-sm col-span-3 w-full text-[18px] text-primary bg-[#f0edf8] hover:bg-[#e1dbf0] flex items-center  py-2 justify-center cursor-pointer gap-1"
+              onClick={() => HandleBuy()}
               // onClick={() => HandleOrder(ProductFetch?.id, "add")}
             >
               <BsFillCartPlusFill className="text-[23px] " />

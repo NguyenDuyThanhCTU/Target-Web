@@ -43,6 +43,8 @@ export type DataContextType = {
   setCartItems: (cartItem: any) => void;
   currentUser: any;
   setCurrentUser: (user: any) => void;
+  Bill: any;
+  setBill: (bill: any) => void;
 };
 
 export const DataContext = createContext<DataContextType>({
@@ -83,6 +85,8 @@ export const DataContext = createContext<DataContextType>({
   setCartItems: () => {},
   currentUser: null,
   setCurrentUser: () => {},
+  Bill: {},
+  setBill: () => {},
 });
 
 export const DataProviders: React.FC<Props> = ({ children }) => {
@@ -110,10 +114,12 @@ export const DataProviders: React.FC<Props> = ({ children }) => {
   const [CartItems, setCartItems] = useState([]);
   //custom
   const [currentUser, setCurrentUser] = useState<any>(null);
-
+  const [Bill, setBill] = useState<any>();
   return (
     <DataContext.Provider
       value={{
+        Bill,
+        setBill,
         currentUser,
         setCurrentUser,
         CartItems,

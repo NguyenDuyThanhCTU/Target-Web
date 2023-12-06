@@ -22,6 +22,7 @@ export type ContractContextType = {
   createShoe: (form: any) => void;
   getShoes: () => any;
   getShoe: (pId: any) => any;
+  buyShoe: (pId: any, price: any) => any;
 };
 
 export const ContractContext = createContext<ContractContextType>({
@@ -33,12 +34,13 @@ export const ContractContext = createContext<ContractContextType>({
   createShoe: () => {},
   getShoes: () => {},
   getShoe: () => {},
+  buyShoe: () => {},
 });
 
 export const ContractProvider: React.FC<Props> = ({ children }) => {
   const [Shoes, setShoes] = useState<any[]>([]);
   const { contract }: any = useContract(
-    "0x1006C5D5e1EC1710686cCf8eE34ffd8Db9096e68"
+    "0x1Cc1fb3bbae43386fe630b13658A7682C088B921"
   );
   const { mutateAsync: createShoe } = useContractWrite(contract, "createShoe");
 
@@ -86,6 +88,14 @@ export const ContractProvider: React.FC<Props> = ({ children }) => {
     return shoes;
   };
 
+  const buyShoe = async (pId: any, price: any) => {
+    const data = await contract.call("donateToCampaign", [pId], {
+      value: ethers.utils.parseEther(price),
+    });
+
+    return data;
+  };
+
   const fetchCampaigns = async () => {
     const data = await getShoes();
     setShoes(data);
@@ -98,6 +108,7 @@ export const ContractProvider: React.FC<Props> = ({ children }) => {
   return (
     <ContractContext.Provider
       value={{
+        buyShoe,
         getShoe,
         Shoes,
         setShoes,
