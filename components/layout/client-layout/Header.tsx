@@ -57,6 +57,7 @@ const Header = () => {
     setIsLoading(true);
     setTimeout(() => {
       setCurrentUser(null);
+      setIsLoading(false);
     }, 1000);
   };
 

@@ -7,26 +7,9 @@ import { IconMapping, ProfileSidebarItems } from "@assets/item";
 
 const ProfileSidebar: React.FC = () => {
   const { isSelected, setSelected } = useStateProvider();
-  const { HeaderAdmin } = useData();
 
   const HandleSelect = (idx: number) => {
-    if (
-      HeaderAdmin.role === "editor" &&
-      (idx === 0 ||
-        idx === 2 ||
-        idx === 6 ||
-        idx === 8 ||
-        idx === 9 ||
-        idx === 10)
-    ) {
-      notification["warning"]({
-        message: "Thao tác không thành công",
-        description: `
-        Bạn cần quyền QUẢN TRỊ để vào mục này !`,
-      });
-    } else {
-      setSelected(idx);
-    }
+    setSelected(idx);
   };
 
   return (

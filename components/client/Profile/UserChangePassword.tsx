@@ -30,6 +30,8 @@ const UserChangePassword = ({ user }: any) => {
             description: `Mật khẩu của bạn đã được cập nhật !`,
           });
           setIsRefetch("CRUD accounts");
+          setCurrentPassword("");
+          setNewPassword("");
         });
       } else {
         notification["error"]({
@@ -105,7 +107,7 @@ const UserChangePassword = ({ user }: any) => {
             <Link href="/" className="text-blue-600 hover:underline">
               Chính sách bảo mật
             </Link>{" "}
-            của Công Ty Ads
+            của RunTech+
           </p>
         </div>
       </div>

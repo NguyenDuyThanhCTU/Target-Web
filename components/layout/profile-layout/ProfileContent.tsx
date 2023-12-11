@@ -43,19 +43,7 @@ const ProfileContent = () => {
         ) : isSelected === 4 ? (
           <div className="p-5 d:px-10 flex justify-start gap-10 flex-col p:px-2">
             <>
-              <UserFavorite />
-            </>
-          </div>
-        ) : isSelected === 5 ? (
-          <div className="p-5 d:px-10 flex justify-start gap-10 flex-col p:px-2">
-            <>
-              <UserFavorite />
-            </>
-          </div>
-        ) : isSelected === 6 ? (
-          <div className="p-5 d:px-10 flex justify-start gap-10 flex-col p:px-2">
-            <>
-              <UserChangePassword />
+              <UserChangePassword user={currentUser} />
             </>
           </div>
         ) : null}

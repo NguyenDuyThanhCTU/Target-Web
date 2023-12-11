@@ -53,6 +53,7 @@ const Information = ({ showModal }: any) => {
       setIsLoading(true);
       setTimeout(() => {
         window.location.reload();
+        setIsLoading(false);
       }, 500);
     });
   };

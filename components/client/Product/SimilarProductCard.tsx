@@ -126,6 +126,59 @@ const SimilarProductCard = ({ item, type, Data }: any) => {
             </div>
           </div>
         </div>
+      ) : type === "orderDetail" ? (
+        <>
+          {" "}
+          <div className="flex gap-3 py-3 border-b cursor-pointer hover:bg-gray-100">
+            <div className="flex-[30%]">
+              <img src={Data.image} alt="similarProduct" />
+            </div>
+            <div className="flex-[60%] ">
+              <div>
+                <h3 className="truncate1">
+                  {Data.title} - cấp {level}
+                </h3>
+
+                <div className="flex items-center ">
+                  <div className="w-10">
+                    <Lottie animationData={iconCoin} />
+                  </div>
+                  <span className="text-red-500">0.0{item} SepoliaETH</span>
+                </div>
+                <div className="flex flex-col">
+                  <p>
+                    {" "}
+                    Tốc độ tối đa:{" "}
+                    <span className="text-green-500">
+                      +${Data.limitspeed} km/h{" "}
+                    </span>
+                  </p>
+                  <p>
+                    {" "}
+                    Quãng đường tối đa :{" "}
+                    <span className="text-green-500">
+                      +${Data.limitdistance} km{" "}
+                    </span>
+                  </p>
+                  <p>
+                    {" "}
+                    Số coin nhận được:{" "}
+                    <span className="text-green-500">
+                      +${Data.limitcoinearning} SepoliaETH{" "}
+                    </span>
+                  </p>
+                  <p>
+                    {" "}
+                    Thời gian chờ:{" "}
+                    <span className="text-green-500">
+                      +${Data.limittime} phút{" "}
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
       ) : (
         <div
           className="flex gap-3 py-3 border-b cursor-pointer hover:bg-gray-100"

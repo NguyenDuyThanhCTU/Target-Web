@@ -174,19 +174,12 @@ export const ProfileSidebarItems = [
     name: "Lịch sử giao dịch",
     icon: "CiCoinInsert",
   },
-  {
-    name: "Hoạt Động Chạy Bộ",
-    icon: "FaFirstOrderAlt",
-  },
+
   {
     name: "Nâng Cấp và Điểm Thưởng",
     icon: "IoFlashOutline",
   },
 
-  {
-    name: "Thành tựu",
-    icon: "GiAchievement",
-  },
   {
     name: "Đổi mật khẩu",
     icon: "MdOutlinePassword",
@@ -320,7 +313,7 @@ export const HeaderItems = [
   },
   {
     name: "Danh mục sản phẩm",
-    link: "san-pham/giam-gia",
+    link: "san-pham/tat-ca",
   },
   {
     name: "Sản phẩm",

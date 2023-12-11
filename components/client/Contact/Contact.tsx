@@ -48,6 +48,7 @@ const Contact = () => {
         description: `
            Vui lòng nhập đầy đủ THÔNG TIN !`,
       });
+      setIsLoading(false);
     } else {
       const dataFields = [
         { title: "Họ Tên:", value: name },

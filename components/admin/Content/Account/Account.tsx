@@ -46,6 +46,7 @@ const Account = () => {
         setIsRefetch("CRUD accounts");
         setIsLoading(true);
         router.push("/login");
+        setIsLoading(false);
       });
     } else {
       notification["error"]({
