@@ -67,19 +67,11 @@ const Content: React.FC = () => {
         ) : isSelected === 8 ? (
           <>
             <div className="p-5 d:px-10 p:px-2 flex justify-start gap-10">
-              <>
-                <Sale />
-              </>
-            </div>
-          </>
-        ) : isSelected === 9 ? (
-          <>
-            <div className="p-5 d:px-10 p:px-2 flex justify-start gap-10">
               <Order />
               <></>
             </div>
           </>
-        ) : isSelected === 10 ? (
+        ) : isSelected === 9 ? (
           <>
             <div className="p-5 d:px-10 p:px-2 flex justify-start gap-10">
               <Branch />

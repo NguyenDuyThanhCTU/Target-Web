@@ -453,7 +453,6 @@ const Manage = () => {
             <Form onFinish={onFinish} labelAlign="left" labelCol={{ span: 4 }}>
               <Form.Item name="role" label="Quyền Hạn">
                 <Select placeholder="Phân quyền ...">
-                  <Select.Option value="manager">Quản trị</Select.Option>
                   <Select.Option value="editor">Biên tập viên</Select.Option>
                 </Select>
               </Form.Item>

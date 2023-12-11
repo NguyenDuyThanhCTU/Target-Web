@@ -12,7 +12,7 @@ const UploadVideo: React.FC = () => {
   const { setIsRefetch } = useStateProvider();
 
   const getVideoId = (url: string): string | null => {
-    const match = url.match(
+    const match = url?.match(
       /(?:https?:\/\/)?(?:www\.)?youtu(?:\.be|be\.com)\/(?:watch\?v=|embed\/|v\/|u\/\w\/|embed\/?\??(?:\w*=\w*)*)?([\w-]{11})/
     );
     return match ? match[1] : null;
@@ -68,7 +68,7 @@ const UploadVideo: React.FC = () => {
             <Input
               text="Liên kết video youtube"
               Value={videoUrl}
-              setValue={setVideoUrl}
+              setValue={(e: any) => setVideoUrl(e.target.value)}
               Input={false}
               PlaceHolder=""
             />

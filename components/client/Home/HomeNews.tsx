@@ -17,7 +17,7 @@ const HomeNews = ({ Data }: any) => {
         <div className="font-bold text-[25px] pb-2 border-b-2 border-black w-full flex justify-between">
           <h2> TIN TỨC</h2>
           <div className="flex items-center text-mainyellow hover:text-mainorange text-[18px] font-extralight cursor-pointer hover:scale-105 duration-300 ">
-            <p>Xem thêm</p>
+            <Link href={`/tin-tuc`}>Xem thêm</Link>
             <div className="p-2">
               <AiOutlineRight className="text-[16px]" />
             </div>

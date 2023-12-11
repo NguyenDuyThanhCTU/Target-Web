@@ -1,5 +1,5 @@
 "use client";
-import { HeaderItems, TypeProductItems } from "@assets/item";
+import { HeaderItems, TypeProductFunc, TypeProductItems } from "@assets/item";
 import { useData } from "@context/DataProviders";
 import { useStateProvider } from "@context/StateProvider";
 import { Drawer } from "antd";
@@ -23,10 +23,6 @@ const Header = () => {
     {
       label: "Hướng dẫn sử dụng",
       value: "huong-dan-su-dung",
-    },
-    {
-      label: "Catalogue sản phẩm",
-      value: "catalogue-san-pham",
     },
   ];
 
@@ -127,6 +123,19 @@ const Header = () => {
                             </p>
                           </Link>
                         ))}
+                        {TypeProductFunc.map((items: any, idx: number) => (
+                          <Link
+                            key={idx}
+                            href={`/bai-viet/${items.value}`}
+                            className="w-max  border-b"
+                          >
+                            <p className="py-2 px-4 hover:text-maingreen duration-300 text-black">
+                              {" "}
+                              {items.label}
+                            </p>
+                          </Link>
+                        ))}
+                        {}
                       </div>
                     </div>
                   </div>

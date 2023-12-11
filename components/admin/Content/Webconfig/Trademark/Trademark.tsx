@@ -59,24 +59,10 @@ const Trademark: React.FC = () => {
       type: "input",
       placeholder: TradeMarkData.websiteName,
     },
-    {
-      name: "Slogan công ty",
-      type: "input",
-      placeholder: TradeMarkData.websiteSlogan,
-    },
-    {
-      name: "Ngày thành lập",
-      type: "input",
-      placeholder: TradeMarkData.websiteFounding,
-    },
-    {
-      name: "Lĩnh vực hoạt động",
-      type: "input",
-      placeholder: TradeMarkData.websitefield,
-    },
   ];
 
   const HandleUpdate = (idx: number) => {
+    console.log(idx);
     if (!Data && !LogoUrl && !IcoUrl) {
       notification.error({
         message: "Lỗi !",
@@ -86,15 +72,9 @@ const Trademark: React.FC = () => {
       let newData: { [key: string]: string } = {};
       if (idx === 0) {
         newData = { websiteName: Data };
-      } else if (idx === 1) {
-        newData = { websiteSlogan: Data };
-      } else if (idx === 2) {
-        newData = { websiteFounding: Data };
       } else if (idx === 3) {
-        newData = { websitefield: Data };
-      } else if (idx === 4) {
         newData = { websiteLogo: Data ? Data : LogoUrl };
-      } else if (idx === 5) {
+      } else if (idx === 4) {
         newData = { websiteIco: Data ? Data : IcoUrl };
       }
 

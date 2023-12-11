@@ -10,7 +10,7 @@ const Order: React.FC = () => {
           Danh sách các đơn hàng
         </h3>
         <div className="mt-5 border rounded-xl flex flex-col gap-10">
-          <ListOrder />
+          {/* <ListOrder />  */}
         </div>
       </div>
     </div>

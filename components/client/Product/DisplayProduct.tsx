@@ -5,6 +5,7 @@ import { useSmartContract } from "@context/ContractProviders";
 import ProductCard from "./ProductCard";
 import { Pagination, PaginationProps } from "antd";
 import { useData } from "@context/DataProviders";
+import Category from "./Category";
 
 const DisplayProduct = ({ Data, Parent, Children, Type }: any) => {
   const [shoes, setshoes] = useState<any>([]);
@@ -175,9 +176,11 @@ const DisplayProduct = ({ Data, Parent, Children, Type }: any) => {
 
             <FilterProduct filter={setKeyFilter} />
           </div>
-          <div className="py-5 flex gap-10 d:flex-row p:flex-col ">
-            <SortProduct Sort={setKeySort} />
-            <div className="w-full">
+          <div className="py-5 grid grid-cols-8 gap-10 ">
+            <div className="col-span-2">
+              <Category />
+            </div>
+            <div className="w-full col-span-6">
               <div className="grid p:grid-cols-2 d:grid-cols-4  gap-10 w-full ">
                 {Data?.map((item: any, idx: number) => (
                   <div key={idx}>

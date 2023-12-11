@@ -38,6 +38,8 @@ const Fetch: React.FC = () => {
           setTradeMarkData(items);
         } else if (items.id === "SocialMedia") {
           setSocialMedia(items.Data);
+        } else if (items.id === "Introduction") {
+          setIntroduction(items);
         } else if (items.id === "Sale") {
           setSale(items);
         }
@@ -77,9 +79,7 @@ const Fetch: React.FC = () => {
     getAllDocuments("products").then((data: any) => {
       setProducts(data);
     });
-    getAllDocuments("introduction").then((data: any) => {
-      setIntroduction(data);
-    });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

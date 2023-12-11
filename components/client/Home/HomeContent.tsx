@@ -24,6 +24,7 @@ const HomeContent = ({ Data }: any) => {
             <DisplayHomeProducts
               Data={sortProduct}
               Topic={item.label}
+              url={item.value}
               Type={type}
             />
           </div>

@@ -55,7 +55,7 @@ const AddAccount = ({ setOpen }: any) => {
           />
         </div>
         <h3 className="font-LexendDeca text-[18px]">
-          Nhập thông tin thành viên mới cho website của bạn!!!
+          Nhập thông tin thành viên quản trị mới cho website của bạn!!!
         </h3>
       </div>{" "}
       <Form
@@ -105,7 +105,6 @@ const AddAccount = ({ setOpen }: any) => {
             </Form.Item>
             <Form.Item<FormType> name="role" label="Quyền Hạn">
               <Select placeholder="Phân quyền ...">
-                <Select.Option value="manager">Quản trị</Select.Option>
                 <Select.Option value="editor">Biên tập viên</Select.Option>
               </Select>
             </Form.Item>

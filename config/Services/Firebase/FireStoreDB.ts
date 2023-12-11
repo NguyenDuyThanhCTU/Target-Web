@@ -12,6 +12,7 @@ import {
   Timestamp,
   deleteDoc,
   limitToLast,
+  setDoc,
 } from "firebase/firestore";
 import { db } from "../../Firebase";
 
@@ -28,7 +29,22 @@ export const addDocument = async (CollectioneName: string, data: any) => {
     console.error("Error adding document: ", error);
   }
 };
+export const addDataToDocument = async (
+  collectionName: string,
+  documentId: string,
+  data: any
+) => {
+  data.createdAt = serverTimestamp();
 
+  try {
+    const documentRef = doc(db, collectionName, documentId);
+
+    await setDoc(documentRef, data);
+    return documentRef.id;
+  } catch (error) {
+    console.error("Error adding data to document: ", error);
+  }
+};
 export const addDataToArrayField = async (
   CollectioneName: string,
   documentId: string,

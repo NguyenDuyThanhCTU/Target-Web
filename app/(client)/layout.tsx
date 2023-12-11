@@ -23,8 +23,8 @@ const layout: React.FC<ClientLayoutProps> = ({ children }) => {
   return (
     <div className="relative h-screen font-LexendDeca font-extralight">
       <Header />
-      <div>{children}</div>
-      {/* <FloatButton />
+      <div className="d:mt-[98px] p:mt-0">{children}</div>
+      <FloatButton />
 
       <div className="relative z-50">
         <OnTop />
@@ -34,11 +34,8 @@ const layout: React.FC<ClientLayoutProps> = ({ children }) => {
       <Copyright />
       <div className="w-full d:hidden p:fixed bottom-0">
         <MobileFooter />
-      </div> */}
+      </div>
       <SortLogin />
-      {/* <div className="relative z-50">
-        <BookingButton />
-      </div>*/}
     </div>
   );
 };

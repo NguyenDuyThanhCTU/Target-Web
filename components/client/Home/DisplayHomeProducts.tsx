@@ -1,9 +1,8 @@
 import React from "react";
 import ProductCard from "../Product/ProductCard";
+import Link from "next/link";
 
-const DisplayHomeProducts = ({ Data, Topic, Type }: any) => {
-  // console.log(`hi ${Data}`);
-
+const DisplayHomeProducts = ({ Data, Topic, Type, url }: any) => {
   return (
     <div className="py-4">
       <div>
@@ -11,16 +10,20 @@ const DisplayHomeProducts = ({ Data, Topic, Type }: any) => {
           <h2 className="uppercase text-[24px] font-semibold ">{Topic}</h2>
           <div className="flex gap-3 items-center scrollbar-thin overflow-x-auto  scrollbar-thumb-blue-300 scrollbar-track-gray-200">
             {Type.map((item: any, idx: number) => (
-              <div
+              <Link
+                href={`/san-pham/${url}?type=${item.typeUrl}`}
                 className=" w-max border px-4 py-1 text-black border-black cursor-pointer hover:bg-gray-100 duration-300 rounded-full"
                 key={idx}
               >
                 <p className=" w-max">{item.type}</p>
-              </div>
+              </Link>
             ))}
-            <div className="border px-4 py-1 text-black border-black cursor-pointer hover:bg-gray-100 duration-300 rounded-full">
+            <Link
+              href={`/san-pham/${url}`}
+              className="border px-4 py-1 text-black border-black cursor-pointer hover:bg-gray-100 duration-300 rounded-full"
+            >
               <p className=" w-max">Tất cả</p>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

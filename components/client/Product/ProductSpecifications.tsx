@@ -49,7 +49,7 @@ const ProductSpecifications = ({
       ),
 
       tooltip:
-        "Sau mỗi phiên chạy bạn sẽ nhận được coin tương ứng. Có thể nâng cấp để tăng hiệu suất nhận được coin sau mỗi phiên chạy",
+        "Sau mỗi phiên chạy bạn sẽ nhận được điểm thưởng tương ứng. Có thể nâng cấp để tăng hiệu suất nhận được điểm thưởng sau mỗi phiên chạy        ",
     },
     {
       animation: wait,

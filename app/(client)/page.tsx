@@ -22,13 +22,13 @@ const HomePage = async () => {
             <HomeContent Data={ProductData} />
           </div>
         </div>
-        {/* <HomeProducts />
+        <HomeProducts />
         <ProductFunction />
         <ProductType />
         <HomeNews Data={Data} />
         <HomeVideo />
         <HomePolicy />
-        <GetApp /> */}
+        <GetApp />
       </div>
     </div>
   );

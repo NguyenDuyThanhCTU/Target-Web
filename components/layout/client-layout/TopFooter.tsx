@@ -39,7 +39,7 @@ const TopFooter = () => {
               className="text-redPrimmary cursor-pointer    "
               onClick={() => window.open(`tel:${ContactData.phone},"_self")"`)}
             >
-              {ContactData.phone}
+              {ContactData.gmail}
             </span>
           </p>
         </div>

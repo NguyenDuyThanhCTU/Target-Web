@@ -120,12 +120,9 @@ export const ProductSidebarAdmin = [
     name: "Sản phẩm",
     icon: "FaFirstOrderAlt",
   },
+
   {
-    name: "Sale",
-    icon: "IoFlashOutline",
-  },
-  {
-    name: "Đơn hàng",
+    name: "Quy đổi điểm thưởng",
     icon: "AiOutlineUnorderedList",
   },
   {
@@ -308,25 +305,21 @@ export const SocialMediaCustom = [
 
 export const HeaderItems = [
   {
-    name: "Trang chủ",
-    link: "",
+    name: "Giới thiệu",
+    link: "gioi-thieu",
   },
   {
     name: "Danh mục sản phẩm",
     link: "san-pham/tat-ca",
   },
-  {
-    name: "Sản phẩm",
-    link: "san-pham/tat-ca",
-  },
 
-  {
-    name: "Giới thiệu",
-    link: "gioi-thieu",
-  },
   {
     name: "Tin tức",
     link: "tin-tuc",
+  },
+  {
+    name: "Video",
+    link: "video",
   },
 
   {
