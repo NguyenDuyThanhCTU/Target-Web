@@ -12,14 +12,16 @@ const ProductDetailPage = async ({
   params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
-  let Data: any = await getDataBySortProps(
-    "products",
-    "url",
-    params.slug,
-    "level",
-    searchParams.level
-  );
-
+  let Data: any;
+  if (params.slug && searchParams.level) {
+    Data = await getDataBySortProps(
+      "products",
+      "url",
+      params.slug,
+      "level",
+      searchParams.level
+    );
+  }
   return (
     <>
       {" "}
