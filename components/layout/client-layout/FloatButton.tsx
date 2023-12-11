@@ -131,7 +131,7 @@ function FloatButton() {
               </div>
               <Link
                 className="bg-mainyellow border-mainyellow py-3 px-6 text-gray-100 rounded-r-full cursor-pointer"
-                href={`/san-pham?search=${search}`}
+                href={`/san-pham/tat-ca?search=${search}`}
               >
                 <FaSearch />
               </Link>

@@ -5,7 +5,6 @@ import { Modal } from "antd";
 import React, { useEffect, useState } from "react";
 
 const Checkpayment = ({ Product, pId }: any) => {
-  console.log(Product);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { currentUser } = useData();
   const { setLoginState } = useStateProvider();

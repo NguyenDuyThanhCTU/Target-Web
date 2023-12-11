@@ -8,7 +8,7 @@ import { FaEthereum } from "react-icons/fa";
 import { useData } from "@context/DataProviders";
 import { Modal } from "antd";
 import { useStateProvider } from "@context/StateProvider";
-const SimilarProductCard = ({ item, type, Data }: any) => {
+const SimilarProductCard = ({ item, type }: any) => {
   const { currentUser, setBill } = useData();
   const { setLoginState } = useStateProvider();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,10 +21,10 @@ const SimilarProductCard = ({ item, type, Data }: any) => {
   const price = priceString.slice(0, -16);
   const levelString = `${item.level}`;
   const level = levelString.slice(0, -18);
-  const speedString = `${Data?.limitspeed}`;
-  const roadString = `${Data?.limitdistance}`;
-  const coinString = `${Data?.limitcoinearning}`;
-  const waitString = `${Data?.limittime}`;
+  const speedString = `${item?.limitspeed}`;
+  const roadString = `${item?.limitdistance}`;
+  const coinString = `${item?.limitcoinearning}`;
+  const waitString = `${item?.limittime}`;
   let sort: any = currentUser?.productscollection;
 
   const HandleLogin = () => {
@@ -34,17 +34,17 @@ const SimilarProductCard = ({ item, type, Data }: any) => {
 
   const HandleUpdate = () => {
     if (currentUser) {
-      if (!sort?.some((item: any) => item === Data.id)) {
+      if (!sort?.some((item: any) => item === item.id)) {
         const OrderData = {
           id: currentUser.id,
-          image: Data.image,
+          image: item.image,
           name: currentUser.displayName,
           address: currentUser.address,
           email: currentUser.email,
           phone: currentUser.phone,
           productscollection: [...currentUser.productscollection],
-          productId: Data.id,
-          level: Data.level,
+          productId: item.id,
+          level: item.level,
           limitcoinearning: coinString,
           limitdistance: roadString,
           limitspeed: speedString,
@@ -71,14 +71,14 @@ const SimilarProductCard = ({ item, type, Data }: any) => {
           <div className="flex-[60%] ">
             <div>
               <h3 className="truncate1">
-                {item.name} - cấp {level}
+                {item.title} - cấp {level}
               </h3>
 
               <div className="flex items-center ">
                 <div className="w-10">
                   <Lottie animationData={iconCoin} />
                 </div>
-                <span className="text-red-500">0.0{price} SepoliaETH</span>
+                <span className="text-red-500">{item.price} SepoliaETH</span>
               </div>
               <div className="flex flex-col">
                 <p>
@@ -105,7 +105,7 @@ const SimilarProductCard = ({ item, type, Data }: any) => {
                 </p>
               </div>
               <div className="flex mt-2">
-                {sort?.some((item: any) => item === Data.id) ? (
+                {sort?.some((items: any) => items === item.id) ? (
                   <>
                     {" "}
                     <div className="py-1 px-4 bg-mainred text-orange-500 uppercase  flex gap-2 items-center text-[15px]">
@@ -131,47 +131,47 @@ const SimilarProductCard = ({ item, type, Data }: any) => {
           {" "}
           <div className="flex gap-3 py-3 border-b cursor-pointer hover:bg-gray-100">
             <div className="flex-[30%]">
-              <img src={Data.image} alt="similarProduct" />
+              <img src={item.image} alt="similarProduct" />
             </div>
             <div className="flex-[60%] ">
               <div>
                 <h3 className="truncate1">
-                  {Data.title} - cấp {level}
+                  {item.title} - cấp {level}
                 </h3>
 
                 <div className="flex items-center ">
                   <div className="w-10">
                     <Lottie animationData={iconCoin} />
                   </div>
-                  <span className="text-red-500">0.0{item} SepoliaETH</span>
+                  <span className="text-red-500">{item.price} SepoliaETH</span>
                 </div>
                 <div className="flex flex-col">
                   <p>
                     {" "}
                     Tốc độ tối đa:{" "}
                     <span className="text-green-500">
-                      +${Data.limitspeed} km/h{" "}
+                      +${item.limitspeed} km/h{" "}
                     </span>
                   </p>
                   <p>
                     {" "}
                     Quãng đường tối đa :{" "}
                     <span className="text-green-500">
-                      +${Data.limitdistance} km{" "}
+                      +${item.limitdistance} km{" "}
                     </span>
                   </p>
                   <p>
                     {" "}
                     Số coin nhận được:{" "}
                     <span className="text-green-500">
-                      +${Data.limitcoinearning} SepoliaETH{" "}
+                      +${item.limitcoinearning} SepoliaETH{" "}
                     </span>
                   </p>
                   <p>
                     {" "}
                     Thời gian chờ:{" "}
                     <span className="text-green-500">
-                      +${Data.limittime} phút{" "}
+                      +${item.limittime} phút{" "}
                     </span>
                   </p>
                 </div>
@@ -182,21 +182,21 @@ const SimilarProductCard = ({ item, type, Data }: any) => {
       ) : (
         <div
           className="flex gap-3 py-3 border-b cursor-pointer hover:bg-gray-100"
-          onClick={() => HandleNavigate(item.url, level, item.pId)}
+          onClick={() => HandleNavigate(item.url, item.level, item.pId)}
         >
           <div className="flex-[30%]">
             <img src={item.image} alt="similarProduct" />
           </div>
           <div className="flex-[60%]">
             <h3 className="truncate1">
-              {item.name} - cấp {level}
+              {item.title} - cấp {level}
             </h3>
 
             <div className="flex items-center ">
               <div className="w-10">
                 <Lottie animationData={iconCoin} />
               </div>
-              <span className="text-red-500">0.0{price} SepoliaETH</span>
+              <span className="text-red-500">{item.price} SepoliaETH</span>
             </div>
             <div className="flex">
               <div className="py-1 px-4 bg-mainred text-blue-500 flex gap-2 items-center text-[15px]">

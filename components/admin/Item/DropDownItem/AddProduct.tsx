@@ -24,10 +24,10 @@ import TextEditor from "@components/admin/Item/CKEditor/TextEditor";
 import { useSmartContract } from "@context/ContractProviders";
 import { ethers } from "ethers";
 
-const AddProduct = ({}) => {
-  const { setDropDown, setIsRefetch } = useStateProvider();
-  const { productTypes } = useData();
-  const { createShoe } = useSmartContract();
+const AddProduct = () => {
+  const { setDropDown, setIsRefetch, setIsLoading } = useStateProvider();
+  const { productTypes, Products } = useData();
+  const { createShoe, countShoes } = useSmartContract();
   const [open, setOpen] = useState(false);
   const [openDescription, setOpenDescription] = useState(false);
   const [openFunction, setOpenFunction] = useState(false);
@@ -75,12 +75,16 @@ const AddProduct = ({}) => {
     }
   }, [formSmartContract.name]);
 
+  //pId is the pId field of lastest product in the database
+
   let data = {
     limitspeed: form.limitspeed,
+    pId: 0,
     limitdistance: form.limitdistance,
     limitcoinearning: form.limitcoinearning,
     limittime: form.limittime,
     nightmode: form.nightmode,
+    price: formSmartContract.price,
     test: form.test,
     type: form.typeurl,
     image: form.image,
@@ -98,24 +102,46 @@ const AddProduct = ({}) => {
     e.preventDefault();
 
     if (!formSmartContract.name) {
-      notification["error"]({
-        message: "Lỗi !!!",
-        description: `Vui lòng điền đầy đủ các mục cho sản phẩm !`,
+      notification["info"]({
+        message: "Thao tác thất bại!",
+        description: `Tên sản phẩm không được để trống !`,
+      });
+    } else if (!formSmartContract.price) {
+      notification["info"]({
+        message: "Thao tác thất bại!",
+        description: `Giá sản phẩm không được để trống !`,
+      });
+    } else if (!formSmartContract.level) {
+      notification["info"]({
+        message: "Thao tác thất bại!",
+        description: `Cấp sản phẩm không được để trống !`,
+      });
+    } else if (!formSmartContract.level) {
+      notification["info"]({
+        message: "Thao tác thất bại!",
+        description: `Cấp sản phẩm không được để trống !`,
+      });
+    } else if (!formSmartContract.image) {
+      notification["info"]({
+        message: "Thao tác thất bại!",
+        description: `Ảnh sản phẩm không được để trống !`,
       });
     } else {
+      setIsLoading(true);
+      await createShoe({
+        ...formSmartContract,
+        price: ethers.utils.parseUnits(formSmartContract.price, 18),
+        level: ethers.utils.parseUnits(formSmartContract.level, 18),
+      });
+      const pId = await countShoes();
+      data.pId = pId - 1;
       addDocument("products", data).then(() => {
         notification["success"]({
           message: "Tải lên thành công!",
           description: `giày của bạn đã được tải lên !`,
         });
         setIsRefetch("CRUD products");
-        // handleDiscard();
-        // setDropDown("");
-      });
-      await createShoe({
-        ...formSmartContract,
-        price: ethers.utils.parseUnits(formSmartContract.price, 18),
-        level: ethers.utils.parseUnits(formSmartContract.level, 18),
+        setIsLoading(false);
       });
     }
   };

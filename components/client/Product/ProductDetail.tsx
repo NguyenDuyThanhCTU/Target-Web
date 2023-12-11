@@ -27,11 +27,10 @@ import { useStateProvider } from "@context/StateProvider";
 
 const ProductDetail = ({ DbData }: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [ContractData, setContractData] = useState<any>();
   const [similarProduct, setSimilarProduct] = useState([]);
-  const { getShoe, contract, address, Shoes, buyShoe } = useSmartContract();
+  // const { getShoe, contract, address, Shoes, buyShoe } = useSmartContract();
   const { setLoginState } = useStateProvider();
-  const { currentUser, setBill } = useData();
+  const { currentUser, setBill, Products } = useData();
 
   const [similarProductUpdate, setSimilarProductUpdate] = useState<any>([]);
   const searchParams = useSearchParams();
@@ -39,33 +38,22 @@ const ProductDetail = ({ DbData }: any) => {
   const level = searchParams.get("level");
   const [isCheckPaymentOpen, setIsCheckPaymentOpen] = useState(false);
 
-  const fetchCampaigns = async () => {
-    const data = await getShoe(search);
-    setContractData(data);
-  };
-
   useEffect(() => {
-    if (contract) fetchCampaigns();
-  }, [address, contract]);
-
-  useEffect(() => {
-    const similarproduct: any = Shoes.filter(
-      (item: any) => item.parenturl === ContractData?.parenturl
+    const similarproduct: any = Products.filter(
+      (item: any) => item.parentUrl === DbData?.parentUrl
     );
-    const similarproductUpdate: any = Shoes.filter(
-      (item: any) => item.url === ContractData?.url
+    const similarproductUpdate: any = Products.filter(
+      (item: any) => item.url === DbData?.url
     );
     setSimilarProductUpdate(similarproductUpdate);
     setSimilarProduct(similarproduct);
-  }, [Shoes, ContractData]);
+  }, [DbData, Products]);
 
   const router = useRouter();
-  const priceString = `${ContractData?.price}`;
   const speedString = `${DbData?.limitspeed}`;
   const roadString = `${DbData?.limitdistance}`;
   const coinString = `${DbData?.limitcoinearning}`;
   const waitString = `${DbData?.limittime}`;
-  const price = priceString.slice(0, -16);
 
   const items = [
     {
@@ -112,20 +100,20 @@ const ProductDetail = ({ DbData }: any) => {
         const searchNumber = Number(search);
         const OrderData = {
           id: currentUser.id,
-          image: DbData.image,
+          image: DbData?.image,
           name: currentUser.displayName,
           address: currentUser.address,
           email: currentUser.email,
           phone: currentUser.phone,
           productscollection: [...currentUser.productscollection],
-          productId: DbData.id,
-          level: DbData.level,
+          productId: DbData?.id,
+          level: DbData?.level,
           limitcoinearning: coinString,
           limitdistance: roadString,
           limitspeed: speedString,
           limittime: waitString,
           pId: searchNumber,
-          price: `0.0${price}`,
+          price: DbData?.price,
         };
         setBill(OrderData);
         router.push(`/thanh-toan`);
@@ -146,7 +134,7 @@ const ProductDetail = ({ DbData }: any) => {
             <Image.PreviewGroup>
               <Image
                 className="p-2 h-full w-full object-contain hover:scale-110 duration-500"
-                src={ContractData?.image}
+                src={DbData?.image}
               />
             </Image.PreviewGroup>
             {DbData?.subimage?.length > 0 && (
@@ -188,12 +176,10 @@ const ProductDetail = ({ DbData }: any) => {
               <div className="flex gap-2 items-center">
                 {level ? (
                   <h3 className="text-[26px] uppercase">
-                    {ContractData?.name} - Cấp {level}{" "}
+                    {DbData?.title} - Cấp {level}{" "}
                   </h3>
                 ) : (
-                  <h3 className="text-[26px] uppercase">
-                    {ContractData?.name}{" "}
-                  </h3>
+                  <h3 className="text-[26px] uppercase">{DbData?.name} </h3>
                 )}
                 <div
                   className="w-[80px] cursor-pointer hover:scale-110 duration-300"
@@ -211,7 +197,9 @@ const ProductDetail = ({ DbData }: any) => {
                   <div className="w-20">
                     <Lottie animationData={iconCoin} />
                   </div>
-                  <span className="text-red-500">0.0{price} SepoliaETH</span>
+                  <span className="text-red-500">
+                    {DbData?.price} SepoliaETH
+                  </span>
                 </div>
               </>
             </div>

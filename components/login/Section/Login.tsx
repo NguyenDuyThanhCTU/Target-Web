@@ -53,6 +53,7 @@ export const Login = ({ setChangeState }: any) => {
         if (LoginState) {
           setLoginState(false);
           setCurrentUser(sort[0]);
+          setIsLoading(false);
         } else {
           if (sort[0].role === "admin" || sort[0].role === "editor") {
             setVerify(true);
@@ -62,6 +63,7 @@ export const Login = ({ setChangeState }: any) => {
             router.push("/");
           }
           setCurrentUser(sort[0]);
+          setIsLoading(false);
         }
       } else if (!Username || !Password) {
         setErrorMessage(true);
@@ -75,6 +77,7 @@ export const Login = ({ setChangeState }: any) => {
           description: `
         Tài khoản hoặc mật khẩu không đúng !`,
         });
+        setIsLoading(false);
       }
     }
   };
@@ -88,6 +91,7 @@ export const Login = ({ setChangeState }: any) => {
       });
       setIsLoading(true);
       router.push("/");
+      setIsLoading(false);
     });
   };
 

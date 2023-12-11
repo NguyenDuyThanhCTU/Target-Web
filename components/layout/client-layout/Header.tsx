@@ -169,31 +169,14 @@ const Header = () => {
                                   {sort.length > 0 && (
                                     <div className="hidden group-hover/lv1:block absolute top-0 left-full mt-0 w-max bg-mainred  shadow-lg">
                                       <div className="">
-                                        {sort.map((items: any, idx: number) => (
+                                        {sort.map((item: any, idx: number) => (
                                           <div key={idx}>
                                             <div className=" group/lv2    relative font-light     border-b">
                                               <Link
-                                                href={`${
-                                                  items.type ===
-                                                  "Sản phẩm cấp độ 1"
-                                                    ? `/san-pham/tat-ca?level=1`
-                                                    : items.type ===
-                                                      "Sản phẩm cấp độ 2"
-                                                    ? `/san-pham/tat-ca?level=2`
-                                                    : items.type ===
-                                                      "Sản phẩm cấp độ 3"
-                                                    ? `/san-pham/tat-ca?level=3`
-                                                    : items.type ===
-                                                      "Sản phẩm có nhiệm vụ kèm theo"
-                                                    ? `/san-pham/tat-ca?option=quest`
-                                                    : items.type ===
-                                                      "Sản phẩm cho phép chạy đêm"
-                                                    ? `/san-pham/tat-ca?option=nightmode`
-                                                    : `/san-pham/tat-ca?option=test`
-                                                }`}
+                                                href={`${`/san-pham/${items.value}?type=${item.typeUrl}`}`}
                                               >
                                                 <div className="py-4 px-10 hover:bg-gray-100 hover:text-blue-400 duration-300  bg-white font-light flex items-center justify-between w-full">
-                                                  <p>{items.type}</p>
+                                                  <p>{item.type}</p>
                                                 </div>
                                               </Link>
                                             </div>
@@ -209,14 +192,14 @@ const Header = () => {
                                   {sort.length > 0 && (
                                     <div className="hidden group-hover/lv1:block absolute top-0 left-full mt-0 w-max bg-mainred  shadow-lg">
                                       <div className="">
-                                        {sort.map((items: any, idx: number) => (
+                                        {sort.map((item: any, idx: number) => (
                                           <div key={idx}>
                                             <div className=" group/lv2    relative font-light     border-b">
                                               <Link
-                                                href={`${`/san-pham/${items.typeUrl}`}`}
+                                                href={`${`/san-pham/${items.value}?type=${item.typeUrl}`}`}
                                               >
                                                 <div className="py-4 px-10 hover:bg-gray-100 hover:text-blue-400 duration-300  bg-white font-light flex items-center justify-between w-full">
-                                                  <p>{items.type}</p>
+                                                  <p>{item.type}</p>
                                                 </div>
                                               </Link>
                                             </div>

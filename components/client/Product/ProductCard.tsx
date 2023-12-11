@@ -9,15 +9,9 @@ import { BiPhoneCall } from "react-icons/bi";
 import { FaEthereum } from "react-icons/fa";
 
 const ProductCard = ({ Data }: any) => {
-  // const resultString = `${myObject._hex} - ${myObject._isBigNumber.toString()}`;
   const { Products } = useData();
-  const priceString = `${Data.price}`;
-  const levelString = `${Data.level}`;
+  // console.log(Data);
 
-  //delete 18 final character
-  const price = priceString.slice(0, -16);
-
-  const level = levelString.slice(0, -18);
   const router = useRouter();
 
   const HandleNavigate = (Url: any, Level: any) => {
@@ -26,7 +20,7 @@ const ProductCard = ({ Data }: any) => {
   const topic = Products.filter((item: any) => item.url === Data.url);
 
   return (
-    <div onClick={() => HandleNavigate(Data.url, level)}>
+    <div onClick={() => HandleNavigate(Data.url, Data.level)}>
       <Badge.Ribbon
         text={
           `${topic[0]?.parentUrl}` === "giay-toc-do"
@@ -42,7 +36,7 @@ const ProductCard = ({ Data }: any) => {
         color="cyan"
         placement="start"
       >
-        <Badge.Ribbon text={`Cấp ${level}`} color="red" placement="end">
+        <Badge.Ribbon text={`Cấp ${Data.level}`} color="red" placement="end">
           <div className="border font-LexendDeca font-extralight  cursor-pointer h-[320px] ">
             <div className="">
               <div className="pt-2 px-2">
@@ -58,7 +52,7 @@ const ProductCard = ({ Data }: any) => {
                 </h3>
                 <p className="text-redPrimmary font-light flex gap-2 items-center mt-2">
                   <FaEthereum />
-                  <span> 0.0{price} SepoliaETH</span>
+                  <span> {Data.price} SepoliaETH</span>
                 </p>
               </div>
 

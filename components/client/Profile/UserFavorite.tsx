@@ -9,7 +9,6 @@ const UserFavorite = () => {
   const favoriteProducts = Products.filter((item: any) =>
     currentUser?.favorite?.includes(item.id)
   );
-  console.log(favoriteProducts);
   return (
     <div className="grid gap-5 p:grid-cols-2 d:grid-cols-4">
       {favoriteProducts.map((item: any, idx: number) => (

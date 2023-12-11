@@ -4,8 +4,9 @@ import { FilterProduct, SortProduct } from "./SortProduct";
 import { useSmartContract } from "@context/ContractProviders";
 import ProductCard from "./ProductCard";
 import { Pagination, PaginationProps } from "antd";
+import { useData } from "@context/DataProviders";
 
-const DisplayProducts = () => {
+const DisplayProduct = ({ Data, Parent, Children, Type }: any) => {
   const [shoes, setshoes] = useState<any>([]);
   const [ProductSort, setProductSort] = useState<any>([]);
   const [KeyFilter, setKeyFilter] = useState<any>();
@@ -101,32 +102,76 @@ const DisplayProducts = () => {
     const currentPosts = shoes.slice(indexOfFirstPost, indexOfLastPost);
     setProductSort(currentPosts);
   }, [currentPage]);
+
+  const [Topic, setTopic] = React.useState<any>("");
+
+  const { productTypes, Products } = useData();
+
+  useEffect(() => {
+    if (Type !== undefined) {
+      const topic = productTypes.find((item: any) => item.typeUrl === Type);
+      if (topic) {
+        setTopic(topic.type);
+      }
+    } else if (Children !== undefined) {
+      const childTopic = productTypes.find((item: any) =>
+        item.children.some((child: any) => child.childrenUrl === Children)
+      );
+      if (childTopic) {
+        const topic = childTopic.children.find(
+          (child: any) => child.childrenUrl === Children
+        );
+        if (topic) {
+          setTopic(topic.children);
+        }
+      }
+    } else {
+      if (Parent === "giay-toc-do") {
+        setTopic("Giày tốc độ");
+      }
+      if (Parent === "non-vuot-gioi-han") {
+        setTopic("Nón vượt giới hạn");
+      }
+      if (Parent === "ao-thach-thuc") {
+        setTopic("Áo thách thức");
+      }
+      if (Parent === "quan-phong-cach") {
+        setTopic("Quần phong cách");
+      }
+      const topic = productTypes.find((item: any) => item.parentUrl === Parent);
+      if (topic) {
+        setTopic(topic.parent);
+      }
+    }
+  }, [Type, Parent, Children, productTypes]);
+
   return (
     <div>
       <div className="p:w-auto p:mx-2 d:w-[1460px] d:mx-auto">
         <div className="flex flex-col font-LexendDeca font-extralight py-10 ">
           <div className="bg-black text-white border border-white">
             <div className="p-6">
-              {/* <h1 className="text-[24px] font-semibold  ">
-        {params.slug === "tat-ca"
-          ? "Tất cả sản phẩm"
-          : ProductSort[0]?.parent}
-      </h1> */}
-              <p>
-                {KeySort
-                  ? `${KeySort.type}` === "Tốc độ tối đa"
-                    ? `Tất cả sản phẩm có tốc độ tối đa ${KeySort.KeySort} km/h`
-                    : `${KeySort.type}` === "Quãng đường tối đa"
-                    ? `Tất cả sản phẩm có quãng đường tối đa ${KeySort.KeySort} km`
-                    : `Tất cả sản phẩm có hiệu suất nhận coin x${KeySort.KeySort}`
-                  : "Tất cả sản phẩm"}
-              </p>
+              <p>Tất cả sản phẩm {Topic}</p>
             </div>
           </div>
           <div className="w-full justify-between flex pt-10">
-            <p>
-              <strong>Hiển thị 1-20 </strong>trong {shoes.length} sản phẩm
-            </p>
+            {Data?.length !== 0 ? (
+              <>
+                {" "}
+                <p>
+                  <strong> Tìm thấy {Data?.length} sản phẩm</strong> trong{" "}
+                  {Products.length} sản phẩm
+                </p>
+              </>
+            ) : (
+              <>
+                {" "}
+                <p>
+                  <strong> Không tìm thấy sản phẩm nào</strong> trong{" "}
+                  {Products.length} sản phẩm
+                </p>
+              </>
+            )}
 
             <FilterProduct filter={setKeyFilter} />
           </div>
@@ -134,21 +179,23 @@ const DisplayProducts = () => {
             <SortProduct Sort={setKeySort} />
             <div className="w-full">
               <div className="grid p:grid-cols-2 d:grid-cols-4  gap-10 w-full ">
-                {ProductSort.map((item: any, idx: number) => (
+                {Data?.map((item: any, idx: number) => (
                   <div key={idx}>
                     <ProductCard Data={item} />
                   </div>
                 ))}
               </div>
               <div className="w-full flex justify-center my-10">
-                <Pagination
-                  // showSizeChanger
+                {Data?.length > 20 && (
+                  <Pagination
+                    // showSizeChanger
 
-                  pageSize={20}
-                  onChange={onChange}
-                  defaultCurrent={1}
-                  total={shoes.length}
-                />
+                    pageSize={20}
+                    onChange={onChange}
+                    defaultCurrent={1}
+                    total={shoes.length}
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -158,4 +205,4 @@ const DisplayProducts = () => {
   );
 };
 
-export default DisplayProducts;
+export default DisplayProduct;

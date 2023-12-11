@@ -1,4 +1,3 @@
-import DisplayProducts from "@components/client/Product/DisplayProducts";
 import ProductCard from "@components/client/Product/ProductCard";
 import { getAllDataProps } from "@components/lib/get-data";
 import React from "react";
@@ -9,7 +8,6 @@ const DisplayProductPage = async ({
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
   let Products = await getAllDataProps("products");
-  console.log(Products);
   let Data: any;
   const searchParamsValue: any = searchParams.search;
   if (Object.keys(searchParams).length !== 0) {

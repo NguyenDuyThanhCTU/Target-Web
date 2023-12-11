@@ -1,10 +1,11 @@
-import DisplayProducts from "@components/client/Product/DisplayProducts";
+import DisplayProduct from "@components/client/Product/DisplayProduct";
 import {
   FilterProduct,
   SortProduct,
 } from "@components/client/Product/SortProduct";
 import ThemeLayout from "@components/items/ThemeLayout";
 import {
+  getAllDataProps,
   getDataBySortProps,
   getDataByTypeProps,
 } from "@components/lib/get-data";
@@ -15,21 +16,28 @@ const ProductPage = async ({
   searchParams,
 }: {
   params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: { [key: string]: any };
 }) => {
-  const childrenParam: any = searchParams.children;
+  const searchKeyParams: any = searchParams.search;
   const typeParam: any = searchParams.type;
   let Data: any;
-  if (childrenParam !== undefined) {
-    Data = await getDataByTypeProps("products", "childrenUrl", childrenParam);
+
+  if (searchKeyParams !== undefined) {
+    const allData = await getAllDataProps("products");
+    Data = allData?.filter((product: any) =>
+      product?.title?.toLowerCase().includes(searchParams?.toLowerCase())
+    );
   }
   if (typeParam !== undefined) {
     Data = await getDataByTypeProps("products", "typeUrl", typeParam);
   } else {
-    Data = await getDataByTypeProps("products", "parentUrl", params.slug);
+    if (params.slug === "tat-ca") {
+      Data = await getAllDataProps("products");
+    } else {
+      Data = await getDataByTypeProps("products", "parentUrl", params.slug);
+    }
   }
-
-  console.log(params.slug);
+  console.log(Data);
   return (
     <ThemeLayout>
       <div className="w-full h-[45vh] ">
@@ -39,7 +47,12 @@ const ProductPage = async ({
           className="w-full h-full object-cover object-center"
         />
       </div>
-      {/* <DisplayProducts /> */}
+      <DisplayProduct
+        Data={Data}
+        Parent={params.slug}
+        SearchKey={searchKeyParams}
+        Type={typeParam}
+      />
     </ThemeLayout>
   );
 };

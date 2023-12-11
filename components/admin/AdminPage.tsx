@@ -18,11 +18,11 @@ const AdminPage = () => {
     connect().then(() => setIsModalOpen(false));
   };
   const router = useRouter();
-  // useEffect(() => {
-  //   if (!verify) {
-  //     router.push("/dang-nhap");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!verify) {
+      router.push("/dang-nhap");
+    }
+  }, []);
   return (
     <>
       <div className="grid grid-flow-col font-LexendDeca relative ">

@@ -154,22 +154,16 @@ export const updateDocument = async (
 
 export const updateDocumentByField = async (
   CollectioneName: string,
-  field: string,
-  value: any,
-  newData: any
+  id: string,
+  newData: any,
+  fieldName: string
 ) => {
-  const collectionRef = collection(db, CollectioneName);
-  const q = query(collectionRef, where(field, "==", value));
-  const querySnapshot = await getDocs(q);
+  const updatedData = {
+    [fieldName]: newData,
+    createdAt: serverTimestamp(),
+  };
 
-  if (querySnapshot.size === 0) {
-    throw new Error(`Document with ${field} = ${value} not found.`);
-  } else if (querySnapshot.size > 1) {
-    throw new Error(`Multiple documents found with ${field} = ${value}.`);
-  } else {
-    const docSnapshot = querySnapshot.docs[0];
-    await updateDoc(doc(db, CollectioneName, docSnapshot.id), newData);
-  }
+  await updateDocument(CollectioneName, id, updatedData);
 };
 
 export const updateArrayFieldAtIndex = async (

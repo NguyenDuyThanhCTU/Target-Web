@@ -1,60 +1,42 @@
 "use client";
-import { addDocument } from "@config/Services/Firebase/FireStoreDB";
+import {
+  addDocument,
+  updateDocumentByField,
+} from "@config/Services/Firebase/FireStoreDB";
 import { useData } from "@context/DataProviders";
 import { useStateProvider } from "@context/StateProvider";
 import { Modal, notification } from "antd";
 import Lottie from "lottie-react";
-import Link from "next/link";
 import React, { useState } from "react";
 import iconCoin from "@assets/animation/coin-icon.json";
 import { useSmartContract } from "@context/ContractProviders";
 
 const FormConfirm = ({ setStep, setOrderId }: any) => {
-  const { CartItems, Products, Bill } = useData();
+  const { Bill, currentUser } = useData();
   const { buyShoe } = useSmartContract();
   const { setIsLoading } = useStateProvider();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const cartMap: any = {};
-
-  CartItems?.forEach((itemId: any) => {
-    cartMap[itemId] = (cartMap[itemId] || 0) + 1;
-  });
-
-  const cartProducts: any = [];
-  let totalAmount = 0.0;
-  let FinalCount = 0;
-  Object.keys(cartMap).forEach((itemId) => {
-    const product = Products.find((product: any) => product.id === itemId);
-
-    if (product) {
-      const { createdAt, ...productWithoutCreatedAt } = product;
-      const itemCount = cartMap[itemId];
-
-      const priceAsNumber = parseFloat(productWithoutCreatedAt.price);
-
-      const itemTotal = priceAsNumber * itemCount;
-
-      totalAmount += itemTotal;
-      FinalCount += itemCount;
-
-      cartProducts.push({
-        ...productWithoutCreatedAt,
-
-        count: itemCount,
-        total: itemTotal,
-      });
-    }
-  });
 
   const HandlePayment = () => {
+    setIsLoading(true);
     buyShoe(Bill.pId, Bill.price).then((res: any) => {
-      setIsLoading(true);
       if (res) {
-        setIsLoading(false);
         addDocument("orders", Bill).then((res: any) => {
+          const updateUserCollection = [
+            ...currentUser.productscollection,
+            Bill?.id,
+          ];
+
+          updateDocumentByField(
+            "accounts",
+            currentUser.id,
+            updateUserCollection,
+            "productscollection"
+          );
           notification.success({ message: "Thành công" });
           setStep(3);
           setOrderId(res);
+          setIsLoading(false);
         });
       }
     });

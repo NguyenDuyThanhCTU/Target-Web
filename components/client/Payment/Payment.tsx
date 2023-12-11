@@ -3,11 +3,17 @@ import React, { useState } from "react";
 import FormOrder from "./FormOrder";
 import FormConfirm from "./FormConfirm";
 import Success from "./Success";
+import { Modal } from "antd";
+import { useSmartContract } from "@context/ContractProviders";
 
 const Payment = () => {
   const [step, setStep] = React.useState(1);
-  const [DataFormOrder, setDataFormOrder] = useState<any>();
+  const [isModalOpen, setIsModalOpen] = React.useState(true);
+  const { connect } = useSmartContract();
   const [OrderId, setOrderId] = useState<any>();
+  const HandleConnectMetamask = () => {
+    connect().then(() => setIsModalOpen(false));
+  };
   return (
     <div>
       <div className="d:w-[1300px] d:mx-auto p:w-auto p:mx-2 py-10">
@@ -67,11 +73,7 @@ const Payment = () => {
                 step === 2 ? "block" : "hidden"
               } p:px-0 d:px-20 my-5`}
             >
-              <FormConfirm
-                setStep={setStep}
-                Data={DataFormOrder}
-                setOrderId={setOrderId}
-              />
+              <FormConfirm setStep={setStep} setOrderId={setOrderId} />
             </div>
             <div
               className={`${
@@ -83,6 +85,22 @@ const Payment = () => {
           </div>
         </div>
       </div>
+      <Modal
+        footer={false}
+        closable={false}
+        className="bg-none"
+        open={isModalOpen}
+        style={{ background: "none" }}
+      >
+        <div className="w-full flex items-center justify-center">
+          <button
+            className={`font-epilogue font-semibold text-[16px] leading-[26px] text-white min-h-[52px] px-4 rounded-[10px] bg-[#1dc071] hover:bg-[#298257] duration-300`}
+            onClick={() => HandleConnectMetamask()}
+          >
+            Kết nối với ví Metamask
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 };

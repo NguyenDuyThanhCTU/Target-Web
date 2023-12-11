@@ -138,8 +138,10 @@ const Fetch: React.FC = () => {
       setIsRefetch("done");
     } else if (isRefetch === "CRUD products") {
       getAllDocuments("products").then((data: any) => {
+        console.log(data);
         setProducts(data);
       });
+      setIsRefetch("done");
     } else if (isRefetch === "CRUD posts") {
       getAllDocuments("posts").then((data: any) => {
         setPosts(data);

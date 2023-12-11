@@ -18,10 +18,11 @@ export type ContractContextType = {
   address?: string;
   contract?: any;
   connect: () => any;
-  createShoe: (form: any) => void;
+  createShoe: (form: any) => any;
   getShoes: () => any;
   getShoe: (pId: any) => any;
   buyShoe: (pId: any, price: any) => any;
+  countShoes: () => any;
 };
 
 export const ContractContext = createContext<ContractContextType>({
@@ -34,6 +35,7 @@ export const ContractContext = createContext<ContractContextType>({
   getShoes: () => {},
   getShoe: () => {},
   buyShoe: () => {},
+  countShoes: () => {},
 });
 
 export const ContractProvider: React.FC<Props> = ({ children }) => {
@@ -50,7 +52,7 @@ export const ContractProvider: React.FC<Props> = ({ children }) => {
     try {
       const data: any = await createShoe({
         args: [
-          address, // owner
+          address,
           form.name,
           form.url,
           form.image,
@@ -58,8 +60,7 @@ export const ContractProvider: React.FC<Props> = ({ children }) => {
           form.level,
         ],
       });
-
-      console.log("contract call success", data);
+      return data;
     } catch (error) {
       console.log("contract call failure", error);
     }
@@ -95,6 +96,13 @@ export const ContractProvider: React.FC<Props> = ({ children }) => {
     return data;
   };
 
+  const countShoes = async () => {
+    const count = await contract.call("getShoeCount");
+    const parsedCount: any = ethers.utils.formatEther(count);
+    let result = Math.round(parsedCount * 1000000000000000000);
+    return result;
+  };
+
   const fetchCampaigns = async () => {
     const data = await getShoes();
     setShoes(data);
@@ -107,6 +115,7 @@ export const ContractProvider: React.FC<Props> = ({ children }) => {
   return (
     <ContractContext.Provider
       value={{
+        countShoes,
         buyShoe,
         getShoe,
         Shoes,
