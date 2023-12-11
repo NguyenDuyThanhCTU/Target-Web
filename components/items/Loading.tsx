@@ -4,16 +4,7 @@ import React, { useEffect } from "react";
 import { FaSpinner } from "react-icons/fa";
 
 const Loading = () => {
-  const { isLoading, setIsLoading } = useStateProvider();
-
-  useEffect(() => {
-    const handle = () => {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
-    };
-    handle();
-  }, [isLoading]);
+  const { isLoading } = useStateProvider();
 
   return (
     <div>

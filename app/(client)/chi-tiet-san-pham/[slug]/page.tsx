@@ -24,7 +24,6 @@ const ProductDetailPage = async ({
   }
   return (
     <>
-      {" "}
       <ProductDetail DbData={Data[0]} />{" "}
     </>
   );

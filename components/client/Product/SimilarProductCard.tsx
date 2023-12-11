@@ -9,7 +9,7 @@ import { useData } from "@context/DataProviders";
 import { Modal } from "antd";
 import { useStateProvider } from "@context/StateProvider";
 const SimilarProductCard = ({ item, type, Data }: any) => {
-  const { currentUser, setBill, Bill } = useData();
+  const { currentUser, setBill } = useData();
   const { setLoginState } = useStateProvider();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
@@ -54,7 +54,6 @@ const SimilarProductCard = ({ item, type, Data }: any) => {
         };
         setBill(OrderData);
         router.push(`/thanh-toan`);
-        console.log("thanhtoan");
       }
     } else {
       setIsModalOpen(true);

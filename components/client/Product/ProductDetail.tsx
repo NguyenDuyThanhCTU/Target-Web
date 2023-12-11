@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Image, Modal, Tabs, Tooltip } from "antd";
+import { Image, Modal, Tabs, Tooltip, notification } from "antd";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -22,16 +22,22 @@ import SimilarProductCard from "./SimilarProductCard";
 import { useData } from "@context/DataProviders";
 import ProductSpecifications from "./ProductSpecifications";
 import Upgrade from "./Upgrade";
+import Checkpayment from "./Checkpayment";
+import { useStateProvider } from "@context/StateProvider";
 
 const ProductDetail = ({ DbData }: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [ContractData, setContractData] = useState<any>();
   const [similarProduct, setSimilarProduct] = useState([]);
   const { getShoe, contract, address, Shoes, buyShoe } = useSmartContract();
+  const { setLoginState } = useStateProvider();
+  const { currentUser, setBill } = useData();
+
   const [similarProductUpdate, setSimilarProductUpdate] = useState<any>([]);
   const searchParams = useSearchParams();
   const search = searchParams.get("pId");
   const level = searchParams.get("level");
+  const [isCheckPaymentOpen, setIsCheckPaymentOpen] = useState(false);
 
   const fetchCampaigns = async () => {
     const data = await getShoe(search);
@@ -93,9 +99,44 @@ const ProductDetail = ({ DbData }: any) => {
       ),
     },
   ];
-
+  let sort: any = currentUser?.productscollection;
   const HandleBuy = () => {
-    buyShoe(1, 0.01);
+    if (currentUser) {
+      if (sort?.some((item: any) => item === DbData.id)) {
+        notification["info"]({
+          message: " Bạn đã mua sản phẩm này rồi !",
+          description: `
+        Bạn có thể nâng cấp để tăng chỉ số của sản phẩm`,
+        });
+      } else {
+        const searchNumber = Number(search);
+        const OrderData = {
+          id: currentUser.id,
+          image: DbData.image,
+          name: currentUser.displayName,
+          address: currentUser.address,
+          email: currentUser.email,
+          phone: currentUser.phone,
+          productscollection: [...currentUser.productscollection],
+          productId: DbData.id,
+          level: DbData.level,
+          limitcoinearning: coinString,
+          limitdistance: roadString,
+          limitspeed: speedString,
+          limittime: waitString,
+          pId: searchNumber,
+          price: `0.0${price}`,
+        };
+        setBill(OrderData);
+        router.push(`/thanh-toan`);
+      }
+    } else {
+      setIsCheckPaymentOpen(true);
+    }
+  };
+  const HandleLogin = () => {
+    setLoginState(true);
+    setIsCheckPaymentOpen(false);
   };
   return (
     <div className="flex flex-col gap-5 mt-[98px]  d:w-[1500px] d:mx-auto p:w-auto p:mx-2">
@@ -246,6 +287,34 @@ const ProductDetail = ({ DbData }: any) => {
       >
         <Upgrade Data={similarProductUpdate} />
       </Modal>
+
+      <>
+        <Modal
+          closable={false}
+          open={isCheckPaymentOpen}
+          onCancel={() => setIsCheckPaymentOpen(false)}
+          footer={null}
+        >
+          <div>
+            <h2 className="text-[24px] font-semibold">Đến trang đăng nhập</h2>
+            <p>Đăng nhập để giao dịch</p>
+            <div className="flex w-full justify-center gap-5 mt-5">
+              <div
+                className="py-2 px-6 rounded-full border border-mainyellow cursor-pointer text-mainyellow duration-300 hover:border-orange-500 hover:text-orange-500"
+                onClick={() => setIsCheckPaymentOpen(false)}
+              >
+                Hủy
+              </div>
+              <div
+                className="py-2 px-6 rounded-full border border-mainyellow bg-mainyellow text-white duration-300 hover:bg-orange-500 hover:border-orange-500 cursor-pointer"
+                onClick={() => HandleLogin()}
+              >
+                Đăng nhập
+              </div>
+            </div>
+          </div>
+        </Modal>
+      </>
     </div>
   );
 };

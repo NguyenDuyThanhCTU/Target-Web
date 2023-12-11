@@ -6,8 +6,7 @@ import {
   useMetamask,
   useContractWrite,
 } from "@thirdweb-dev/react";
-import { BaseContract, ethers } from "ethers";
-import { EditionMetadataWithOwnerOutputSchema } from "@thirdweb-dev/sdk";
+import { ethers } from "ethers";
 
 interface Props {
   children: React.ReactNode;
@@ -40,7 +39,7 @@ export const ContractContext = createContext<ContractContextType>({
 export const ContractProvider: React.FC<Props> = ({ children }) => {
   const [Shoes, setShoes] = useState<any[]>([]);
   const { contract }: any = useContract(
-    "0x1Cc1fb3bbae43386fe630b13658A7682C088B921"
+    "0x53b8543a8dEcAa8991ad159047Ce2bF4712122a3"
   );
   const { mutateAsync: createShoe } = useContractWrite(contract, "createShoe");
 

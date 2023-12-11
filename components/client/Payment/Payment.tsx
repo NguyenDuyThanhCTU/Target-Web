@@ -2,11 +2,12 @@
 import React, { useState } from "react";
 import FormOrder from "./FormOrder";
 import FormConfirm from "./FormConfirm";
+import Success from "./Success";
 
 const Payment = () => {
   const [step, setStep] = React.useState(1);
   const [DataFormOrder, setDataFormOrder] = useState<any>();
-
+  const [OrderId, setOrderId] = useState<any>();
   return (
     <div>
       <div className="d:w-[1300px] d:mx-auto p:w-auto p:mx-2 py-10">
@@ -66,35 +67,19 @@ const Payment = () => {
                 step === 2 ? "block" : "hidden"
               } p:px-0 d:px-20 my-5`}
             >
-              <FormConfirm setStep={setStep} Data={DataFormOrder} />
+              <FormConfirm
+                setStep={setStep}
+                Data={DataFormOrder}
+                setOrderId={setOrderId}
+              />
             </div>
-            {/* <div
+            <div
               className={`${
                 step === 3 ? "block" : "hidden"
               } p:px-0 d:px-20 my-5`}
             >
-              <Result
-                status="success"
-                title="Đặt hàng thành công!"
-                subTitle="Mã đơn hàng:2017182818828182881. Bạn có thể theo dõi trong mục đơn hàng của tôi"
-                extra={[
-                  <div className="flex w-full  gap-5 justify-center">
-                    <Link
-                      href={`/`}
-                      className="py-2 px-6  duration-300 cursor-pointer text-mainyellow border-mainyellow uppercase border rounded-full font-normal hover:text-orange-500 hover:border-orange-500"
-                    >
-                      Quay về
-                    </Link>
-                    <Link
-                      href={`/tai-khoan`}
-                      className="py-2  px-10 duration-300 cursor-pointer text-white hover:text-white bg-mainyellow border-mainyellow uppercase border rounded-full font-normal hover:bg-orange-500 hover:border-orange-500"
-                    >
-                      Đến trang đơn hàng
-                    </Link>
-                  </div>,
-                ]}
-              />
-            </div> */}
+              <Success OrderId={OrderId} />
+            </div>
           </div>
         </div>
       </div>

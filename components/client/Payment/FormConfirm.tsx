@@ -9,8 +9,8 @@ import React, { useState } from "react";
 import iconCoin from "@assets/animation/coin-icon.json";
 import { useSmartContract } from "@context/ContractProviders";
 
-const FormConfirm = ({ setStep }: any) => {
-  const { CartItems, Products, currentUser, Bill } = useData();
+const FormConfirm = ({ setStep, setOrderId }: any) => {
+  const { CartItems, Products, Bill } = useData();
   const { buyShoe } = useSmartContract();
   const { setIsLoading } = useStateProvider();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -46,32 +46,17 @@ const FormConfirm = ({ setStep }: any) => {
     }
   });
 
-  const HandleContinue = () => {
-    setIsLoading(true);
-    //create order data
-
-    // const orderData = {
-    //   name: Data?.name,
-    //   phone: Data?.phone,
-    //   city: Data?.city,
-    //   country: Data?.country,
-    //   address: Data?.address,
-    //   postCode: Data?.postCode,
-    //   products: cartProducts,
-    //   totalAmount: totalAmount,
-    //   count: FinalCount,
-    //   user: currentUser.id,
-    // };
-
-    // addDocument("orders", orderData).then(() => {
-    //   notification.success({ message: "Đặt hàng thành công" });
-    //   setStep(3);
-    // });
-  };
-
   const HandlePayment = () => {
-    buyShoe(Bill?.pId, Bill?.price).then((res: any) => {
-      console.log(res);
+    buyShoe(Bill.pId, Bill.price).then((res: any) => {
+      setIsLoading(true);
+      if (res) {
+        setIsLoading(false);
+        addDocument("orders", Bill).then((res: any) => {
+          notification.success({ message: "Thành công" });
+          setStep(3);
+          setOrderId(res);
+        });
+      }
     });
   };
 
