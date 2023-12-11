@@ -45,6 +45,7 @@ const Register = ({ setChangeState }: any) => {
         username: Username,
         password: Password,
         name: Username,
+        favorite: [],
         role: "user",
         status: "active",
         photoURL:

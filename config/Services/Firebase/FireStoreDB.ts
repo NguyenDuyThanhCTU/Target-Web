@@ -232,3 +232,37 @@ export const deleteDataFromArrayField = async (
     console.error(`Lỗi khi xóa dữ liệu khỏi trường ${fieldName}:`, error);
   }
 };
+
+export const deleteDataFromArrayValue = async (
+  collectionName: string,
+  documentId: string,
+  fieldName: string,
+  idValue: any
+) => {
+  try {
+    const ref = doc(db, collectionName, documentId);
+    const snapshot = await getDoc(ref);
+
+    if (snapshot.exists()) {
+      const documentData = snapshot.data();
+      const arrayField = documentData[fieldName] || [];
+
+      const updatedArrayField = arrayField.filter(
+        (item: any) => item !== idValue
+      );
+
+      await updateDoc(ref, { [fieldName]: updatedArrayField });
+
+      console.log(
+        `Xóa dữ liệu có giá trị ${idValue} khỏi trường ${fieldName} thành công!`
+      );
+    } else {
+      console.error("Không tìm thấy tài liệu!");
+    }
+  } catch (error) {
+    console.error(
+      `Lỗi khi xóa dữ liệu có giá trị ${idValue} khỏi trường ${fieldName}:`,
+      error
+    );
+  }
+};

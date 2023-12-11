@@ -126,6 +126,7 @@ const ProductDetail = ({ DbData }: any) => {
     setLoginState(true);
     setIsCheckPaymentOpen(false);
   };
+
   return (
     <div className="flex flex-col gap-5 mt-[98px]  d:w-[1500px] d:mx-auto p:w-auto p:mx-2">
       <div>

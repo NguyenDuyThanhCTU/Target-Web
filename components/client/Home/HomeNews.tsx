@@ -36,7 +36,7 @@ const HomeNews = ({ Data }: any) => {
               <Link href={`/tin-tuc/${Data[0]?.url}`}>
                 <p className="text[15px]  ">RunTech+ | {DetailFirstPostDate}</p>
                 <h2 className="font-normal mt-2 hover:text-blue-400 duration-300 text-[20px]">
-                  {Data[0].title}
+                  {Data[0]?.title}
                 </h2>
               </Link>
 

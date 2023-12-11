@@ -10,7 +10,7 @@ const UserFavorite = () => {
     currentUser?.favorite?.includes(item.id)
   );
   return (
-    <div className="grid gap-5 p:grid-cols-2 d:grid-cols-4">
+    <div className="grid gap-5 p:grid-cols-2 d:grid-cols-5">
       {favoriteProducts.map((item: any, idx: number) => (
         <div key={idx}>
           <ProductCard Data={item} />

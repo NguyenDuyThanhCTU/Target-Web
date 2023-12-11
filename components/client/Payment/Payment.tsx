@@ -11,6 +11,7 @@ const Payment = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(true);
   const { connect } = useSmartContract();
   const [OrderId, setOrderId] = useState<any>();
+
   const HandleConnectMetamask = () => {
     connect().then(() => setIsModalOpen(false));
   };

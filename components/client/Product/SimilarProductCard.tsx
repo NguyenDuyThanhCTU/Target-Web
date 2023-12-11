@@ -50,7 +50,7 @@ const SimilarProductCard = ({ item, type }: any) => {
           limitspeed: speedString,
           limittime: waitString,
           pId: item.pId,
-          price: `0.0${price}`,
+          price: item.price,
         };
         setBill(OrderData);
         router.push(`/thanh-toan`);
@@ -71,7 +71,7 @@ const SimilarProductCard = ({ item, type }: any) => {
           <div className="flex-[60%] ">
             <div>
               <h3 className="truncate1">
-                {item.title} - cấp {level}
+                {item.title} - cấp {item.level}
               </h3>
 
               <div className="flex items-center ">
@@ -136,7 +136,7 @@ const SimilarProductCard = ({ item, type }: any) => {
             <div className="flex-[60%] ">
               <div>
                 <h3 className="truncate1">
-                  {item.title} - cấp {level}
+                  {item.title} - cấp {item.level}
                 </h3>
 
                 <div className="flex items-center ">
@@ -189,7 +189,7 @@ const SimilarProductCard = ({ item, type }: any) => {
           </div>
           <div className="flex-[60%]">
             <h3 className="truncate1">
-              {item.title} - cấp {level}
+              {item.title} - cấp {item.level}
             </h3>
 
             <div className="flex items-center ">

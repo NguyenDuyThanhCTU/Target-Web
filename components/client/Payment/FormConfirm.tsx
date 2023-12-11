@@ -12,7 +12,7 @@ import iconCoin from "@assets/animation/coin-icon.json";
 import { useSmartContract } from "@context/ContractProviders";
 
 const FormConfirm = ({ setStep, setOrderId }: any) => {
-  const { Bill, currentUser } = useData();
+  const { Bill, currentUser, setCurrentUser } = useData();
   const { buyShoe } = useSmartContract();
   const { setIsLoading } = useStateProvider();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,7 +24,7 @@ const FormConfirm = ({ setStep, setOrderId }: any) => {
         addDocument("orders", Bill).then((res: any) => {
           const updateUserCollection = [
             ...currentUser.productscollection,
-            Bill?.id,
+            Bill?.productId,
           ];
 
           updateDocumentByField(
@@ -34,6 +34,14 @@ const FormConfirm = ({ setStep, setOrderId }: any) => {
             "productscollection"
           );
           notification.success({ message: "Thành công" });
+
+          const updatedUser = {
+            ...currentUser,
+            productscollection: updateUserCollection,
+          };
+
+          setCurrentUser(updatedUser);
+
           setStep(3);
           setOrderId(res);
           setIsLoading(false);
