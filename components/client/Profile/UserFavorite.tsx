@@ -10,12 +10,18 @@ const UserFavorite = () => {
     currentUser?.favorite?.includes(item.id)
   );
   return (
-    <div className="grid gap-5 p:grid-cols-2 d:grid-cols-5">
-      {favoriteProducts.map((item: any, idx: number) => (
-        <div key={idx}>
-          <ProductCard Data={item} />
-        </div>
-      ))}
+    <div>
+      <h2 className="text-[24px] font-normal text-white">
+        Danh sách sản phẩm yêu thích
+      </h2>
+
+      <div className="grid gap-5 p:grid-cols-2 d:grid-cols-5">
+        {favoriteProducts.map((item: any, idx: number) => (
+          <div key={idx}>
+            <ProductCard Data={item} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

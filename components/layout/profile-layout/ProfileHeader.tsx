@@ -59,16 +59,6 @@ const ProfileHeader = ({ Data }: any) => {
         <div className="flex gap-32 cursor-pointer mr-10">
           <div className="flex items-center">
             <div className="flex items-center gap-5 ">
-              <Dropdown menu={{ items }} placement="bottom">
-                <a onClick={(e) => e.preventDefault()}>
-                  <Badge count={Notification.length} size="small">
-                    <div className="text-[24px] text-white">
-                      <BiSolidBellRing />
-                    </div>
-                  </Badge>
-                </a>
-              </Dropdown>
-
               <div className="group relative flex gap-5 items-center ">
                 <img
                   src={Data?.photoURL}

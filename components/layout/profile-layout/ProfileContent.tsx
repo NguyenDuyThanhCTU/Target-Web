@@ -8,6 +8,8 @@ import UserOrders from "@components/client/Profile/UserOrders";
 import Account from "@components/admin/Content/Account/Account";
 import UserChangePassword from "@components/client/Profile/UserChangePassword";
 import ProfileAccount from "@components/client/Profile/ProfileAccount";
+import Inventory from "@components/client/Profile/Inventory";
+import Exchange from "@components/client/Profile/Exchange";
 
 const ProfileContent = () => {
   const { isSelected } = useStateProvider();
@@ -37,13 +39,13 @@ const ProfileContent = () => {
         ) : isSelected === 3 ? (
           <div className="p-5 d:px-10 flex justify-start gap-10 flex-col p:px-2">
             <>
-              <UserFavorite />
+              <Inventory />
             </>
           </div>
         ) : isSelected === 4 ? (
           <div className="p-5 d:px-10 flex justify-start gap-10 flex-col p:px-2">
             <>
-              <UserChangePassword user={currentUser} />
+              <Exchange />
             </>
           </div>
         ) : null}

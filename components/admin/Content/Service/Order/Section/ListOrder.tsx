@@ -6,22 +6,22 @@ import React from "react";
 import { SlOptions } from "react-icons/sl";
 
 const ListOrder: React.FC = () => {
-  const { Orders } = useData();
+  const { Notification } = useData();
 
   return (
     <div>
       <div className="rounded-xl m-5 h-[650px] overflow-y-scroll">
         <div className="grid grid-cols-10 pb-5 border-b mr-2">
           <p>STT</p>
-          <p>Tên KH</p>
-          <p>SĐT KH</p>
-          <p>Email</p>
-          <p>Địa</p>
-          <p>Giá</p>
+          <p>Mã KH</p>
+          <p>Mã Giao dịch</p>
+          <p>Số lượng</p>
+          <p>Ghi chú</p>
+          <p>Yêu cầu</p>
           <p>Thời gian</p>
           <p className="w-[100px]">Trạng thái</p>
         </div>
-        {Orders.map((data: any, idx: number) => {
+        {/* {Orders.map((data: any, idx: number) => {
           let Icon = IconMapping[data.state];
 
           return (
@@ -75,13 +75,11 @@ const ListOrder: React.FC = () => {
               <div className="group absolute right-20">
                 <SlOptions className="ml-6 border-2 rounded-full text-[30px] p-[3px] border-white text-white hover:border-blue-500 hover:text-blue-500" />
 
-                {/* <div className="absolute right-[-100px] top-[40px] hidden group-hover:block">
-                  <DropDown ItemDropDown={OrderDashboardItems} id={data.id} />
-                </div> */}
+        
               </div>
             </div>
           );
-        })}
+        })} */}
       </div>
     </div>
   );

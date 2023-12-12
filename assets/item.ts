@@ -178,7 +178,7 @@ export const ProfileSidebarItems = [
   },
 
   {
-    name: "Đổi mật khẩu",
+    name: "Quy đổi",
     icon: "MdOutlinePassword",
   },
 ];
