@@ -122,7 +122,7 @@ export const ProductSidebarAdmin = [
   },
 
   {
-    name: "Quy đổi điểm thưởng",
+    name: "Yêu cầu quy đổi",
     icon: "AiOutlineUnorderedList",
   },
   {

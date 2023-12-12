@@ -23,6 +23,7 @@ export type ContractContextType = {
   getShoe: (pId: any) => any;
   buyShoe: (pId: any, price: any) => any;
   countShoes: () => any;
+  transfer: (receiver: any, amount: any) => any;
 };
 
 export const ContractContext = createContext<ContractContextType>({
@@ -36,6 +37,7 @@ export const ContractContext = createContext<ContractContextType>({
   getShoe: () => {},
   buyShoe: () => {},
   countShoes: () => {},
+  transfer: () => {},
 });
 
 export const ContractProvider: React.FC<Props> = ({ children }) => {
@@ -108,6 +110,21 @@ export const ContractProvider: React.FC<Props> = ({ children }) => {
     setShoes(data);
   };
 
+  //Write a transfer function Based on contract:
+  //   function transferTo(address payable _receiver) external payable {
+  //     require(msg.value > 0, "Transfer amount must be greater than 0");
+  //     require(_receiver != address(0), "Invalid receiver address");
+
+  //     (bool sent, ) = _receiver.call{value: msg.value}("");
+  //     require(sent, "Failed to send Ether");
+  // }
+  const transfer = async (receiver: any, amount: any) => {
+    const data = await contract.call("transferTo", [receiver], {
+      value: ethers.utils.parseEther(amount),
+    });
+    return data;
+  };
+
   useEffect(() => {
     if (contract) fetchCampaigns();
   }, [address, contract]);
@@ -115,6 +132,7 @@ export const ContractProvider: React.FC<Props> = ({ children }) => {
   return (
     <ContractContext.Provider
       value={{
+        transfer,
         countShoes,
         buyShoe,
         getShoe,
