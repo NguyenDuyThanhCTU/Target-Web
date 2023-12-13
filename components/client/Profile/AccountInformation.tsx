@@ -1,8 +1,8 @@
 "use client";
 import { useData } from "@context/DataProviders";
 import { useStateProvider } from "@context/StateProvider";
-import { Timeline } from "antd";
-import { useState } from "react";
+import { Modal, Timeline } from "antd";
+import { useEffect, useState } from "react";
 
 import { CgExtensionAdd } from "react-icons/cg";
 import { FaHatWizard, FaPhotoVideo, FaTshirt } from "react-icons/fa";
@@ -11,11 +11,15 @@ import { GiConverseShoe, GiUnderwearShorts } from "react-icons/gi";
 import { MdOutlineManageAccounts, MdOutlinePostAdd } from "react-icons/md";
 import { SiTemporal, SiWebmoney } from "react-icons/si";
 import { TfiLayoutSliderAlt } from "react-icons/tfi";
+import SimilarProductCard from "../Product/SimilarProductCard";
 
 const AccountInformation = ({ HeaderAdmin }: any) => {
-  const { setSelected } = useStateProvider();
-  const { currentUser } = useData();
+  const { currentUser, Products } = useData();
   const [Cooldown, setCooldown] = useState<any>();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [ListProduct, setListProduct] = useState<any>([]);
+  const [Selected, setSelected] = useState<any>();
+  const { setSelectedId } = useStateProvider();
   const currentTime = new Date();
   const thirtyMinutes = currentUser?.limittime * 60 * 1000; // 30 phút tính bằng mili giây
   const endTime = new Date(currentTime.getTime() + thirtyMinutes);
@@ -31,7 +35,25 @@ const AccountInformation = ({ HeaderAdmin }: any) => {
   }
 
   // Gọi hàm updateCountdown mỗi giây để cập nhật thời gian còn lại
-  setInterval(updateCountdown, 1000);
+
+  const ProductsCollection = Products.filter((item: any) =>
+    currentUser?.productscollection?.includes(item.id)
+  );
+
+  useEffect(() => {
+    const sort = ProductsCollection.filter(
+      (item: any) => item.parentUrl === Selected
+    );
+    if (sort.length > 0) {
+      setListProduct(sort);
+    }
+  }, [Selected]);
+
+  const HandleSelected = (type: string) => {
+    setIsModalOpen(true);
+    setSelected(type);
+    setSelectedId(type);
+  };
 
   return (
     <>
@@ -50,7 +72,7 @@ const AccountInformation = ({ HeaderAdmin }: any) => {
           <div>
             <div
               className="flex bg-slate-200 cursor-pointer hover:scale-110 duration-300  gap-3  text-black rounded-full items-center h-32  w-32 justify-center p:py-2  p:px-4 d:text-[28px] p:text-[13px] absolute -top-10 left-[43%] shadow-lg"
-              onClick={() => setSelected(7)}
+              onClick={() => HandleSelected("giay-toc-do")}
             >
               <GiConverseShoe className="text-[80px]" />
             </div>
@@ -58,7 +80,7 @@ const AccountInformation = ({ HeaderAdmin }: any) => {
           <div>
             <div
               className="flex cursor-pointer hover:scale-110 duration-300  gap-3 bg-red-200 text-black rounded-full items-center h-32  w-32 justify-center p:py-2  p:px-4 d:text-[28px] p:text-[13px] absolute bottom-0  left-32 shadow-lg"
-              onClick={() => setSelected(7)}
+              onClick={() => HandleSelected("non-vuot-gioi-han")}
             >
               <FaHatWizard className="text-[80px]" />
             </div>
@@ -66,7 +88,7 @@ const AccountInformation = ({ HeaderAdmin }: any) => {
           <div>
             <div
               className="flex cursor-pointer hover:scale-110 duration-300  gap-3 bg-blue-200 text-black rounded-full items-center h-32  w-32 justify-center p:py-2  p:px-4 d:text-[28px] p:text-[13px] absolute top-[20%] left-20 shadow-lg"
-              onClick={() => setSelected(1)}
+              onClick={() => HandleSelected("quan-phong-cach")}
             >
               <GiUnderwearShorts className="text-[80px]" />
             </div>
@@ -75,7 +97,7 @@ const AccountInformation = ({ HeaderAdmin }: any) => {
           <div>
             <div
               className="flex justify-center cursor-pointer hover:scale-110 duration-300  gap-3 bg-purple-200 text-black rounded-full items-center  p:py-2   h-32  w-32 p:px-4 d:text-[28px] p:text-[13px] absolute bottom-0 right-28 shadow-lg"
-              onClick={() => setSelected(5)}
+              onClick={() => HandleSelected("phu-kien-sang-tao")}
             >
               <SiTemporal className="text-[80px]" />
             </div>
@@ -83,7 +105,7 @@ const AccountInformation = ({ HeaderAdmin }: any) => {
           <div>
             <div
               className="flex justify-center  cursor-pointer hover:scale-110 duration-300  gap-3 bg-yellow-200 text-black rounded-full items-center  p:py-2   h-32  w-32 p:px-4 d:text-[28px] p:text-[13px] absolute top-[20%] right-20 shadow-lg"
-              onClick={() => setSelected(4)}
+              onClick={() => HandleSelected("ao-thach-thuc")}
             >
               <FaTshirt className="text-[80px]" />
             </div>
@@ -166,6 +188,22 @@ const AccountInformation = ({ HeaderAdmin }: any) => {
           />
         </div>
       </div>
+      <>
+        <Modal
+          title="Danh sách sản phẩm"
+          open={isModalOpen}
+          onCancel={() => setIsModalOpen(false)}
+          footer={null}
+        >
+          <div>
+            {ListProduct.map((item: any, idx: number) => (
+              <div key={idx}>
+                <SimilarProductCard item={item} type="profile" />
+              </div>
+            ))}
+          </div>
+        </Modal>
+      </>
     </>
   );
 };

@@ -87,7 +87,7 @@ const Register = ({ setChangeState }: any) => {
       </div>
       <div className="w-full   h-[89px] font-semibold text-[13px] ">
         <div className="mb-2">
-          Mật khẩu hiện tại <p className="text-red-700 inline-block ml-1">*</p>
+          Nhập mật khẩu <p className="text-red-700 inline-block ml-1">*</p>
         </div>
         <div className="w-full border rounded-lg mb-1">
           <input
@@ -100,7 +100,7 @@ const Register = ({ setChangeState }: any) => {
       </div>
       <div className="w-full   h-[89px] font-semibold text-[13px] ">
         <div className="mb-2">
-          Mật khẩu mới
+          Nhập lại mật khẩu
           <p className="text-red-700 inline-block ml-1">*</p>
         </div>
         <div className="w-full border rounded-lg mb-1 relative">

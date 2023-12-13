@@ -24,6 +24,8 @@ export type StateContextType = {
   setTheme: (theme: string) => void;
   LoginState: boolean;
   setLoginState: (LoginState: boolean) => void;
+  SelectedId: string;
+  setSelectedId: (selectedId: string) => void;
 };
 
 export const StateContext = createContext<StateContextType>({
@@ -45,6 +47,8 @@ export const StateContext = createContext<StateContextType>({
   setTheme: () => {},
   LoginState: false,
   setLoginState: () => {},
+  SelectedId: "",
+  setSelectedId: () => {},
 });
 
 export const StateProvider = ({ children }: Props) => {
@@ -60,9 +64,12 @@ export const StateProvider = ({ children }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [OpenCart, setOpenCart] = useState(false);
   const [theme, setTheme] = useState("light");
+  const [SelectedId, setSelectedId] = useState("");
   return (
     <StateContext.Provider
       value={{
+        SelectedId,
+        setSelectedId,
         LoginState,
         setLoginState,
         theme,

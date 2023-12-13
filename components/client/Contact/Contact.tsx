@@ -26,7 +26,7 @@ const Contact = () => {
   const [districts, setDistricts] = React.useState("");
   const [wards, setWards] = React.useState("");
   const [content, setContent] = React.useState("");
-  const { ContactData, TradeMarkData, SocialMedia } = useData();
+  const { ContactData } = useData();
   const { setIsLoading } = useStateProvider();
 
   const HandleDiscard = () => {
@@ -64,7 +64,7 @@ const Contact = () => {
       });
 
       const response = await fetch(
-        "https://formsubmit.co/ajax/vetaucaotocrachgia@gmail.com",
+        `https://formsubmit.co/ajax/thanhb1906564@student.ctu.edu.vn`,
         {
           method: "POST",
           headers: {
@@ -102,17 +102,29 @@ const Contact = () => {
             Chúng tôi luôn lắng nghe bạn!
           </h2>
           <div className="flex flex-col gap-2">
-            <Input type="Họ tên*" value={name} setData={setName} />
-            <Input type="Số điện thoại*" value={phone} setData={setPhone} />
-            <Input type="Email" value={email} setData={setEmail} />
-            <div className="flex flex-col gap-2">
+            <Input
+              text="Họ tên*"
+              Value={name}
+              setValue={(e: any) => setName(e.target.value)}
+            />
+            <Input
+              text="Số điện thoại*"
+              Value={phone}
+              setValue={(e: any) => setPhone(e.target.value)}
+            />
+            <Input
+              text="Email"
+              Value={email}
+              setValue={(e: any) => setEmail(e.target.value)}
+            />
+            {/* <div className="flex flex-col gap-2">
               <label className="font-semibold ">Khu vực</label>
               <AddressDropdown
                 setSelectedCity={setCities}
                 setSelectedDistrict={setDistricts}
                 setSelectedWardName={setWards}
               />
-            </div>
+            </div> */}
 
             <div className="flex flex-col gap-2">
               <label className="font-semibold ">Nội dung lời nhắn</label>

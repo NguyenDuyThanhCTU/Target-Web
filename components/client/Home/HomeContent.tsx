@@ -12,24 +12,26 @@ const HomeContent = ({ Data }: any) => {
 
   return (
     <div className="flex flex-col bg-white py-10">
-      {TypeProductItems?.map((item: any, idx: number) => {
-        const sortProduct = Products.filter(
-          (product: any) => product.parentUrl === item.value
-        );
-        const type = productTypes.filter(
-          (type: any) => type.parentUrl === item.value
-        );
-        return (
-          <div key={idx}>
-            <DisplayHomeProducts
-              Data={sortProduct}
-              Topic={item.label}
-              url={item.value}
-              Type={type}
-            />
-          </div>
-        );
-      })}{" "}
+      {TypeProductItems.slice(0, TypeProductItems.length)?.map(
+        (item: any, idx: number) => {
+          const sortProduct = Products.filter(
+            (product: any) => product.parentUrl === item.value
+          );
+          const type = productTypes.filter(
+            (type: any) => type.parentUrl === item.value
+          );
+          return (
+            <div key={idx}>
+              <DisplayHomeProducts
+                Data={sortProduct}
+                Topic={item.label}
+                url={item.value}
+                Type={type}
+              />
+            </div>
+          );
+        }
+      )}{" "}
     </div>
   );
 };

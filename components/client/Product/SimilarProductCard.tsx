@@ -8,10 +8,12 @@ import { FaEthereum } from "react-icons/fa";
 import { useData } from "@context/DataProviders";
 import { Modal } from "antd";
 import { useStateProvider } from "@context/StateProvider";
+import { updateDocumentByField } from "@config/Services/Firebase/FireStoreDB";
 const SimilarProductCard = ({ item, type }: any) => {
   const { currentUser, setBill } = useData();
-  const { setLoginState } = useStateProvider();
+  const { setLoginState, SelectedId } = useStateProvider();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [productId, setProductId] = useState("");
   const router = useRouter();
   const HandleNavigate = (Url: any, Level: any, pId: any) => {
     router.push(`/chi-tiet-san-pham/${Url}?level=${Level}&pId=${pId}`);
@@ -60,6 +62,7 @@ const SimilarProductCard = ({ item, type }: any) => {
     }
   };
 
+  const HandleChange = (Id: string) => {};
   return (
     <div>
       {" "}
@@ -174,6 +177,77 @@ const SimilarProductCard = ({ item, type }: any) => {
                       +${item.limittime} phút{" "}
                     </span>
                   </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      ) : type === "profile" ? (
+        <>
+          {" "}
+          <div
+            className="flex gap-3 py-3 border-b cursor-pointer hover:bg-gray-100"
+            onClick={() => HandleChange(item.id)}
+          >
+            <div className="flex-[30%]">
+              <img src={item.image} alt="similarProduct" />
+            </div>
+            <div className="flex-[60%] ">
+              <div>
+                <h3 className="truncate1">
+                  {item.title} - cấp {item.level}
+                </h3>
+
+                <div className="flex items-center ">
+                  <div className="w-10">
+                    <Lottie animationData={iconCoin} />
+                  </div>
+                  <span className="text-red-500">{item.price} SepoliaETH</span>
+                </div>
+                <div className="flex flex-col">
+                  <p>
+                    {" "}
+                    Tốc độ tối đa:{" "}
+                    <span className="text-green-500">
+                      +${speedString} km/h{" "}
+                    </span>
+                  </p>
+                  <p>
+                    {" "}
+                    Quãng đường tối đa :{" "}
+                    <span className="text-green-500">+${roadString} km </span>
+                  </p>
+                  <p>
+                    {" "}
+                    Số coin nhận được:{" "}
+                    <span className="text-green-500">
+                      +${coinString} SepoliaETH{" "}
+                    </span>
+                  </p>
+                  <p>
+                    {" "}
+                    Thời gian chờ:{" "}
+                    <span className="text-green-500">+${waitString} phút </span>
+                  </p>
+                </div>
+                <div className="flex mt-2">
+                  {sort?.some((items: any) => items === item.id) ? (
+                    <>
+                      {" "}
+                      <div className="py-1 px-4 bg-mainred text-orange-500 uppercase  flex gap-2 items-center text-[15px]">
+                        Đã sở hữu
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div
+                        className="py-1 px-4 bg-mainred text-blue-500 border duration-300 hover:text-white border-blue-500 flex gap-2 items-center text-[15px]"
+                        onClick={() => HandleUpdate()}
+                      >
+                        Nâng cấp ngay
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
